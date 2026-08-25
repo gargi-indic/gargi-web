@@ -1,0 +1,33 @@
+[Unit]
+Description=Gargi inference (Gargi-M1 base + instruct)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=gargi
+Group=gargi
+WorkingDirectory=/opt/gargi/inference
+EnvironmentFile=/etc/gargi.env
+ExecStart=/opt/gargi/.venv/bin/python app.py
+Restart=always
+RestartSec=5
+
+# Loading two fp32 checkpoints peaks around 1.4 GB. The cap is well clear of
+# that but will stop a leak from taking the whole box down.
+MemoryMax=4G
+TimeoutStartSec=300
+
+# The service reads model weights from its own cache and writes nothing.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/home/gargi/.cache
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=gargi
+
+[Install]
+WantedBy=multi-user.target

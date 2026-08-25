@@ -1,0 +1,8 @@
+# What NOT to upload to Cloud Build. Everything the image needs is either in
+# requirements.txt or pulled from the Hub during the build.
+.gitignore
+.venv/
+__pycache__/
+*.pyc
+.cache/
+README.md

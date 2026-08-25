@@ -1,0 +1,14 @@
+# Cloud Run builds amd64, where the default PyPI torch wheel drags in ~2.5 GB
+# of CUDA that a CPU service can never use -- and would push the image past
+# what is sensible to cold-start. The CPU index is ~200 MB instead.
+#
+# On aarch64 (Oracle ARM, Apple Silicon) the PyPI wheel is already CPU-only and
+# this index line is harmless.
+--extra-index-url https://download.pytorch.org/whl/cpu
+numpy==2.1.3
+torch==2.8.0
+tokenizers==0.21.2
+huggingface_hub==0.34.2
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4

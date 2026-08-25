@@ -1,0 +1,28 @@
+# Caddy fetches and renews a Let's Encrypt certificate for this hostname
+# automatically. __HOSTNAME__ is filled in by setup.sh.
+__HOSTNAME__ {
+	encode zstd gzip
+
+	# SSE must not be buffered, or tokens arrive in one lump at the end
+	# instead of streaming.
+	reverse_proxy 127.0.0.1:__PORT__ {
+		flush_interval -1
+		transport http {
+			response_header_timeout 120s
+			read_timeout 120s
+		}
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000;"
+		X-Content-Type-Options "nosniff"
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/gargi.log {
+			roll_size 10MiB
+			roll_keep 5
+		}
+	}
+}
