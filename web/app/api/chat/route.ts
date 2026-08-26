@@ -97,8 +97,10 @@ export async function POST(req: NextRequest) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // .trim() because a token pasted into a dashboard env var routinely
+        // carries a trailing newline, which fails auth while looking identical.
         ...(process.env.GARGI_API_TOKEN
-          ? { Authorization: `Bearer ${process.env.GARGI_API_TOKEN}` }
+          ? { Authorization: `Bearer ${process.env.GARGI_API_TOKEN.trim()}` }
           : {}),
       },
       body: JSON.stringify({

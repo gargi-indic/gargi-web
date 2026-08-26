@@ -39,7 +39,9 @@ echo "==> Bearer token"
 if ! gcloud secrets describe "$SECRET_NAME" --project "$PROJECT" &>/dev/null; then
   # Generated here and stored in Secret Manager, so the token never sits in a
   # shell history, a env file, or this repo.
-  openssl rand -hex 32 | gcloud secrets create "$SECRET_NAME" \
+  # tr -d '\n' matters: without it the newline openssl emits becomes part of the
+  # secret, and every request 401s against a token that prints identically.
+  openssl rand -hex 32 | tr -d '\n' | gcloud secrets create "$SECRET_NAME" \
     --data-file=- --replication-policy=automatic --project "$PROJECT" --quiet
   echo "    created secret $SECRET_NAME"
 else
@@ -71,7 +73,7 @@ gcloud run deploy "$SERVICE" \
   --region "$REGION" \
   --platform managed \
   --allow-unauthenticated \
-  --memory 2Gi \
+  --memory 4Gi \
   --cpu 2 \
   --min-instances "$MIN_INSTANCES" \
   --max-instances "$MAX_INSTANCES" \

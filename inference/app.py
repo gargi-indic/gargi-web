@@ -37,7 +37,11 @@ REPOS = {
     "instruct": os.environ.get("INSTRUCT_REPO", "gishnu/malayalam-nanogpt-instruct-v3-100M"),
     "base": os.environ.get("BASE_REPO", "gishnu/malayalam-nanogpt-base-v3-100M"),
 }
-API_TOKEN = os.environ.get("GARGI_API_TOKEN", "")
+# .strip() is not cosmetic. `openssl rand -hex 32 | gcloud secrets create` stores
+# the trailing newline as part of the secret, so the injected value ends in \n
+# while every client sends the token without it -- and every request 401s with a
+# token that looks identical when printed.
+API_TOKEN = os.environ.get("GARGI_API_TOKEN", "").strip()
 QUANTIZE = os.environ.get("QUANTIZE", "0") not in ("0", "false", "False", "")
 MAX_NEW_TOKENS_CAP = int(os.environ.get("MAX_NEW_TOKENS_CAP", "300"))
 TORCH_THREADS = int(os.environ.get("TORCH_THREADS", "2"))

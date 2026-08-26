@@ -26,6 +26,7 @@ Config is read from the checkpoint where present. The training loop's
 
 from __future__ import annotations
 
+import gc
 from dataclasses import dataclass
 
 import torch
@@ -201,8 +202,8 @@ def load_checkpoint(ckpt_path: str, vocab_size: int, quantize: bool = False) -> 
         model=model,
         config=cfg,
         vocab_size=vocab_size,
-        step=ck.get("step"),
-        val_loss=ck.get("loss"),
+        step=step,
+        val_loss=val_loss,
         quantized=quantize,
         n_params=n_params,
     )

@@ -149,6 +149,14 @@ a:hover { color: var(--color-accent-700); }
   display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: end;
   position: relative;
 }
+.vision-split {
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px;
+  align-items: start; padding: 48px var(--gutter);
+}
+.vision-split .manifesto { margin: 0; }
+.vision-why { max-width: 52ch; }
+.vision-why p { font-size: 18px; line-height: 1.6; margin: 0; }
+.vision-why p + p { margin-top: 20px; }
 
 /* ---------- waitlist ---------- */
 .waitlist-label {
@@ -197,7 +205,7 @@ a:hover { color: var(--color-accent-700); }
 
 .fundamentals { border-top: 2px solid var(--color-divider); }
 .fundamental {
-  display: flex; gap: 40px; padding: 34px var(--gutter);
+  display: flex; align-items: flex-start; gap: 40px; padding: 24px var(--gutter);
   border-bottom: 1px solid var(--color-divider);
 }
 .fundamental:last-child { border-bottom: 0; }
@@ -207,7 +215,7 @@ a:hover { color: var(--color-accent-700); }
   font-size: 13px; color: var(--color-accent); margin-bottom: 8px;
 }
 .fundamental-head h3 { margin: 0; font-size: 22px; }
-.fundamental p { margin: 0; font-size: 16px; line-height: 1.65; max-width: 72ch; }
+.fundamental p { margin: 0; font-size: 16px; line-height: 1.6; max-width: 62ch; }
 
 .table-scroll { overflow-x: auto; }
 .releases th:first-child, .releases td:first-child { padding-left: var(--gutter); }
@@ -322,6 +330,46 @@ a:hover { color: var(--color-accent-700); }
 .blog-cta-left { padding: 52px 40px 56px var(--gutter); position: relative; }
 .blog-cta-right { padding: 52px var(--gutter) 56px 40px; position: relative; }
 
+/* ---------- article (a single blog post) ---------- */
+.article-head {
+  padding: 56px var(--gutter) 40px;
+  border-bottom: 2px solid var(--color-divider);
+}
+.article-back {
+  display: inline-block; margin-bottom: 28px; font-size: 14px;
+  font-family: var(--font-archivo), "Archivo", sans-serif; font-weight: 800;
+}
+.article-head h1 {
+  margin: 0; max-width: 20ch;
+  font-size: clamp(34px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em;
+}
+.article-standfirst {
+  margin: 24px 0 0; max-width: 56ch; font-size: 19px; line-height: 1.55;
+}
+.article { padding-top: 48px; }
+.article h2 {
+  font-size: 28px; letter-spacing: -0.02em;
+  margin: 52px 0 14px; padding-top: 20px;
+  border-top: 1px solid var(--color-divider);
+}
+.article h3 { font-size: 19px; margin: 34px 0 10px; }
+.article p { margin: 0 0 18px; }
+.article ul { margin: 0 0 18px; }
+.article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
+  background: color-mix(in srgb, var(--color-text) 7%, transparent);
+  padding: 1px 5px; border-radius: 3px;
+}
+.article-pre {
+  margin: 0 0 22px; padding: 20px; overflow-x: auto;
+  border: 1px solid var(--color-divider);
+  background: color-mix(in srgb, var(--color-text) 4%, transparent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px; line-height: 1.65;
+}
+.article-table { margin-bottom: 22px; }
+.article-table td:first-child { font-weight: 800; width: 34%; }
+
 /* ---------- prose (privacy) ---------- */
 .prose { padding: 64px var(--gutter); max-width: 74ch; }
 .prose h1 { font-size: clamp(36px, 4.5vw, 56px); letter-spacing: -0.03em; margin: 0 0 12px; }
@@ -351,6 +399,7 @@ a:hover { color: var(--color-accent-700); }
     padding-inline: var(--gutter);
   }
   .accent-split { grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  .vision-split { grid-template-columns: 1fr; gap: 28px; }
   .hero-body { max-width: 100%; }
   .hero-mark { left: 40%; opacity: 0.5; }
   .about-hero-mark { padding: 48px 0; }
@@ -389,7 +438,13 @@ a:hover { color: var(--color-accent-700); }
 /* ===========================================================================
    Chat
    =========================================================================== */
-.chat-shell { height: 100dvh; display: flex; overflow: hidden; }
+.chat-shell {
+  height: 100dvh; display: flex; overflow: hidden;
+  /* Transcript and composer share one column so they stay aligned as the
+     window grows; it stretches with the viewport instead of sitting at a
+     fixed 900px in the corner of a wide screen. */
+  --chat-col: min(100%, 1440px);
+}
 
 .chat-sidebar {
   width: 272px; flex: none;
@@ -443,6 +498,10 @@ a:hover { color: var(--color-accent-700); }
 }
 
 .chat-main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+
+/* Holds the watermark still: as a child of the scroller it rode the content
+   down on every token and padded scrollHeight past the last message. */
+.chat-stage { flex: 1; min-height: 0; display: flex; position: relative; overflow: hidden; }
 .chat-topbar {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   padding: 12px 32px; border-bottom: 2px solid var(--color-divider); flex: none;
@@ -454,16 +513,17 @@ a:hover { color: var(--color-accent-700); }
 .chat-model-sub { font-size: 12px; }
 .chat-seg { margin-left: auto; }
 
-.chat-scroll { flex: 1; overflow: hidden auto; position: relative; }
+.chat-scroll { flex: 1; overflow: hidden auto; position: relative; z-index: 1; }
 .chat-ghost {
-  position: absolute; right: -30px; bottom: -110px;
+  position: absolute; right: -30px; bottom: -110px; z-index: 0;
   font-family: var(--font-malayalam); font-weight: 800;
   font-size: 400px; line-height: 0.8; color: var(--color-neutral-200);
   user-select: none; pointer-events: none;
 }
 .chat-turns {
   position: relative; padding: 36px 40px;
-  display: flex; flex-direction: column; gap: 28px; max-width: 900px;
+  display: flex; flex-direction: column; gap: 28px;
+  width: 100%; max-width: var(--chat-col);
 }
 .turn-user {
   align-self: flex-end; max-width: 68%;
@@ -504,13 +564,14 @@ a:hover { color: var(--color-accent-700); }
 .chat-composer {
   padding: 16px 40px 22px; border-top: 2px solid var(--color-divider); flex: none;
 }
-.chat-composer-inner { max-width: 900px; }
+.chat-composer-inner { width: 100%; max-width: var(--chat-col); }
 .chat-input-row {
   border: 2px solid var(--color-text); background: var(--color-surface);
   display: flex; align-items: flex-end;
 }
 .chat-textarea {
-  border: 0; background: transparent; min-height: 64px; max-height: 200px;
+  border: 0; background: transparent; flex: 1; min-width: 0;
+  min-height: 64px; max-height: 200px;
   font-size: 17px; padding: 14px 16px; resize: none;
   font-family: var(--font-malayalam);
 }

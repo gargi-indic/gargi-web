@@ -36,10 +36,15 @@ export function ChatClient() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const taRef = useRef<HTMLTextAreaElement>(null);
   const lastPrompt = useRef<string>("");
+  const pendingTokens = useRef("");
+  const rafId = useRef<number | null>(null);
+  const pinned = useRef(true);
+  const turnCount = useRef(0);
 
   useEffect(() => { track("chat_opened", { checkpoint }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -52,8 +57,87 @@ export function ChatClient() {
   }, []);
   useEffect(() => { void loadConversations(); }, [loadConversations]);
 
+  /** Reopen a stored thread. The sidebar is only useful if it reads back. */
+  const openConversation = useCallback(async (id: string) => {
+    if (busy || id === conversationId) { setDrawerOpen(false); return; }
+    setLoadingId(id);
+    setError(null);
+    try {
+      const res = await fetch(`/api/conversations/${id}`);
+      if (!res.ok) throw new Error("That chat could not be opened.");
+      const data = await res.json();
+      const loaded: Turn[] = (data.messages ?? []).map(
+        (m: { role: "user" | "assistant"; content: string }) => ({
+          role: m.role,
+          content: m.content,
+          checkpoint: data.conversation?.checkpoint === "base" ? "base" : "instruct",
+        })
+      );
+      setTurns(loaded);
+      setConversationId(id);
+      if (data.conversation?.checkpoint === "base" || data.conversation?.checkpoint === "instruct") {
+        setCheckpoint(data.conversation.checkpoint);
+      }
+      setDrawerOpen(false);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "That chat could not be opened.");
+    } finally {
+      setLoadingId(null);
+    }
+  }, [busy, conversationId]);
+
+  const applyTokens = useCallback(() => {
+    rafId.current = null;
+    const chunk = pendingTokens.current;
+    if (!chunk) return;
+    pendingTokens.current = "";
+    setTurns((t) => {
+      if (!t.length) return t;
+      const next = [...t];
+      const last = next[next.length - 1];
+      next[next.length - 1] = { ...last, content: last.content + chunk };
+      return next;
+    });
+  }, []);
+
+  // Tokens land far faster than the screen repaints. Buffering them into one
+  // update per frame is what keeps the transcript from juddering mid-stream.
+  const queueToken = useCallback(
+    (t: string) => {
+      pendingTokens.current += t;
+      if (rafId.current == null) rafId.current = requestAnimationFrame(applyTokens);
+    },
+    [applyTokens]
+  );
+
+  const flushTokens = useCallback(() => {
+    if (rafId.current != null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
+    applyTokens();
+  }, [applyTokens]);
+
+  useEffect(() => () => {
+    if (rafId.current != null) cancelAnimationFrame(rafId.current);
+  }, []);
+
+  const onScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    pinned.current = el.scrollHeight - el.scrollTop - el.clientHeight < 64;
+  }, []);
+
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    const el = scrollRef.current;
+    if (!el) return;
+    // A new turn always pulls the view down; a growing one only if the reader
+    // has not scrolled up. Jump instantly — a smooth scroll restarted on every
+    // frame is what made the window shake.
+    if (turns.length !== turnCount.current) pinned.current = true;
+    else if (!pinned.current) return;
+    turnCount.current = turns.length;
+    el.scrollTop = el.scrollHeight;
   }, [turns]);
 
   async function send(text: string) {
@@ -107,15 +191,9 @@ export function ChatClient() {
           if (ev === "meta" && payload.conversationId) {
             setConversationId(payload.conversationId as string);
           } else if (ev === "token") {
-            setTurns((t) => {
-              const next = [...t];
-              next[next.length - 1] = {
-                ...next[next.length - 1],
-                content: next[next.length - 1].content + String(payload.t ?? ""),
-              };
-              return next;
-            });
+            queueToken(String(payload.t ?? ""));
           } else if (ev === "done") {
+            flushTokens();
             setTurns((t) => {
               const next = [...t];
               next[next.length - 1] = {
@@ -127,12 +205,14 @@ export function ChatClient() {
               return next;
             });
           } else if (ev === "error") {
+            flushTokens();
             throw new Error(String(payload.message ?? "The model stopped unexpectedly."));
           }
         }
       }
       void loadConversations();
     } catch (err) {
+      flushTokens();
       setError(err instanceof Error ? err.message : "Something went wrong.");
       setTurns((t) => {
         const next = [...t];
@@ -230,8 +310,10 @@ export function ChatClient() {
                   key={c.id}
                   className="chat-history-item ml"
                   aria-current={c.id === conversationId}
+                  aria-busy={c.id === loadingId}
                   title={c.title}
-                  onClick={() => { setConversationId(c.id); setDrawerOpen(false); }}
+                  disabled={busy}
+                  onClick={() => void openConversation(c.id)}
                 >
                   {c.title || "Untitled"}
                 </button>
@@ -273,94 +355,107 @@ export function ChatClient() {
           </div>
         </div>
 
-        <div className="chat-scroll" ref={scrollRef}>
+        <div className="chat-stage">
           <div className="chat-ghost" aria-hidden>ഗ</div>
 
-          {turns.length === 0 ? (
-            <div className="chat-empty">
-              <h2>Ask {M1.name} something in Malayalam</h2>
-              <p className="text-muted">
-                A {M1.params}-parameter research preview with a {M1.contextTokens}-token
-                context. It will get things wrong. <b>Instruct</b> answers questions;{" "}
-                <b>Base</b> only continues text.
-              </p>
-              <div className="chat-suggestions">
-                {SUGGESTIONS.map((s) => (
-                  <button key={s} className="chat-suggestion" onClick={() => void send(s)}>
-                    {s}
-                  </button>
-                ))}
+          <div className="chat-scroll" ref={scrollRef} onScroll={onScroll}>
+            {turns.length === 0 ? (
+              <div className="chat-empty">
+                <h2>Ask {M1.name} something in Malayalam</h2>
+                <p className="text-muted">
+                  A {M1.params}-parameter research preview with a {M1.contextTokens}-token
+                  context. It will get things wrong. <b>Instruct</b> answers questions;{" "}
+                  <b>Base</b> only continues text.
+                </p>
+                <div className="chat-suggestions">
+                  {SUGGESTIONS.map((s) => (
+                    <button key={s} className="chat-suggestion" onClick={() => void send(s)}>
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
-          ) : (
-            <div className="chat-turns">
-              {turns.map((t, i) =>
-                t.role === "user" ? (
-                  <div className="turn-user" key={i}>
-                    <div className="turn-label">You</div>
-                    <div className="turn-body ml">{t.content}</div>
-                  </div>
-                ) : (
-                  <div className="turn-assistant" key={i}>
-                    <div className="turn-label text-muted">
-                      Gargi{t.checkpoint === "base" ? " · base" : ""}
+            ) : (
+              <div className="chat-turns">
+                {turns.map((t, i) =>
+                  t.role === "user" ? (
+                    <div className="turn-user" key={i}>
+                      <div className="turn-label">You</div>
+                      <div className="turn-body ml">{t.content}</div>
                     </div>
-                    <div className="turn-body ml">
-                      {t.content}
-                      {t.streaming && <span className="caret" aria-label="generating" />}
-                    </div>
-                    {!t.streaming && t.content && (
-                      <div className="turn-actions text-muted">
-                        {t.meta?.total_ms != null && (
-                          <span>
-                            {(Number(t.meta.total_ms) / 1000).toFixed(1)}s ·{" "}
-                            {t.meta.completion_tokens} tokens
-                            {t.meta.tokens_per_sec ? ` · ${t.meta.tokens_per_sec} tok/s` : ""}
-                          </span>
-                        )}
-                        <button
-                          className="btn btn-ghost"
-                          onClick={() => {
-                            void navigator.clipboard.writeText(t.content);
-                            track("response_copied", {});
-                          }}
-                        >
-                          Copy
-                        </button>
-                        <button
-                          className="btn btn-ghost"
-                          disabled={busy}
-                          onClick={() => {
-                            setTurns((x) => x.slice(0, i - 1));
-                            track("regenerated", {});
-                            void send(lastPrompt.current);
-                          }}
-                        >
-                          Regenerate
-                        </button>
-                        <button
-                          className="btn btn-ghost"
-                          aria-pressed={t.rating === "up"}
-                          aria-label="Good response"
-                          onClick={() => void rate(i, "up")}
-                        >
-                          ↑ Good
-                        </button>
-                        <button
-                          className="btn btn-ghost"
-                          aria-pressed={t.rating === "down"}
-                          aria-label="Bad response"
-                          onClick={() => void rate(i, "down")}
-                        >
-                          ↓ Bad
-                        </button>
+                  ) : (
+                    <div className="turn-assistant" key={i}>
+                      <div className="turn-label text-muted">
+                        Gargi{t.checkpoint === "base" ? " · base" : ""}
                       </div>
-                    )}
-                  </div>
-                )
-              )}
-            </div>
-          )}
+                      <div className="turn-body ml">
+                        {t.content}
+                        {t.streaming && <span className="caret" aria-label="generating" />}
+                      </div>
+                      {!t.streaming && t.content && (
+                        <div className="turn-actions text-muted">
+                          {t.meta?.total_ms != null && (
+                            <span>
+                              {(Number(t.meta.total_ms) / 1000).toFixed(1)}s ·{" "}
+                              {t.meta.completion_tokens} tokens
+                              {t.meta.tokens_per_sec ? ` · ${t.meta.tokens_per_sec} tok/s` : ""}
+                            </span>
+                          )}
+                          <button
+                            className="btn btn-ghost"
+                            onClick={() => {
+                              void navigator.clipboard.writeText(t.content);
+                              track("response_copied", {});
+                            }}
+                          >
+                            Copy
+                          </button>
+                          <button
+                            className="btn btn-ghost"
+                            disabled={busy}
+                            onClick={() => {
+                              // The prompt that produced *this* turn -- not the
+                              // last one typed, which is wrong for a reopened
+                              // thread or for any turn but the newest.
+                              const prompt = turns[i - 1]?.content ?? lastPrompt.current;
+                              setTurns((x) => x.slice(0, i - 1));
+                              track("regenerated", {});
+                              void send(prompt);
+                            }}
+                          >
+                            Regenerate
+                          </button>
+                          {/* A reopened thread has no generation id, so there is
+                              nothing to attach a rating to -- hide the buttons
+                              rather than offer a click that does nothing. */}
+                          {t.generationId && (
+                            <>
+                              <button
+                                className="btn btn-ghost"
+                                aria-pressed={t.rating === "up"}
+                                aria-label="Good response"
+                                onClick={() => void rate(i, "up")}
+                              >
+                                ↑ Good
+                              </button>
+                              <button
+                                className="btn btn-ghost"
+                                aria-pressed={t.rating === "down"}
+                                aria-label="Bad response"
+                                onClick={() => void rate(i, "down")}
+                              >
+                                ↓ Bad
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="chat-composer">

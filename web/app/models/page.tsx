@@ -53,7 +53,7 @@ export default function Models() {
         <div className="section-head" style={{ paddingTop: 44, paddingBottom: 24 }}>
           <h2 style={{ fontSize: 32 }}>Fundamentals</h2>
           <span className="section-note text-muted">
-            How the model is built, and why each decision was made that way.
+            {/* The short version — the full recipe is in the model card. */}
           </span>
         </div>
         <div className="fundamentals">
@@ -73,7 +73,7 @@ export default function Models() {
         <div className="section-head" style={{ paddingTop: 44, paddingBottom: 24 }}>
           <h2 style={{ fontSize: 32 }}>Releases</h2>
           <span className="section-note text-muted">
-            Weights, tokenizers and evaluation code, published as each one is finished.
+            {/* Weights, tokenizers and evaluation code, published as each one is finished. */}
           </span>
         </div>
         <div className="table-scroll">
@@ -110,7 +110,7 @@ export default function Models() {
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
           <div className="manifesto" style={{ maxWidth: "26ch" }}>
-            Every release ships with its data card, its evaluations and its failures.
+            A billion people should not have to think in English to be understood by a machine.
           </div>
           <WaitlistForm source="models" />
         </div>

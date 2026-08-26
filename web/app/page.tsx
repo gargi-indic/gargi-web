@@ -22,13 +22,12 @@ export default function Home() {
             Indic models,<br />built from<br />scratch.
           </h1>
           <p className="hero-lede">
-            Gargi builds open foundation models for Indian languages — trained from the
-            language itself, not translated into it. We start with Malayalam and work
-            outward, one language at a time, in the open.
+            Gargi builds diverse linguistic models and a shared knowledge infrastructure.
+            This approach preserves the unique worldviews of different languages and leverages them for agentic tasks.
           </p>
           <div className="hero-actions">
             <Link className="btn btn-primary btn-lg" href="/chat">Try {M1.name}</Link>
-            <a className="btn btn-secondary btn-lg btn-onbg" href="#languages">
+            <a className="btn btn-secondary btn-lg btn-onbg" href="#language">
               The language base
             </a>
           </div>
@@ -39,9 +38,7 @@ export default function Home() {
         <div className="section-head">
           <h2>Building knowledge infrastructure for Indic languages</h2>
           <span className="section-note text-muted">
-            Each language gets its own tokenizer, its own corpus and its own evaluation
-            suite — the base layer other people can build on. Nothing is a fine-tune of
-            the last one.
+
           </span>
         </div>
         <div className="lang-grid">
@@ -71,12 +68,12 @@ export default function Home() {
       <section id="access" className="access">
         <div className="access-img grayscale">
           <Image
-            src="/close-panel.png"
+            src="/access-portrait.png"
             alt=""
-            width={720}
-            height={480}
+            width={1200}
+            height={1600}
             priority={false}
-            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            style={{ width: "100%", height: "100%", objectFit: "contain" }}
           />
         </div>
         <div className="accent-panel">

@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ScriptCycler } from "@/components/ScriptCycler";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { CONTRIBUTORS, MANIFESTO, PILLARS } from "@/content/site";
+import { CONTRIBUTORS, MANIFESTO, PILLARS, VISION, WHY_OPEN } from "@/content/site";
 
 export const metadata: Metadata = {
   title: "About",
@@ -35,8 +35,16 @@ export default function About() {
       </section>
 
       <section style={{ borderBottom: "2px solid var(--color-divider)" }}>
-        <div className="section-head" style={{ paddingBottom: 24 }}>
-          <h2 style={{ fontSize: 32 }}>What we are doing</h2>
+        <div className="vision-split">
+          <div>
+            <div className="kicker" style={{ marginBottom: 16 }}>Our vision</div>
+            <p className="manifesto">{VISION}</p>
+          </div>
+          <div className="vision-why">
+            {WHY_OPEN.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
         </div>
         <div className="pillars">
           {PILLARS.map((p) => (

@@ -1,0 +1,80 @@
+# Deploy the inference service to Cloud Run on push.
+#
+# Vercel deploys the web app itself via its GitHub integration, so this workflow
+# only covers `inference/`. The path filter matters: without it every copy edit
+# to the site would trigger a 10-minute container rebuild for no reason.
+name: Deploy inference to Cloud Run
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "inference/**"
+      - "deploy/gcp/**"
+      - ".github/workflows/deploy-inference.yml"
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: gargi-slm
+  REGION: asia-south1
+  SERVICE: gargi-inference
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # for Workload Identity Federation
+    steps:
+      - uses: actions/checkout@v4
+
+      # Workload Identity Federation rather than a service-account JSON key:
+      # no long-lived credential to leak, and nothing to rotate. Setup is in
+      # deploy/gcp/README.md.
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy
+        run: |
+          gcloud run deploy "$SERVICE" \
+            --source ./inference \
+            --project "$PROJECT_ID" \
+            --region "$REGION" \
+            --platform managed \
+            --allow-unauthenticated \
+            --memory 4Gi \
+            --cpu 2 \
+            --min-instances 0 \
+            --max-instances 2 \
+            --concurrency 8 \
+            --timeout 300 \
+            --cpu-boost \
+            --no-cpu-throttling \
+            --set-env-vars "TORCH_THREADS=2,QUANTIZE=0,MAX_NEW_TOKENS_CAP=300" \
+            --set-secrets "GARGI_API_TOKEN=gargi-api-token:latest" \
+            --quiet
+
+      - name: Verify the new revision actually serves
+        run: |
+          URL=$(gcloud run services describe "$SERVICE" --region "$REGION" \
+                --project "$PROJECT_ID" --format='value(status.url)')
+          echo "Deployed to $URL"
+          # A green deploy is not proof of a working model: revision 00004 went
+          # green with a broken bearer token. Check readiness explicitly.
+          for i in $(seq 1 20); do
+            if curl -sf --max-time 30 "$URL/health" | grep -q '"ready": true'; then
+              echo "Both checkpoints loaded."
+              curl -s "$URL/health" | python3 -m json.tool
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Service never reported ready" >&2
+          gcloud run services logs read "$SERVICE" --region "$REGION" \
+            --project "$PROJECT_ID" --limit 30
+          exit 1

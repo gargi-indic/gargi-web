@@ -32,7 +32,7 @@ people. Flip it back to `0` afterwards.
 
 | Flag | Value | Why |
 |---|---|---|
-| `--memory` | `2Gi` | Loading both fp32 checkpoints peaks at ~1.4 GB (measured) |
+| `--memory` | `4Gi` | Loading both fp32 checkpoints peaks above 2 GiB — see below |
 | `--cpu` | `2` | Matches `TORCH_THREADS=2`; more threads than cores makes it slower, not faster |
 | `--concurrency` | `8` | The app's own single-flight lock handles contention and returns a fast 503, which beats a second user waiting 40s for a cold instance |
 | `--max-instances` | `2` | Caps spend. Each instance is a full 880 MB model load |

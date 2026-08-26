@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { WaitlistForm } from "@/components/WaitlistForm";
@@ -22,13 +23,13 @@ export default function Blog() {
       <div className="blog-head">
         <h1>Notes</h1>
         <p className="text-muted">
-          Progress on the models, decisions we are working through, and what we find while
-          building the language layer. Written as the work happens, not after it.
+          {/* Progress on the models, decisions we are working through, and what we find while
+          building the language layer. Written as the work happens, not after it. */}
         </p>
       </div>
 
       {featured && (
-        <article className="post-featured">
+        <Link className="post-featured" href={featured.href ?? "#"}>
           <div className="post-featured-body">
             <div className="post-meta">
               <span className="tag tag-accent">{featured.tag}</span>
@@ -46,28 +47,30 @@ export default function Blog() {
             </div>
             <div className="post-featured-tag">{M1.name} · {M1.params}</div>
           </div>
-        </article>
+        </Link>
       )}
 
-      <div className="post-list">
-        {rest.map((p) => (
-          <article className="post-row" key={p.title}>
-            <span className="post-row-date text-muted">{p.date}</span>
-            <span className="post-row-tag"><span className="tag tag-outline">{p.tag}</span></span>
-            <span className="post-row-main">
-              <span className="post-row-title">{p.title}</span>
-              <span className="post-row-excerpt text-muted">{p.excerpt}</span>
-            </span>
-            <span className="post-row-read text-muted">{p.read}</span>
-          </article>
-        ))}
-      </div>
+      {rest.length > 0 && (
+        <div className="post-list">
+          {rest.map((p) => (
+            <Link className="post-row" key={p.title} href={p.href ?? "#"}>
+              <span className="post-row-date text-muted">{p.date}</span>
+              <span className="post-row-tag"><span className="tag tag-outline">{p.tag}</span></span>
+              <span className="post-row-main">
+                <span className="post-row-title">{p.title}</span>
+                <span className="post-row-excerpt text-muted">{p.excerpt}</span>
+              </span>
+              <span className="post-row-read text-muted">{p.read}</span>
+            </Link>
+          ))}
+        </div>
+      )}
 
       <section className="blog-cta">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="blog-cta-left">
           <div className="manifesto" style={{ maxWidth: "24ch", fontSize: 38 }}>
-            Work in progress, published as it goes.
+            A billion people should not have to think in English to be understood by a machine.
           </div>
         </div>
         <div className="blog-cta-right">
