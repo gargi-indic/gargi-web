@@ -81,6 +81,21 @@ export default function Privacy() {
           so plainly rather than pretend otherwise.
         </p>
 
+        <h2>Disclaimer and limitation of liability</h2>
+        <p>
+          {M1.name} is a {M1.params}-parameter research preview with a {M1.contextTokens}-token
+          context. It is provided <b>&ldquo;as is&rdquo;, without warranties of any kind</b>,
+          express or implied. Its output is frequently wrong, incomplete, or nonsensical, and
+          must not be relied on for any medical, legal, financial, or otherwise consequential
+          decision.
+        </p>
+        <p>
+          You are responsible for anything you do with the output. To the fullest extent
+          permitted by law, {SITE.name} and its maintainers accept <b>no liability</b> for any
+          loss or damage arising from your use of {M1.name} or reliance on the content it
+          generates.
+        </p>
+
         <h2>Open data</h2>
         <p>
           Some of this may eventually be released as an open Malayalam instruction dataset,

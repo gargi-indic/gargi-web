@@ -489,8 +489,11 @@ export function ChatClient() {
             {error && <div className="chat-error" role="alert">{error}</div>}
 
             <div className="chat-notice text-muted">
-              {M1.name} is a research preview and can be wrong. Conversations are stored to
-              improve the model — see <Link href="/privacy">privacy</Link>.
+              {M1.name} is a {M1.params}-parameter research preview with a{" "}
+              {M1.contextTokens}-token context. Its output is often wrong or nonsensical
+              and is generated as-is — Gargi accepts no responsibility for how it is used
+              or interpreted. Conversations are stored to improve the model — see{" "}
+              <Link href="/privacy">privacy</Link>.
             </div>
           </div>
         </div>
