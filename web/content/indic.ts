@@ -130,7 +130,7 @@ export const LANGUAGES = [
   },
   {
     glyph: "ಗ",
-    native: "കನ್ನಡ",
+    native: "ಕನ್ನಡ",
     english: "Kannada",
     speakers: "44M speakers",
     model: "—",
