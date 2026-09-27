@@ -30,29 +30,6 @@ h1, h2, h3, h4, h5, h6, .btn, .nav-brand {
 a { color: var(--color-accent); }
 a:hover { color: var(--color-accent-700); }
 
-/* ---------- nav ---------- */
-.site-nav { padding-inline: var(--gutter); flex-wrap: wrap; }
-.nav-brand-link {
-  display: flex; align-items: center; gap: 8px;
-  color: var(--color-text); text-decoration: none;
-}
-.wordmark-glyph { display: flex; align-items: center; gap: 2px; font-size: 20px; }
-.wordmark-bracket { color: var(--color-accent); }
-.wordmark-bracket-light { color: var(--color-accent-400); }
-.nav-cta { margin-left: 8px; }
-
-/* ---------- footer ---------- */
-.site-footer {
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-  padding: 24px var(--gutter);
-  border-top: 2px solid var(--color-divider); font-size: 13px;
-}
-.footer-mark {
-  font-family: var(--font-archivo), "Archivo", sans-serif; font-weight: 800;
-  display: flex; align-items: center; gap: 6px;
-}
-.footer-links { margin-left: auto; display: flex; gap: 20px; }
-
 /* ---------- script cycler ---------- */
 @keyframes scriptcycle { 0%, 8.2% { opacity: 1 } 8.34%, 100% { opacity: 0 } }
 .sc {
@@ -407,8 +384,6 @@ a:hover { color: var(--color-accent-700); }
 
 @media (max-width: 720px) {
   :root { --gutter: 20px; }
-  .site-nav { gap: 12px; row-gap: 8px; }
-  .site-nav .nav-brand { margin-right: auto; }
   .lang-grid { grid-template-columns: 1fr; }
   .lang-cell { border-right: 0; padding-inline: var(--gutter); }
   .pillars { grid-template-columns: 1fr; }
@@ -432,7 +407,6 @@ a:hover { color: var(--color-accent-700); }
   .accent-panel { padding: 40px var(--gutter); }
   .accent-panel-ghost { font-size: 220px; bottom: -90px; }
   .waitlist-row { flex-wrap: wrap; }
-  .footer-links { margin-left: 0; flex-basis: 100%; }
 }
 
 /* ===========================================================================
@@ -456,6 +430,16 @@ a:hover { color: var(--color-accent-700); }
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-archivo), "Archivo", sans-serif; font-weight: 800;
   font-size: 17px; color: var(--color-bg); text-decoration: none; flex: none;
+}
+/* The sidebar background is a fixed dark color in both site themes (not tied
+   to prefers-color-scheme), so the wordmark must inherit .chat-brand's fixed
+   light color rather than use --ink/--accent (which do flip with the theme
+   and would go invisible again) or the `light` variant (which reads
+   --on-accent, also theme-reactive). */
+.chat-brand .wordmark,
+.chat-brand .wordmark-bracket,
+.chat-brand .wordmark-glyph {
+  color: inherit;
 }
 .chat-side-block {
   padding: 14px 18px 12px; display: flex; flex-direction: column; gap: 8px;
