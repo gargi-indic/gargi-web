@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { M1, POSTS } from "@/content/site";
+import { M1, POSTS } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "Notes",
@@ -18,7 +18,7 @@ export default function Blog() {
   return (
     <div className="shell">
       <PageView page="blog" />
-      <Nav current="blog" />
+      <SiteHeader current="blog" />
 
       <div className="blog-head">
         <h1>Notes</h1>
@@ -78,7 +78,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
