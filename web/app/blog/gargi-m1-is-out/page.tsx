@@ -43,7 +43,7 @@ export default function GargiM1IsOut() {
           {M1.name} is public today. The <a href={HF_BASE} target="_blank" rel="noreferrer">base</a>{" "}
           and <a href={HF} target="_blank" rel="noreferrer">instruct</a> checkpoints and the
           tokenizer are on Hugging Face under {M1.license}, and you can{" "}
-          <Link href="/chat">try it in chat</Link> right now — switch between the two checkpoints
+          <Link href="/indic/chat">try it in chat</Link> right now — switch between the two checkpoints
           in the header and watch them disagree.
         </p>
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
@@ -14,8 +13,7 @@ export const metadata: Metadata = {
 export default function Models() {
   return (
     <div className="shell">
-      <PageView page="models" />
-      <SiteHeader current="indic" />
+      <PageView page="indic-models" />
 
       <section className="model-hero">
         <div className="model-hero-body">
@@ -27,7 +25,7 @@ export default function Models() {
             tokenizer and training recipe are published in full.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-primary btn-lg" href="/chat">Try it in chat</Link>
+            <Link className="btn btn-primary btn-lg" href="/indic/chat">Try it in chat</Link>
             <a className="btn btn-secondary btn-lg btn-onbg" href="#downloads">Download weights</a>
           </div>
         </div>
