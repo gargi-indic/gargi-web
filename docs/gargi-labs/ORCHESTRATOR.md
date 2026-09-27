@@ -39,8 +39,8 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
 
 | Issue | What | State |
 |---|---|---|
-| #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Assigned to Jules** (2nd attempt; the 1st errored out). Waiting for PR |
-| #2 | Move model pages under `/indic` + redirects | Not assigned. Needs #1 merged |
+| #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
+| #2 | Move model pages under `/indic` + redirects | **Assigned to Jules** (wave 2) |
 | #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1, #2 |
 | #4 | `/reflex` from Home.dc.html | Not assigned. Needs #1 |
 | #5 | `/reflex/research` | Not assigned. Needs #1 |
@@ -68,6 +68,30 @@ Start a wave only after every PR in the previous wave is merged into `gargi-labs
 Within wave 3, merge #4 first; the others touch `web/content/reflex.ts` and
 `web/app/reflex/layout.tsx` and may need a rebase afterwards.
 
+## 4a. Jules API (status checks and nudges, not assignment)
+
+Assignment stays on GitHub (`gh issue edit --add-label jules`) — see §5. But for visibility
+between Jules' sparse GitHub comments, and for sending a session an instruction without
+toggling the label, use the Jules API via `scripts/jules_api.py`:
+
+```bash
+python3 scripts/jules_api.py list                              # all sessions, newest activity first
+python3 scripts/jules_api.py status <session-id-or-task-url>    # state, timestamps
+python3 scripts/jules_api.py activities <session-id-or-task-url> --all   # full progress log
+python3 scripts/jules_api.py activities <session-id-or-task-url> --all --patch  # + latest cumulative diff
+python3 scripts/jules_api.py send <session-id-or-task-url> "<message>"   # nudge/instruct mid-session
+```
+
+The task URL Jules posts in its "Jules is on it" comment (`jules.google.com/task/NNN...`) maps
+directly to `sessions/NNN...` — pass either form. `activities --patch` gives you Jules' in-progress
+diff before a PR even opens, useful for an early look. `send` posts into the session directly
+(equivalent to a message in the Jules UI) — prefer this over relabeling for a small mid-task
+correction; still relabel per §5 if Jules has actually errored out.
+
+The API key lives in `.env.jules.local` at the repo root (gitignored via `.env*.local`).
+**Never** commit that file, print the key, or put it in an issue/PR/commit. If it's missing,
+stop and ask the owner rather than requesting a new one yourself.
+
 ## 5. How to work with Jules
 
 - **Assign:** `gh issue edit N --add-label jules`. Within a minute `google-labs-jules` comments
@@ -78,6 +102,17 @@ Within wave 3, merge #4 first; the others touch `web/content/reflex.ts` and
 - **Wrong base branch:** if the PR targets `main`, retarget it: `gh pr edit N --base gargi-labs`.
   Then check the diff only contains that ticket's changes (`gh pr diff N --name-only`). If it
   pulled in unrelated commits, comment asking Jules to rebase onto `gargi-labs`.
+- **Branched from `main` (happened on #1):** Jules may cut its branch from `main` despite the
+  issue text and paste an old snapshot of `design/` and `docs/` into its commit. Retargeting
+  alone is not enough: merging would roll back PLAN.md and delete newer files. Check with
+  `git merge-base origin/<jules-branch> origin/gargi-labs`; if it equals `origin/main`, rebuild:
+  ```bash
+  git switch -c review/prN origin/gargi-labs
+  git diff origin/gargi-labs origin/<jules-branch> -- web | git apply --index   # web/ only (plus supabase/ for #7)
+  ```
+  Review that, commit with `Co-Authored-By: google-labs-jules[bot] <161369871+google-labs-jules[bot]@users.noreply.github.com>`,
+  open a PR from `review/prN` into `gargi-labs`, merge it, and close Jules' PR with a thank-you
+  comment linking the new one. See #9 → #10 for the worked example.
 - **Request changes:** comment on the PR, starting with `@google-labs-jules`, as a numbered list
   of concrete fixes (file, what's wrong, what it should be). One comment per review round.
 - **Waiting:** poll no more than once a minute. Don't wait on a single ticket when another in
