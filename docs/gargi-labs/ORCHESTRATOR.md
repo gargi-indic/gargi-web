@@ -54,6 +54,18 @@ Already on `gargi-labs` (done by the previous orchestrator, not by Jules): `PLAN
 
 Untracked local leftovers you may ignore: `web/public/_preview/` (design comparison pages; #8 deletes it).
 
+**Post-merge fix on #1:** an independent Opus review of `ba1ed2a` (run after the owner merged #10
+directly, before the review gate could run) found and fixed three regressions in commit `a356c66`:
+a corrupted Kannada native-name character (`content/indic.ts`), an invisible chat-sidebar wordmark
+in light mode, and stale `Nav.tsx`/`Footer.tsx` CSS in `site.css` that was winning the cascade
+against the new `SiteHeader`/`SiteFooter`/`Wordmark`. Verified independently (Unicode code points,
+typecheck, build). Any PR based on an earlier commit needs to rebase past `a356c66`, not just `7c0843e`.
+
+**Deferred, not regressions — pick up in #8 or a follow-up pass:** the same Opus review flagged three
+LOW items in `ba1ed2a` that were intentionally left unfixed: mobile-menu a11y gaps in `SiteHeader`,
+nav copy hardcoded in components instead of sourced from `content/lab.ts`, and doc comments dropped
+during the `site.ts` → `indic.ts` split. Don't lose track of these.
+
 ## 4. Run order
 
 ```
