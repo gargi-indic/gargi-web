@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { FUNDAMENTALS, M1, M1_STATS, RELEASES } from "@/content/site";
+import { FUNDAMENTALS, M1, M1_STATS, RELEASES } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "Models",
@@ -15,7 +15,7 @@ export default function Models() {
   return (
     <div className="shell">
       <PageView page="models" />
-      <Nav current="models" />
+      <SiteHeader current="indic" />
 
       <section className="model-hero">
         <div className="model-hero-body">
@@ -116,7 +116,7 @@ export default function Models() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

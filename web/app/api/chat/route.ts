@@ -3,7 +3,7 @@ import { supabaseAdmin, supabaseConfigured } from "@/lib/supabase";
 import { getOrCreateSessionId, ipHash, requestContext } from "@/lib/session";
 import { checkRateLimit } from "@/lib/rateLimit";
 import { scoreGeneration } from "@/lib/quality";
-import { GEN_DEFAULTS } from "@/content/site";
+import { GEN_DEFAULTS } from "@/content/indic";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
 
   if (upstream.status === 503) {
     return Response.json(
-      { error: "Gargi is answering someone else. Try again in a moment." },
+      { error: "Gargi-M1 is answering someone else. Try again in a moment." },
       { status: 503, headers: { "Retry-After": "5" } }
     );
   }

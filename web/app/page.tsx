@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { ScriptCycler } from "@/components/ScriptCycler";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { LANGUAGES, M1, MANIFESTO } from "@/content/site";
+import { LANGUAGES, M1, MANIFESTO } from "@/content/indic";
 
 export default function Home() {
   return (
     <div className="shell">
       <PageView page="home" />
-      <Nav />
+      <SiteHeader />
 
       <section className="hero">
         <div className="hero-mark" aria-hidden>
@@ -22,7 +22,7 @@ export default function Home() {
             Indic models,<br />built from<br />scratch.
           </h1>
           <p className="hero-lede">
-            Gargi builds diverse linguistic models and a shared knowledge infrastructure.
+            Gargi Labs builds diverse linguistic models and a shared knowledge infrastructure.
             This approach preserves the unique worldviews of different languages and leverages them for agentic tasks.
           </p>
           <div className="hero-actions">
@@ -83,7 +83,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { SCRIPTS } from "@/content/site";
+import { SCRIPTS } from "@/content/indic";
 
 /**
  * The [ഗ] wordmark cycling through twelve Indic scripts -- one glyph per
@@ -7,7 +7,7 @@ import { SCRIPTS } from "@/content/site";
  */
 export function ScriptCycler({ className = "" }: { className?: string }) {
   return (
-    <div className={`sc ${className}`} aria-label="Gargi" role="img">
+    <div className={`sc ${className}`} aria-label="Gargi Labs" role="img">
       <span aria-hidden>[</span>
       <span className="sc-stack" aria-hidden>
         {SCRIPTS.map((s, i) => (

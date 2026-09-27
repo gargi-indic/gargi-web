@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { PageView } from "@/components/PageView";
-import { M1, SITE } from "@/content/site";
+import { M1 } from "@/content/indic";
+import { SITE } from "@/content/lab";
 
 export const metadata: Metadata = {
   title: "Privacy",
-  description: "What Gargi stores, why, and how to have it removed.",
+  description: "What Gargi Labs stores, why, and how to have it removed.",
 };
 
 export default function Privacy() {
   return (
     <div className="shell">
       <PageView page="privacy" />
-      <Nav />
+      <SiteHeader />
       <div className="prose">
         <h1>Privacy</h1>
         <p className="updated text-muted">Last updated 25 August 2026</p>
@@ -103,7 +104,7 @@ export default function Privacy() {
           stripped of personal information.
         </p>
       </div>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
