@@ -139,8 +139,7 @@ bottom and live on their own pages. Section order:
 Replaces the old "Research access" waitlist panel. One component, `ContactSupport`, used on
 `/indic` and `/lab`: the grayscale portrait (`web/public/access-portrait.png`) on the left, a
 red panel on the right with a short line and a form (name, email, "I want to" choice:
-Contribute / Support the project / Ask a question / Get updates, message, Send), plus direct
-links. The old manifesto line (*"A billion people should not have to think in English…"*) is
+Contribute / Support the project / Ask a question / Get updates, message, Send). The old manifesto line (*"A billion people should not have to think in English…"*) is
 **retired**; remove `MANIFESTO` from content.
 
 The panel states the lab's mission (owner, 2026-09-27: make AI products sustainable and
@@ -149,9 +148,9 @@ accessible; bring the tools that cut cost and latency; support autonomous decisi
 
 > **Tools that make AI products sustainable: lower cost, lower latency, and decisions that run on their own.**
 
-Direct links under the form: **email only**, from a single `CONTACT_EMAIL` constant in
-`content/lab.ts` (address to be confirmed by the owner; until then the link is hidden when the
-constant is empty). Submissions are stored in Supabase and listed in `/admin`; no email alerts.
+No direct contact links (no email address, no socials) are shown. The form is the only
+channel: it collects the visitor's contact details and stores them in Supabase
+(`contact_messages`), listed in `/admin`. No email alerts.
 
 ### Lab copy (starting point, owner may rewrite)
 
