@@ -48,8 +48,8 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
 | Issue | What | State |
 |---|---|---|
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
-| #2 | Move model pages under `/indic` + redirects | **Assigned to Jules** (wave 2) |
-| #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1, #2 |
+| #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
+| #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1 (done), #2 (done) |
 | #4 | `/reflex` from Home.dc.html | Not assigned. Needs #1 |
 | #5 | `/reflex/research` | Not assigned. Needs #1 |
 | #6 | `/reflex/docs` | Not assigned. Needs #1 |
@@ -73,6 +73,14 @@ typecheck, build). Any PR based on an earlier commit needs to rebase past `a356c
 LOW items in `ba1ed2a` that were intentionally left unfixed: mobile-menu a11y gaps in `SiteHeader`,
 nav copy hardcoded in components instead of sourced from `content/lab.ts`, and doc comments dropped
 during the `site.ts` → `indic.ts` split. Don't lose track of these.
+
+**#2 (`d76b519` via #13):** an independent Opus review before merge found no correctness bugs
+("safe to merge as-is") and flagged four more LOW/cosmetic items to pick up later, none blocking:
+the `app/indic/layout.tsx` remounts page content on chat↔non-chat navigation (harmless); the
+header/nav render outside `.shell` so they go full-width above 1440px on Indic pages only
+(cosmetic, restyle-ticket material); `/indic` has no dedicated metadata title yet; and the chat
+sidebar's "Gargi Labs home" logo links to `/` (the lab placeholder) rather than `/indic` (fine,
+not a bug, but worth revisiting once `/lab` exists).
 
 ## 4. Run order
 
