@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ScriptCycler } from "@/components/ScriptCycler";
 import { WaitlistForm } from "@/components/WaitlistForm";
@@ -15,8 +14,7 @@ export const metadata: Metadata = {
 export default function About() {
   return (
     <div className="shell">
-      <PageView page="about" />
-      <SiteHeader current="indic" />
+      <PageView page="indic-about" />
 
       <section className="about-hero">
         <div className="about-hero-body">
@@ -68,7 +66,7 @@ export default function About() {
           </p>
           <div className="hero-actions">
             <a className="btn btn-primary" href="#contribute">Get involved</a>
-            <Link className="btn btn-secondary btn-onbg" href="/models">See the models</Link>
+            <Link className="btn btn-secondary btn-onbg" href="/indic/models">See the models</Link>
           </div>
         </div>
         <div id="contribute" className="contribute-list">
