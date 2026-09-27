@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400&display=swap">
+<style>html,body{margin:0;background:#f4f1e9;color:#1d1c19;-webkit-font-smoothing:antialiased}a{color:#1d1c19;text-decoration:none}a:hover{color:#cf5d24}*{box-sizing:border-box}</style>
+</helmet>
+<div style="min-height:100vh;background:#f4f1e9;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#1d1c19">
+
+<header style="position:sticky;top:0;z-index:5;background:rgba(244,241,233,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #d9d3c6">
+  <div style="max-width:1240px;margin:0 auto;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Home.dc.html" style="display:flex;align-items:baseline;gap:10px"><span style="font:500 28px 'Newsreader',Georgia,serif;letter-spacing:-0.01em">Gargi</span><span style="font:400 16px 'Noto Serif Devanagari',serif;color:#66625a">गार्गी</span></a>
+    <nav style="display:flex;align-items:center;gap:30px;font:500 15px 'Hanken Grotesk',sans-serif">
+      <a href="Home.dc.html">Reflex</a><a href="Research.dc.html">Research</a><a href="Home.dc.html#vision">Vision</a><a href="Docs.dc.html" style="color:#cf5d24">Docs</a><a href="Home.dc.html#lab">Lab</a>
+      <a href="#" style="font:500 14px 'JetBrains Mono',monospace;padding:8px 14px;border:1.5px solid #1d1c19;border-radius:7px">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<section data-screen-label="Docs intro" style="max-width:1240px;margin:0 auto;padding:80px 48px 56px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:64px;align-items:end">
+  <div>
+    <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">DOCS · GARGI REFLEX v0.1</div>
+    <h1 style="margin:22px 0 0;font:400 64px/1.04 'Newsreader',Georgia,serif;letter-spacing:-0.025em">Add gargi to a repo in an afternoon.</h1>
+    <p style="margin:22px 0 0;font:400 19px/1.6 'Hanken Grotesk',sans-serif;color:#3d3a34;max-width:560px">The docs live on GitHub, next to the code. This page is the map: install, pick an integration path, and find the guide you need.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#1d1c19;color:#f4f1e9;border-radius:9px;font:500 17px 'JetBrains Mono',monospace"><span><span style="color:#ee8452">$</span> pip install gargi</span><span style="font-size:12px;color:#a39e92">copy</span></div>
+    <div style="padding:18px 20px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:9px">
+      <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">OR TELL YOUR CODING AGENT</div>
+      <div style="margin-top:10px;font:400 16px 'JetBrains Mono',monospace">“Follow GARGI.md to add gargi to this repo.”</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Quick start" style="border-top:1px solid #d9d3c6">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 48px">
+    <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">QUICK START</div>
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid #1d1c19">
+      <div style="padding:22px 20px 22px 0;display:flex;flex-direction:column;gap:10px"><span style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">01</span><span style="font:400 24px 'Newsreader',serif">Scan</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#1d1c19">gargi scan . --json</code><span style="font:400 14px/1.5 'Hanken Grotesk',sans-serif;color:#66625a">Find swappable call sites and estimate monthly savings.</span></div>
+      <div style="padding:22px 20px;border-left:1px solid #d9d3c6;display:flex;flex-direction:column;gap:10px"><span style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">02</span><span style="font:400 24px 'Newsreader',serif">Wrap</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#1d1c19">@gargi.swappable(...)</code><span style="font:400 14px/1.5 'Hanken Grotesk',sans-serif;color:#66625a">Or one of the five other paths below.</span></div>
+      <div style="padding:22px 20px;border-left:1px solid #d9d3c6;display:flex;flex-direction:column;gap:10px"><span style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">03</span><span style="font:400 24px 'Newsreader',serif">Init</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#1d1c19">gargi init</code><span style="font:400 14px/1.5 'Hanken Grotesk',sans-serif;color:#66625a">Create <span style="font-family:'JetBrains Mono',monospace">./.gargi/</span> and set <span style="font-family:'JetBrains Mono',monospace">GARGI_DB</span>.</span></div>
+      <div style="padding:22px 20px;border-left:1px solid #d9d3c6;display:flex;flex-direction:column;gap:10px"><span style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">04</span><span style="font:400 24px 'Newsreader',serif">Train</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#1d1c19">gargi train route_ticket</code><span style="font:400 14px/1.5 'Hanken Grotesk',sans-serif;color:#66625a">Gates pass → shadow. Exit 2 means a gate failed.</span></div>
+      <div style="padding:22px 0 22px 20px;border-left:1px solid #d9d3c6;display:flex;flex-direction:column;gap:10px"><span style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">05</span><span style="font:400 24px 'Newsreader',serif">Watch</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#1d1c19">gargi status</code><span style="font:400 14px/1.5 'Hanken Grotesk',sans-serif;color:#66625a">State, swap rate, agreement, p50, estimated savings.</span></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Integration paths" style="border-top:1px solid #d9d3c6;background:#faf8f3">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 48px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap">
+      <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">SIX INTEGRATION PATHS</div>
+      <a href="#" style="font:500 15px 'Hanken Grotesk',sans-serif;border-bottom:1.5px solid #1d1c19;padding-bottom:2px">GARGI.md ↗</a>
+    </div>
+    <div style="margin-top:24px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px">
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">A Python function</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">@gargi.swappable(...)</code></a>
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">instructor</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">gargi.integrations.instructor.wrap(client)</code></a>
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">Pydantic AI</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">gargi.integrations.pydantic_ai.wrap(agent)</code></a>
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">OpenAI SDK</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">from gargi.openai import OpenAI</code></a>
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">Anthropic SDK</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">from gargi.anthropic import Anthropic</code></a>
+      <a href="#" style="padding:24px;background:#f4f1e9;border:1px solid #d9d3c6;border-radius:12px;display:flex;flex-direction:column;gap:12px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#a39e92">YOUR CODE TODAY</span><span style="font:400 24px 'Newsreader',serif">Any language, n8n</span><code style="font:400 13px 'JetBrains Mono',monospace;color:#cf5d24">gargi proxy · OPENAI_BASE_URL</code></a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Guides and lifecycle" style="border-top:1px solid #d9d3c6">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 48px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px">
+    <div>
+      <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">GUIDES</div>
+      <div style="margin-top:20px;display:flex;flex-direction:column;border-top:1px solid #1d1c19">
+        <a href="#" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:20px 0;border-bottom:1px solid #d9d3c6;align-items:baseline"><span><span style="display:block;font:400 24px 'Newsreader',serif">README</span><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Lifecycle, promotion gates, the contract, CLI.</span></span><span style="font:400 13px 'JetBrains Mono',monospace;color:#a39e92">README.md ↗</span></a>
+        <a href="#" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:20px 0;border-bottom:1px solid #d9d3c6;align-items:baseline"><span><span style="display:block;font:400 24px 'Newsreader',serif">Integrating with a coding agent</span><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Before/after code for all six paths.</span></span><span style="font:400 13px 'JetBrains Mono',monospace;color:#a39e92">GARGI.md ↗</span></a>
+        <a href="#" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:20px 0;border-bottom:1px solid #d9d3c6;align-items:baseline"><span><span style="display:block;font:400 24px 'Newsreader',serif">Cold start</span><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">readiness, import from Langfuse and others, replay.</span></span><span style="font:400 13px 'JetBrains Mono',monospace;color:#a39e92">docs/cold-start.md ↗</span></a>
+        <a href="#" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:20px 0;border-bottom:1px solid #d9d3c6;align-items:baseline"><span><span style="display:block;font:400 24px 'Newsreader',serif">Humans in the loop</span><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Review queue, gargi ui, gold sets, payoff.</span></span><span style="font:400 13px 'JetBrains Mono',monospace;color:#a39e92">docs/human-loop.md ↗</span></a>
+        <a href="#" style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:20px 0;border-bottom:1px solid #d9d3c6;align-items:baseline"><span><span style="display:block;font:400 24px 'Newsreader',serif">n8n workflows</span><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Swap repetitive LLM calls through the proxy.</span></span><span style="font:400 13px 'JetBrains Mono',monospace;color:#a39e92">docs/n8n.md ↗</span></a>
+      </div>
+    </div>
+    <div>
+      <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">LIFECYCLE</div>
+      <div style="margin-top:20px;padding:28px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font:500 15px 'JetBrains Mono',monospace">
+          <span style="padding:9px 14px;border:2px solid #3a70bb;color:#3a70bb;border-radius:7px">teacher</span>
+          <span style="font:400 12px 'JetBrains Mono',monospace;color:#66625a">gates pass →</span>
+          <span style="padding:9px 14px;border:2px solid #8f8a80;color:#66625a;border-radius:7px">shadow</span>
+          <span style="font:400 12px 'JetBrains Mono',monospace;color:#66625a">200 calls or 24 h →</span>
+          <span style="padding:9px 14px;background:#cf5d24;color:#faf8f3;border-radius:7px">assist</span>
+        </div>
+        <div style="margin-top:14px;font:400 13px 'JetBrains Mono',monospace;color:#3a70bb">↺ drift on the holdout slice, or a new lineage → teacher</div>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px;font:400 15px/1.55 'Hanken Grotesk',sans-serif;color:#3d3a34">
+          <span><b style="font-weight:600;color:#3a70bb">teacher</b> · every call goes to the LLM.</span>
+          <span><b style="font-weight:600;color:#66625a">shadow</b> · the LLM answers every call. The student predicts too, and both are logged.</span>
+          <span><b style="font-weight:600;color:#cf5d24">assist</b> · calls where every field clears <span style="font-family:'JetBrains Mono',monospace;font-size:13px">min_confidence</span> are served locally. Everything else, plus the holdout slice, goes to the LLM.</span>
+        </div>
+      </div>
+      <div style="margin-top:20px;border:1px solid #d9d3c6;border-radius:10px;overflow:hidden;background:#fff">
+        <img src="assets/html-report.png" alt="gargi report: per-decision dashboard" style="display:block;width:100%;height:auto">
+      </div>
+      <div style="margin-top:10px;font:400 12px 'JetBrains Mono',monospace;color:#66625a">gargi report route_ticket --out report.html · local demo run</div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="CLI" style="border-top:1px solid #d9d3c6">
+  <div style="max-width:1240px;margin:0 auto;padding:64px 48px 96px">
+    <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">CLI REFERENCE</div>
+    <div style="margin-top:20px;border-top:1px solid #1d1c19">
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi scan PATH [--json] [--volume FILE]</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Find swappable LLM call sites and estimate monthly savings</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi init</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Create ./.gargi/ and print the DB path</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi replay --app mod[:fn] --input rows.jsonl</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Run the teacher over historical inputs; resumable</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi train NAME [--no-promote] [--new-lineage]</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Train and gate; exit 0 = passed, 2 = gates failed, 1 = error</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi status [NAME] [--json]</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">State, rows, swap rate, agreement, ECE, p50, estimated savings</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi review NAME [--limit 20]</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Disagreements and low-confidence rows worth labelling</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi correct ID --field F --value V</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Record a human label, validated against the schema</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi promote NAME · gargi demote NAME</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Manual overrides; every override is recorded</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi report NAME --out report.html</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Swap rate and agreement over time, savings, lifecycle</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;padding:14px 0;border-bottom:1px solid #d9d3c6"><code style="font:400 14px 'JetBrains Mono',monospace">gargi proxy [--port 8787] [--upstream URL]</code><span style="font:400 15px 'Hanken Grotesk',sans-serif;color:#66625a">Run an OpenAI-compatible proxy server</span></div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:#1d1c19;color:#a39e92">
+  <div style="max-width:1240px;margin:0 auto;padding:36px 48px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:baseline">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 24px 'Newsreader',serif;color:#f4f1e9">Gargi</span><span style="font:400 15px 'Noto Serif Devanagari',serif">गार्गी</span></div>
+    <p style="margin:0;font:400 15px/1.5 'Hanken Grotesk',sans-serif;max-width:560px">Gargi is a lab building AI infrastructure that proves itself. Named for Gargi Vachaknavi, who kept asking.</p>
+  </div>
+</footer>
+</div>
+</x-dc>
+</body>
+</html>

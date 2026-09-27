@@ -1,29 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { ScriptCycler } from "@/components/ScriptCycler";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { CONTRIBUTORS, MANIFESTO, PILLARS, VISION, WHY_OPEN } from "@/content/site";
+import { CONTRIBUTORS, MANIFESTO, PILLARS, VISION, WHY_OPEN } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Gargi trains small, capable models for Indian languages and releases them openly.",
+  description: "Gargi Labs trains small, capable models for Indian languages and releases them openly.",
 };
 
 export default function About() {
   return (
     <div className="shell">
       <PageView page="about" />
-      <Nav current="about" />
+      <SiteHeader current="indic" />
 
       <section className="about-hero">
         <div className="about-hero-body">
           <div className="kicker">About</div>
           <h1 className="page-title">Language is shared knowledge.</h1>
           <p className="page-lede" style={{ marginBottom: 0 }}>
-            Gargi trains small, highly capable models for Indian languages and releases
+            Gargi Labs trains small, highly capable models for Indian languages and releases
             them openly. Everything we build is meant to be used, copied and improved by
             anyone — because the knowledge a language carries belongs to the people who
             speak it, not to whoever happens to hold the weights.
@@ -61,7 +61,7 @@ export default function About() {
         <div className="contribute-intro">
           <h2 style={{ margin: "0 0 16px", fontSize: 32 }}>Built the way open source is built</h2>
           <p style={{ margin: "0 0 28px", fontSize: 17, lineHeight: 1.6, maxWidth: "46ch" }}>
-            Gargi develops in the open, in public repositories, with the same review and
+            Gargi Labs develops in the open, in public repositories, with the same review and
             contribution model that produced most of the software the world runs on. If you
             work on language, machine learning, data or the languages themselves, there is
             work here for you.
@@ -89,7 +89,7 @@ export default function About() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

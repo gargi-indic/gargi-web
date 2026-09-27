@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { CONTRIBUTORS, M1, POSTS } from "@/content/site";
+import { CONTRIBUTORS, M1, POSTS } from "@/content/indic";
 
 const POST = POSTS[0];
 
@@ -20,7 +20,7 @@ export default function GargiM1IsOut() {
   return (
     <div className="shell">
       <PageView page="blog/gargi-m1-is-out" />
-      <Nav current="blog" />
+      <SiteHeader current="blog" />
 
       <header className="article-head">
         <Link className="article-back" href="/blog">← Notes</Link>
@@ -118,7 +118,7 @@ export default function GargiM1IsOut() {
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }
