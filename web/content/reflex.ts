@@ -688,4 +688,208 @@ python -m experiments.phase0.run sweep --dataset banking77
   },
 } as const;
 
+export const DOCS = {
+  intro: {
+    eyebrow: "DOCS · GARGI REFLEX v0.1",
+    title: "Add gargi to a repo in an afternoon.",
+    sub: "The docs live on GitHub, next to the code. This page is the map: install, pick an integration path, and find the guide you need.",
+    pipCommand: "pip install gargi",
+    agentEyebrow: "OR TELL YOUR CODING AGENT",
+    agentPrompt: "“Follow GARGI.md to add gargi to this repo.”",
+  },
+  quickStart: {
+    eyebrow: "QUICK START",
+    steps: [
+      {
+        num: "01",
+        title: "Scan",
+        code: "gargi scan . --json",
+        desc: "Find swappable call sites and estimate monthly savings.",
+      },
+      {
+        num: "02",
+        title: "Wrap",
+        code: "@gargi.swappable(...)",
+        desc: "Or one of the five other paths below.",
+      },
+      {
+        num: "03",
+        title: "Init",
+        code: "gargi init",
+        desc: "Create ./.gargi/ and set GARGI_DB.",
+      },
+      {
+        num: "04",
+        title: "Train",
+        code: "gargi train route_ticket",
+        desc: "Gates pass → shadow. Exit 2 means a gate failed.",
+      },
+      {
+        num: "05",
+        title: "Watch",
+        code: "gargi status",
+        desc: "State, swap rate, agreement, p50, estimated savings.",
+      },
+    ],
+  },
+  integrationPaths: {
+    eyebrow: "SIX INTEGRATION PATHS",
+    githubGuideLabel: "GARGI.md ↗",
+    docPath: "GARGI.md",
+    paths: [
+      {
+        tag: "YOUR CODE TODAY",
+        title: "A Python function",
+        code: "@gargi.swappable(...)",
+      },
+      {
+        tag: "YOUR CODE TODAY",
+        title: "instructor",
+        code: "gargi.integrations.instructor.wrap(client)",
+      },
+      {
+        tag: "YOUR CODE TODAY",
+        title: "Pydantic AI",
+        code: "gargi.integrations.pydantic_ai.wrap(agent)",
+      },
+      {
+        tag: "YOUR CODE TODAY",
+        title: "OpenAI SDK",
+        code: "from gargi.openai import OpenAI",
+      },
+      {
+        tag: "YOUR CODE TODAY",
+        title: "Anthropic SDK",
+        code: "from gargi.anthropic import Anthropic",
+      },
+      {
+        tag: "YOUR CODE TODAY",
+        title: "Any language, n8n",
+        code: "gargi proxy · OPENAI_BASE_URL",
+      },
+    ],
+  },
+  guidesAndLifecycle: {
+    guidesEyebrow: "GUIDES",
+    guides: [
+      {
+        title: "README",
+        desc: "Lifecycle, promotion gates, the contract, CLI.",
+        linkLabel: "README.md ↗",
+        docPath: "README.md",
+      },
+      {
+        title: "Integrating with a coding agent",
+        desc: "Before/after code for all six paths.",
+        linkLabel: "GARGI.md ↗",
+        docPath: "GARGI.md",
+      },
+      {
+        title: "Cold start",
+        desc: "readiness, import from Langfuse and others, replay.",
+        linkLabel: "docs/cold-start.md ↗",
+        docPath: "docs/cold-start.md",
+      },
+      {
+        title: "Humans in the loop",
+        desc: "Review queue, gargi ui, gold sets, payoff.",
+        linkLabel: "docs/human-loop.md ↗",
+        docPath: "docs/human-loop.md",
+      },
+      {
+        title: "n8n workflows",
+        desc: "Swap repetitive LLM calls through the proxy.",
+        linkLabel: "docs/n8n.md ↗",
+        docPath: "docs/n8n.md",
+      },
+    ],
+    lifecycleEyebrow: "LIFECYCLE",
+    lifecycleRoles: [
+      {
+        name: "teacher",
+        type: "teacher" as const,
+      },
+      {
+        name: "shadow",
+        type: "muted" as const,
+      },
+      {
+        name: "assist",
+        type: "student" as const,
+      },
+    ],
+    lifecycleTransitions: [
+      "gates pass →",
+      "200 calls or 24 h →",
+    ],
+    resetText: "↺ drift on the holdout slice, or a new lineage → teacher",
+    lifecycleItems: [
+      {
+        role: "teacher",
+        roleClass: "teacher" as const,
+        desc: "every call goes to the LLM.",
+      },
+      {
+        role: "shadow",
+        roleClass: "muted" as const,
+        desc: "the LLM answers every call. The student predicts too, and both are logged.",
+      },
+      {
+        role: "assist",
+        roleClass: "student" as const,
+        desc: "calls where every field clears min_confidence are served locally. Everything else, plus the holdout slice, goes to the LLM.",
+      },
+    ],
+    reportImage: "/reflex/html-report.png",
+    reportAlt: "gargi report: per-decision dashboard",
+    reportCaption: "gargi report route_ticket --out report.html · local demo run",
+  },
+  cli: {
+    eyebrow: "CLI REFERENCE",
+    commands: [
+      {
+        cmd: "gargi scan PATH [--json] [--volume FILE]",
+        desc: "Find swappable LLM call sites and estimate monthly savings",
+      },
+      {
+        cmd: "gargi init",
+        desc: "Create ./.gargi/ and print the DB path",
+      },
+      {
+        cmd: "gargi replay --app mod[:fn] --input rows.jsonl",
+        desc: "Run the teacher over historical inputs; resumable",
+      },
+      {
+        cmd: "gargi train NAME [--no-promote] [--new-lineage]",
+        desc: "Train and gate; exit 0 = passed, 2 = gates failed, 1 = error",
+      },
+      {
+        cmd: "gargi status [NAME] [--json]",
+        desc: "State, rows, swap rate, agreement, ECE, p50, estimated savings",
+      },
+      {
+        cmd: "gargi review NAME [--limit 20]",
+        desc: "Disagreements and low-confidence rows worth labelling",
+      },
+      {
+        cmd: "gargi correct ID --field F --value V",
+        desc: "Record a human label, validated against the schema",
+      },
+      {
+        cmd: "gargi promote NAME · gargi demote NAME",
+        desc: "Manual overrides; every override is recorded",
+      },
+      {
+        cmd: "gargi report NAME --out report.html",
+        desc: "Swap rate and agreement over time, savings, lifecycle",
+      },
+      {
+        cmd: "gargi proxy [--port 8787] [--upstream URL]",
+        desc: "Run an OpenAI-compatible proxy server",
+      },
+    ],
+  },
+} as const;
+
+
 export { phase0Data };

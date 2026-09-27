@@ -2558,3 +2558,465 @@
 .research-link:hover {
   color: var(--accent);
 }
+
+
+/* ==========================================================================
+   Docs Page (/reflex/docs)
+   ========================================================================== */
+
+/* Docs Intro */
+.docs-intro-section {
+  padding: clamp(56px, 8vw, 88px) 0 56px;
+  border-top: none;
+}
+
+.docs-intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: end;
+}
+
+@media (max-width: 860px) {
+  .docs-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+}
+
+.docs-intro-title {
+  margin: 22px 0 0;
+}
+
+.docs-intro-sub {
+  margin: 22px 0 0;
+  font-family: var(--font-sans);
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 560px;
+}
+
+.docs-intro-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.docs-copy-pill {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.docs-agent-card {
+  padding: 18px 20px;
+  background: var(--raised);
+  border: 2px solid var(--line);
+  box-sizing: border-box;
+}
+
+.docs-agent-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.docs-agent-prompt {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--ink);
+}
+
+/* Quick Start */
+.quickstart-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  border-top: 2px solid var(--line);
+}
+
+@media (max-width: 1024px) {
+  .quickstart-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .quickstart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quickstart-col {
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-left: 1px solid var(--line-soft);
+}
+
+.quickstart-col:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+@media (max-width: 1024px) {
+  .quickstart-col:nth-child(3n+1) {
+    border-left: none;
+    padding-left: 0;
+  }
+  .quickstart-col {
+    border-top: 1px solid var(--line-soft);
+  }
+  .quickstart-col:nth-child(-n+3) {
+    border-top: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .quickstart-col {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--line-soft);
+  }
+  .quickstart-col:first-child {
+    border-top: none;
+  }
+}
+
+.quickstart-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--faint);
+}
+
+.quickstart-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.quickstart-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  background: var(--raised);
+  padding: 4px 8px;
+  border: 1px solid var(--line-soft);
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+.quickstart-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+/* Integration Paths */
+.docs-paths-section {
+  background: var(--paper);
+}
+
+.docs-paths-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.docs-paths-link {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 2px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.docs-paths-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.docs-paths-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 860px) {
+  .docs-paths-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .docs-paths-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.docs-path-card {
+  padding: 24px;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-decoration: none;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+
+.docs-path-card:hover {
+  background: var(--raised);
+  border-color: var(--accent);
+}
+
+.docs-path-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--faint);
+}
+
+.docs-path-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.docs-path-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+/* Guides & Lifecycle */
+.docs-gl-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .docs-gl-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+.docs-guides-list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--line);
+}
+
+.docs-guide-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+  transition: color 150ms ease;
+}
+
+.docs-guide-item:hover .docs-guide-title {
+  color: var(--accent);
+}
+
+.docs-guide-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.docs-guide-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--ink);
+  transition: color 150ms ease;
+}
+
+.docs-guide-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.docs-guide-link-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.lifecycle-box {
+  margin-top: 20px;
+  padding: 28px;
+  background: var(--raised);
+  border: 2px solid var(--line);
+}
+
+.lifecycle-pills-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.lifecycle-pill {
+  padding: 8px 14px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.pill-teacher {
+  border: 2px solid var(--teacher);
+  color: var(--teacher);
+}
+
+.pill-shadow {
+  border: 2px solid var(--muted);
+  color: var(--muted);
+}
+
+.pill-assist {
+  background: var(--student);
+  color: var(--on-accent);
+}
+
+.lifecycle-transition {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.lifecycle-reset-text {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--teacher);
+}
+
+.lifecycle-desc-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.lifecycle-desc-item b {
+  font-weight: 700;
+}
+
+.role-teacher {
+  color: var(--teacher);
+}
+
+.role-muted {
+  color: var(--muted);
+}
+
+.role-student {
+  color: var(--student);
+}
+
+.lifecycle-report-box {
+  margin-top: 20px;
+  border: 2px solid var(--line);
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.lifecycle-report-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lifecycle-report-caption {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* CLI Reference */
+.docs-cli-list {
+  margin-top: 20px;
+  border-top: 2px solid var(--line);
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-cli-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 32px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: baseline;
+}
+
+@media (max-width: 860px) {
+  .docs-cli-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.docs-cli-cmd-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.docs-cli-cmd {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+.docs-cli-copy {
+  flex-shrink: 0;
+}
+
+.docs-cli-desc {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
