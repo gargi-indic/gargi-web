@@ -109,7 +109,7 @@ function Thesis({ T, C, P }) {
     </div>
     <div style={{ position: 'absolute', left: 160, top: 760, display: 'flex', gap: 28, alignItems: 'center', opacity: prog(T, S + 4.0, 0.8) }}>
       <span style={{ width: 60, height: 2, background: P.ink }}></span>
-      <span style={{ font: `500 26px ${MONO}`, color: P.muted, letterSpacing: '0.08em' }}>GARGI REFLEX · AUTONOMOUS DISTILLATION FOR LLM DECISIONS</span>
+      <span style={{ font: `500 26px ${MONO}`, color: P.muted, letterSpacing: '0.08em' }}>GARGI REFLEX · AUTONOMOUS MODEL CACHING FOR LLM CALLS</span>
     </div>
   </Scene>;
 }
@@ -294,12 +294,12 @@ function Evidence({ T, C, P }) {
           <div style={{ font: `400 24px ${SANS}`, color: P.muted }}>{b[1]}</div>
         </div>
         <div style={{ position: 'absolute', left: bx, top, width: bw * b[2] * g, height: 58, background: b[3], borderRadius: 0 }}></div>
-        <div style={{ position: 'absolute', left: bx + bw * b[2] * g + 18, top: top + 8, font: `600 34px ${MONO}`, color: P.ink, opacity: g }}>{(b[2] * 100 * g).toFixed(1)}%</div>
+        <div style={{ position: 'absolute', left: bx + bw * b[2] * g + 18, top: top + 8, font: `600 34px ${MONO}`, color: P.ink, opacity: g, background: P.bg, padding: "0 8px", marginLeft: -8 }}>{(b[2] * 100 * g).toFixed(1)}%</div>
         <div style={{ position: 'absolute', left: bx, top: top + 70, font: `400 19px ${MONO}`, color: P.muted, opacity: prog(T, S + 2.2 + i * 0.4, 0.6) }}>{b[4]}</div>
       </div>;
     })}
     <div style={{ position: 'absolute', left: bx + 300, top: 430 + 300 + 4, opacity: clamp(stamp, 0, 1), transform: `rotate(-3deg) scale(${0.7 + 0.3 * stamp})`, transformOrigin: 'left center', font: `600 24px ${MONO}`, letterSpacing: '0.08em', color: P.ink, border: `2.5px solid ${P.ink}`, borderRadius: 0, padding: '8px 16px' }}>GATES REFUSE TO SWAP</div>
-    <div style={{ position: 'absolute', left: 140, bottom: 70, font: `800 38px ${SERIF}`, color: P.ink, opacity: prog(T, S + 6.0, 0.8) }}>“Before you distill an LLM, check whether it agrees with itself.”</div>
+    <div style={{ position: 'absolute', left: 140, bottom: 70, font: `800 38px ${SERIF}`, color: P.ink, opacity: prog(T, S + 6.0, 0.8) }}>“Before you cache an LLM’s decisions, check whether it agrees with itself.”</div>
   </Scene>;
 }
 
@@ -313,7 +313,7 @@ function Close({ T, C, P, headline }) {
   const h = prog(T, S + 0.5, 1.0);
   return <Scene o={o}>
     <div style={{ position: 'absolute', left: 0, right: 0, top: 280, textAlign: 'center' }}>
-      <div style={{ font: `500 24px ${MONO}`, letterSpacing: '0.12em', color: P.muted, opacity: prog(T, S + 0.3, 0.7) }}>GARGI REFLEX · AUTONOMOUS DISTILLATION FOR LLM DECISIONS</div>
+      <div style={{ font: `500 24px ${MONO}`, letterSpacing: '0.12em', color: P.muted, opacity: prog(T, S + 0.3, 0.7) }}>GARGI REFLEX · AUTONOMOUS MODEL CACHING FOR LLM CALLS</div>
       <div style={{ marginTop: 40, font: `800 100px/1.02 ${SERIF}`, letterSpacing: '-0.025em', color: P.ink, opacity: h, transform: `translateY(${(1 - h) * 30}px)` }}>{headline}</div>
       <div style={{ marginTop: 70, display: 'inline-flex', alignItems: 'center', gap: 18, font: `500 38px ${MONO}`, whiteSpace: 'nowrap', color: P.ink, background: P.card, border: `1.5px solid ${P.line}`, borderRadius: 0, padding: '22px 36px', opacity: prog(T, S + 1.6, 0.6) }}>
         <span style={{ color: P.rx }}>$</span><span>{cmd.slice(0, n)}<span style={{ opacity: caret ? 1 : 0, color: P.rx }}>▍</span></span>

@@ -10,9 +10,33 @@ in the `design/reflex/` mockups. The mockups still own Reflex content and sectio
 
 | # | Product | Status | Route root | Source of content |
 |---|---|---|---|---|
-| 1 | **Gargi Reflex** — autonomous distillation for LLM decisions | Launching | `/reflex` | `design/reflex/*.dc.html` + `design/reflex/uploads/gargi-reflex-website/` |
+| 1 | **Gargi Reflex** — autonomous model caching for LLM calls | Launching | `/reflex` | `design/reflex/*.dc.html` + `design/reflex/uploads/gargi-reflex-website/` |
 | 2 | **Coding harness & Meta harness** | In development | `/harness` | Placeholder copy below; a "Get notified" waitlist |
 | 3 | **Indic Language SLMs** (Gargi-M1 and successors) | Live research preview | `/indic` | Everything the site has today |
+
+## Terminology: model caching, never "distillation"
+
+Decided 2026-09-27. "Distillation" reads as copying someone else's model, so it never appears
+in visible copy, alt text, metadata or the film. Reflex is **autonomous model caching**: the LLM
+answers until there's enough data, Reflex trains a small classifier on those answers, serves the
+calls it's confident about, and hands everything else back. The developer does the prompt design;
+Reflex does the data science.
+
+- **Descriptor** (eyebrow, metadata description, OG): *Gargi Reflex · autonomous model caching for LLM calls*
+- **Positioning line** (use once per page, near the top): *You do the prompt design. Reflex does the data science.*
+- **Not a lookup cache** (use once, on `/reflex`, near "What it automates"): *Not a lookup cache. Reflex trains a model on your LLM's answers, so it handles inputs it has never seen.*
+- Cache vocabulary, used consistently: **warm-up** (the LLM answers until there's enough data), **served locally / cache hit** (a confident local answer), **falls back to the LLM** (low confidence), **hit rate** = share served locally (the swap rate), **invalidated** (drift sends the call back to the LLM).
+- "Teacher" and "student" stay as technical terms on `/reflex/research` and in charts only.
+
+Replacements for the mockup copy (`design/reflex/*.dc.html` and the brief):
+
+| Mockup text | Use instead |
+|---|---|
+| GARGI REFLEX · AUTONOMOUS DISTILLATION FOR LLM DECISIONS | GARGI REFLEX · AUTONOMOUS MODEL CACHING FOR LLM CALLS |
+| We're building toward an autonomous distillation system. | We're building toward a fully autonomous model cache. |
+| Fine-tune a single compact model on the distilled data from all your decisions. | Fine-tune a single compact model on everything Reflex has learned across your calls. |
+| "Before you distill an LLM, check whether it agrees with itself." | "Before you cache an LLM's decisions, check whether it agrees with itself." |
+| A weak teacher can't be distilled into a good student. | A weak teacher can't train a good student. |
 
 ## Brand
 
@@ -93,7 +117,7 @@ For now the home page sells Reflex. The other two products get one short row nea
 bottom and live on their own pages. Section order:
 
 1. **Hero** (split). Headline: **Make every LLM call swappable.** Sub (max 20 words):
-   *Reflex learns the decisions your LLM makes again and again, then serves them locally once it proves it agrees.*
+   *You write the prompt. Reflex learns from your LLM's answers and serves the repeat calls locally, in milliseconds.*
    Actions: the `pip install gargi` pill (copy button) and a secondary "Watch the film" link
    to the film section. Visual: the live call stream + swap-rate curve panel from
    `design/reflex/Home.dc.html` (lines 48–80), restyled per DESIGN.md.

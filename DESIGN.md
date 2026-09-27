@@ -153,7 +153,8 @@ Never use `--teacher` blue for a button, link or decoration.
 
 Calm, exact, a little dry. Short sentences. Every number carries its conditions.
 Limits are stated plainly. No "elevate / seamless / unleash / next-gen", no testimonials,
-logos or user counts (there are none), no em-dashes in new copy.
+logos or user counts (there are none), no em-dashes in new copy. Never "distill" or
+"distillation": Reflex is *autonomous model caching* (see PLAN.md "Terminology").
 
 ## 9. Anti-Patterns (Banned)
 
