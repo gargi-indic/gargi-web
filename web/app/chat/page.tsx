@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ChatClient } from "@/components/chat/ChatClient";
-import { M1 } from "@/content/site";
+import { M1 } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "Chat",

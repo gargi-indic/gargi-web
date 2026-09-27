@@ -53,7 +53,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="shell">
       <div className="prose" style={{ maxWidth: "none" }}>
-        <h1>Gargi admin</h1>
+        <h1>Gargi Labs admin</h1>
         {children}
       </div>
     </div>
