@@ -50,7 +50,7 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
 | #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
 | #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1 (done), #2 (done) |
-| #4 | `/reflex` from Home.dc.html | Assigned to Jules, in progress (session `7017089802036803166`) |
+| #4 | `/reflex` from Home.dc.html | Assigned to Jules, in progress — components implemented, styling/dark-mode/review pass under way as of 23:02 UTC 2026-09-27, no PR yet (session `7017089802036803166`) |
 | #5 | `/reflex/research` | Not assigned. Needs #1 |
 | #6 | `/reflex/docs` | Not assigned. Needs #1 |
 | #7 | Contact & support (form, API, migration, admin) | Not assigned. Needs #1 |
