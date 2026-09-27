@@ -117,12 +117,24 @@ Replaces the old "Research access" waitlist panel. One component, `ContactSuppor
 red panel on the right with a short line and a form (name, email, "I want to" choice:
 Contribute / Support the project / Ask a question / Get updates, message, Send), plus direct
 links. The old manifesto line (*"A billion people should not have to think in English…"*) is
-**retired**; remove `MANIFESTO` from content. The replacement line is set in `content/indic.ts`
-as `CONTACT_LINE`.
+**retired**; remove `MANIFESTO` from content.
+
+The panel states the lab's mission (owner, 2026-09-27: make AI products sustainable and
+accessible; bring the tools that cut cost and latency; support autonomous decision making).
+`CONTACT_LINE` in `content/lab.ts`:
+
+> **Tools that make AI products sustainable: lower cost, lower latency, and decisions that run on their own.**
+
+Direct links under the form: **email only**, from a single `CONTACT_EMAIL` constant in
+`content/lab.ts` (address to be confirmed by the owner; until then the link is hidden when the
+constant is empty). Submissions are stored in Supabase and listed in `/admin`; no email alerts.
 
 ### Lab copy (starting point, owner may rewrite)
 
-- Lab line: *Gargi Labs builds AI that proves itself before you trust it. Named for Gargi
+- Mission (use on `/lab` and as `SITE.description`): *Gargi Labs makes AI products sustainable
+  and accessible: the tools that cut cost and latency, and the infrastructure for autonomous
+  decision making.*
+- Lab line (footer): *Gargi Labs builds AI that proves itself before you trust it. Named for Gargi
   Vachaknavi, who kept asking.*
 - Product cards:
   1. **Gargi Reflex** — "Make every LLM call swappable." Learns from the LLM calls your product
