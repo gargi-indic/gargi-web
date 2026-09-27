@@ -8,14 +8,22 @@ goes back to Jules.
 
 Owner: **gishnucodes** (GitHub). Repo: **gargi-indic/gargi-web** (public).
 
+**One ticket per session.** You work exactly one ticket (or one clearly-scoped blocker) to a
+conclusion — merged, or stuck and reported — then post a handoff comment to
+[issue #11](https://github.com/gargi-indic/gargi-web/issues/11) (§10a) and stop. You do **not**
+assign the next ticket yourself; the owner starts a fresh session for that. This keeps each
+session's context window small instead of running the whole backlog in one long-lived process.
+
 ---
 
 ## 1. Read these first (in order)
 
-1. [`PLAN.md`](PLAN.md): the spec. Products, routes, home page, terminology, contact section.
-2. [`../../DESIGN.md`](../../DESIGN.md): the visual rules (direction A: Archivo, red `#ec3013`, square corners, 2px rules).
-3. The issue you are reviewing (`gh issue view N`).
-4. Only when needed: `design/reflex/*.dc.html` mockups (content and layout for Reflex pages) and
+1. [Issue #11](https://github.com/gargi-indic/gargi-web/issues/11) (Orchestration handoff
+   record): read the latest comment for the current live state before anything else.
+2. [`PLAN.md`](PLAN.md): the spec. Products, routes, home page, terminology, contact section.
+3. [`../../DESIGN.md`](../../DESIGN.md): the visual rules (direction A: Archivo, red `#ec3013`, square corners, 2px rules).
+4. The issue you are reviewing (`gh issue view N`).
+5. Only when needed: `design/reflex/*.dc.html` mockups (content and layout for Reflex pages) and
    `design/reflex/uploads/gargi-reflex-website/01-website-brief.md` (the Reflex brief and allowed numbers, §4).
 
 Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
@@ -35,7 +43,7 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
   `contact_messages`, listed in `/admin`, no email alerts.
 - All work lands on **`gargi-labs`**. `main` auto-deploys to production and is **never** touched by you.
 
-## 3. Current state (as of 2026-09-27)
+## 3. Current state (as of 2026-09-27; §10a's issue #11 is the always-current version of this)
 
 | Issue | What | State |
 |---|---|---|
@@ -178,7 +186,7 @@ git switch gargi-labs && git pull
 gh issue close N --comment "Merged in #PR"
 ```
 
-Then assign the next ticket(s) per §4.
+Then post the handoff comment (§10a) and stop. Do not assign the next ticket yourself.
 
 ## 8. Stop and ask the owner when
 
@@ -187,6 +195,7 @@ Then assign the next ticket(s) per §4.
 - #7 is merged: the owner must run `supabase/migrations/0002_contact.sql` in the Supabase SQL
   editor themselves. Remind them; don't do it.
 - Jules fails the same ticket twice.
+- Your ticket is merged (or you're stuck): post the handoff comment (§10a) and stop.
 - Everything is merged: summarise, open the `gargi-labs → main` PR with a checklist of routes to
   verify on the Vercel preview, and hand it to the owner.
 
@@ -202,6 +211,22 @@ Then assign the next ticket(s) per §4.
 After each review round, send a short update: which PR, verdict (merged / changes requested /
 blocked), what you checked, and what's next. Link issues and PRs as full URLs
 (`https://github.com/gargi-indic/gargi-web/pull/N`).
+
+## 10a. Handoff comment (end of every session)
+
+[Issue #11](https://github.com/gargi-indic/gargi-web/issues/11) is the continuity record —
+read its latest comment first when you start, and post a new comment there when you stop,
+covering:
+
+- What you did this session (PR/commit links, review verdicts, any post-merge fixes).
+- The live state table: every issue #1–#8, one line each (merged / in progress incl. Jules
+  session link / open+unassigned / blocked), same shape as §3 below.
+- The run order (§4) restated as-is, so the next session doesn't need to open this file just to
+  know what's next — only what's already merged has moved.
+- Any decisions still pending an owner call.
+- What the next session should do first.
+
+Update §3 of this file to match whenever you post a handoff comment, so the two never drift.
 
 ## Environment notes
 
