@@ -2,8 +2,9 @@
 
 The site stops being "Gargi, the Malayalam model" and becomes **Gargi Labs**, a lab
 with three products. This document is the shared spec every ticket points at. When a
-ticket and this file disagree, this file wins; when this file and the design files in
-`design/reflex/` disagree on Reflex page content, the design files win.
+ticket and this file disagree, this file wins. **How things look is defined in
+[`DESIGN.md`](../../DESIGN.md)** (repo root), which overrides the colours, fonts and radii
+in the `design/reflex/` mockups. The mockups still own Reflex content and section order.
 
 ## Products
 
@@ -18,56 +19,27 @@ ticket and this file disagree, this file wins; when this file and the design fil
 - Name everywhere: **Gargi Labs** (was "Gargi"). Product names: "Gargi Reflex", "Indic Language SLMs".
 - Mark: keep the Malayalam **ഗ**. The design mockups put Devanagari गार्गी next to the
   wordmark — replace that with ഗ (set in Noto Sans Malayalam). Do not use गार्गी anywhere.
-- Lockup: `ഗ` glyph (accent colour) + `Gargi Labs` in Newsreader 500. One `Wordmark`
-  component, with a `light` variant for dark backgrounds.
+- Lockup: `[ഗ] GARGI LABS` (see DESIGN.md §4). One `Wordmark` component, with a `light`
+  variant for dark or red backgrounds.
 - Favicons (`web/public/icon.*`, `apple-icon.png`) already use ഗ — keep them.
 - The ScriptCycler (ഗ cycling through 12 scripts) stays, but only inside `/indic`.
 
 ## Design system
 
-Adopt the "lab notebook" system from `design/reflex/Home.dc.html` as the default theme (lab pages, Reflex, Harness).
+**Direction A (Modernist-led), decided 2026-09-27.** Everything is in
+[`DESIGN.md`](../../DESIGN.md): tokens (light + dark), Archivo + JetBrains Mono + Noto Sans
+Malayalam, radius 0, 2px ink rules, the [ഗ] mark, grayscale photography. One common look for
+the whole site, all three products included. There are no per-product themes.
 
-Tokens (put in `web/styles/tokens.css`, consumed via CSS custom properties — never hard-code hex in components):
-
-| Token | Light | Dark | Role |
-|---|---|---|---|
-| `--paper` | `#f4f1e9` | `#16150f` | page background |
-| `--paper-raised` | `#faf8f3` | `#1f1e19` | cards, alt sections |
-| `--ink` | `#1d1c19` | `#ede9df` | text |
-| `--ink-2` | `#3d3a34` | `#c9c4b8` | body copy |
-| `--muted` | `#66625a` | `#a39e92` | secondary text |
-| `--faint` | `#a39e92` | `#6b675f` | numbering, captions |
-| `--line` | `#d9d3c6` | `#34322d` | rules/borders |
-| `--line-soft` | `#e6e1d6` | `#2a2924` | inner rules |
-| `--student` (Reflex, orange) | `#cf5d24` | `#ee8452` | Reflex / local / primary accent |
-| `--teacher` (LLM, blue) | `#3a70bb` | `#72a0e0` | LLM / teacher |
-| `--holdout` (grey) | `#8f8a80` | `#8f8a80` | holdout / reference |
-| `--inverse-bg` | `#1d1c19` | `#0e0d0a` | dark bands (contract, CTA) |
-
-Dark mode: `@media (prefers-color-scheme: dark)` on `:root`.
-
-**Per-product themes.** Components use only the semantic token names above (plus
-`--font-display`, `--font-sans`, `--font-mono`, `--radius`). The lab-notebook values are the
-default theme. Each product layout sets `data-product="reflex" | "harness" | "indic"` on its
-wrapper, and `tokens.css` may override tokens per product. Only the default theme is defined
-for now; whether `/indic` keeps its current modernist look (Archivo, red `#ec3013`, square
-corners) as a product theme is **still being decided** — do not restyle `/indic` pages yet. The three semantic colours
-(student / teacher / holdout) must mean the same thing in every hero, diagram and chart.
-
-Fonts via `next/font/google` in `web/app/layout.tsx`: **Newsreader** (headings, serif),
-**Hanken Grotesk** (UI/body), **JetBrains Mono** (code and every number),
-**Noto Sans Malayalam** (kept — the ഗ mark and all Malayalam text). Drop Archivo once
-nothing uses it.
-
-Layout: max-width 1240px, 48px side padding on desktop, 16px on phones, no horizontal
-scroll at 375px. Every multi-column grid in the mockups collapses to one column below
-~860px; stat tiles stack; code tabs become a `<select>` on phones.
+Token names used by components: `--paper --raised --ink --ink-2 --muted --faint --line
+--line-soft --accent --on-accent --inverse --on-inverse --student --teacher --holdout`,
+plus `--font-display --font-sans --font-mono`. Values live only in `web/styles/tokens.css`.
 
 ## Information architecture
 
 ```
-/                       Gargi Labs home — lab intro + three product cards (NEW)
-/lab                    About the lab: the name, how we work, products (NEW, brief §9)
+/                       Home: Reflex-first, with the launch film; other products as a short row (NEW)
+/lab                    About the lab: the name, how we work, all products, contact & support (NEW)
 /blog                   Lab-wide blog (unchanged content)
 /blog/gargi-m1-is-out   unchanged
 /privacy                unchanged
@@ -78,7 +50,7 @@ scroll at 375px. Every multi-column grid in the mockups collapses to one column 
 
 /harness                Coding harness & Meta harness — placeholder + waitlist (NEW)
 
-/indic                  Indic SLMs overview  ← today's `/` (hero, languages, manifesto, waitlist)
+/indic                  Indic SLMs overview  ← today's `/` (hero, languages, portrait + contact & support)
 /indic/models           ← today's /models
 /indic/chat             ← today's /chat
 /indic/about            ← today's /about (vision, pillars, contributors)
@@ -114,6 +86,39 @@ All copy and every number stay in `web/content/`, never inline in JSX (existing 
 External links: `REFLEX.github` and `LAB.github` constants. The Reflex source repo
 (`gargi-indic/gargi-decision-harness`) is private until launch — link to
 `https://github.com/gargi-indic` for now, single constant so it's a one-line change.
+
+### Home page (`/`): Reflex first
+
+For now the home page sells Reflex. The other two products get one short row near the
+bottom and live on their own pages. Section order:
+
+1. **Hero** (split). Headline: **Make every LLM call swappable.** Sub (max 20 words):
+   *Reflex learns the decisions your LLM makes again and again, then serves them locally once it proves it agrees.*
+   Actions: the `pip install gargi` pill (copy button) and a secondary "Watch the film" link
+   to the film section. Visual: the live call stream + swap-rate curve panel from
+   `design/reflex/Home.dc.html` (lines 48–80), restyled per DESIGN.md.
+2. **Launch film.** `web/public/reflex/film.mp4` + `film-poster.jpg` (produced separately,
+   see the film ticket), 16:9, per DESIGN.md §5 "Video". Heading: *One minute, from 3.6 s to 5 ms.*
+   Caption (mono): *Banking77 end-to-end demo · stub teacher · laptop CPU.*
+3. **What Reflex does**, as three numbered rows (not cards):
+   - **It watches.** Your typed LLM calls (routing, intent, moderation, extraction) go to your model exactly as today. Reflex logs each input and answer.
+   - **It proves.** It trains a small model on CPU in minutes, then tests it on data it never saw. Unless agreement, calibration and coverage all pass, nothing is swapped.
+   - **It swaps, and keeps checking.** Confident calls are served locally in about 5 ms at $0. Everything else, plus a permanent holdout slice, still goes to your LLM, which takes back over if agreement drops.
+   Below: *Built for Python teams whose product asks an LLM the same kind of question thousands of times a day.*
+4. **Evidence:** the four stat tiles from the mockup (89.0%, 95.1%, 3.6 s → 5 ms, ~$51k/yr), each with its caveat, then "Read the research →" (`/reflex/research`).
+5. **The contract** (ink band): the fallback sentence from the mockup, plus its 19-fault-points line.
+6. **Get started:** `pip install gargi`, "Reproduce our numbers in 90 seconds" command, links to `/reflex` ("Everything about Reflex →"), `/reflex/docs`, GitHub.
+7. **Also from Gargi Labs:** one bordered row, two cells: Coding harness & Meta harness (*In development*, → `/harness`) and Indic Language SLMs (*Research preview · Gargi-M1 live*, → `/indic`).
+
+### Contact & support section
+
+Replaces the old "Research access" waitlist panel. One component, `ContactSupport`, used on
+`/indic` and `/lab`: the grayscale portrait (`web/public/access-portrait.png`) on the left, a
+red panel on the right with a short line and a form (name, email, "I want to" choice:
+Contribute / Support the project / Ask a question / Get updates, message, Send), plus direct
+links. The old manifesto line (*"A billion people should not have to think in English…"*) is
+**retired**; remove `MANIFESTO` from content. The replacement line is set in `content/indic.ts`
+as `CONTACT_LINE`.
 
 ### Lab copy (starting point, owner may rewrite)
 
