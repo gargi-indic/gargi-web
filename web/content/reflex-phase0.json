@@ -1,0 +1,680 @@
+{
+  "_about": "Phase 0 (issue #1), run 2026-09-23. Generated from experiments/phase0/out/*/results.json. coverage_at_95 = share of test calls a local student serves while agreeing with the teacher >= 95%, threshold picked on validation. CIs: 1,000 bootstrap resamples. Write-up: docs/phase0/RESULTS.md.",
+  "cost_usd_total": 29.47,
+  "banking77": {
+    "teacher": "gemini-3.8-flash",
+    "rows": 13072,
+    "splits": {
+      "train": 8979,
+      "test": 3073,
+      "val": 1020
+    },
+    "fields": [
+      "intent"
+    ],
+    "headline": {
+      "encoder": "bge-base-en-v1.5",
+      "coverage_at_95": 0.88968,
+      "coverage_ci95": [
+        0.8516,
+        0.92842
+      ],
+      "agreement_on_served": 0.95501,
+      "agreement_ci95": [
+        0.94047,
+        0.9682
+      ]
+    },
+    "operating_points": [
+      {
+        "agreement_target": 0.9,
+        "coverage": 0.99967,
+        "agreement": 0.90397,
+        "threshold": 0.21587
+      },
+      {
+        "agreement_target": 0.95,
+        "coverage": 0.88968,
+        "agreement": 0.95501,
+        "threshold": 0.69023
+      },
+      {
+        "agreement_target": 0.97,
+        "coverage": 0.83469,
+        "agreement": 0.97115,
+        "threshold": 0.8082
+      }
+    ],
+    "learning_curve": {
+      "encoder": "all-MiniLM-L6-v2",
+      "teacher_labels": [
+        {
+          "labels_used": 500,
+          "coverage_at_95": 0.6082,
+          "agreement_all": 0.76635
+        },
+        {
+          "labels_used": 1000,
+          "coverage_at_95": 0.73641,
+          "agreement_all": 0.81842
+        },
+        {
+          "labels_used": 2000,
+          "coverage_at_95": 0.83046,
+          "agreement_all": 0.8604
+        },
+        {
+          "labels_used": 4000,
+          "coverage_at_95": 0.85063,
+          "agreement_all": 0.88318
+        },
+        {
+          "labels_used": 8979,
+          "coverage_at_95": 0.86886,
+          "agreement_all": 0.9014
+        }
+      ],
+      "gold_labels": [
+        {
+          "labels_used": 500,
+          "coverage_at_95": 0.51611,
+          "agreement_all": 0.75659
+        },
+        {
+          "labels_used": 1000,
+          "coverage_at_95": 0.65636,
+          "agreement_all": 0.83078
+        },
+        {
+          "labels_used": 2000,
+          "coverage_at_95": 0.82525,
+          "agreement_all": 0.88155
+        },
+        {
+          "labels_used": 4000,
+          "coverage_at_95": 0.92971,
+          "agreement_all": 0.9027
+        },
+        {
+          "labels_used": 8979,
+          "coverage_at_95": 0.93231,
+          "agreement_all": 0.91865
+        }
+      ]
+    },
+    "encoders": [
+      {
+        "encoder": "all-MiniLM-L6-v2",
+        "labels": "teacher",
+        "coverage_at_95": 0.86886,
+        "agreement_all": 0.9014
+      },
+      {
+        "encoder": "all-MiniLM-L6-v2",
+        "labels": "gold",
+        "coverage_at_95": 0.93231,
+        "agreement_all": 0.91865
+      },
+      {
+        "encoder": "bge-base-en-v1.5",
+        "labels": "teacher",
+        "coverage_at_95": 0.88968,
+        "agreement_all": 0.90368
+      },
+      {
+        "encoder": "bge-base-en-v1.5",
+        "labels": "gold",
+        "coverage_at_95": 0.94631,
+        "agreement_all": 0.92678
+      }
+    ],
+    "per_field": {
+      "intent": {
+        "agreement_all": 0.90368,
+        "ece": 0.01003,
+        "coverage_at_95_upper_bound": 0.90368
+      }
+    },
+    "noise_ceiling": {
+      "teacher": "gemini-3.8-flash",
+      "second_teacher": "gemini-3.1-pro-preview",
+      "teacher_vs_second_teacher": {
+        "intent": 0.92749,
+        "whole_call": 0.92749,
+        "n": 993
+      },
+      "teacher_vs_gold": {
+        "intent": 0.84894,
+        "whole_call": 0.84894,
+        "n": 993
+      },
+      "second_teacher_vs_gold": {
+        "intent": 0.84995,
+        "whole_call": 0.84995,
+        "n": 993
+      },
+      "student_on_served_calls": {
+        "vs_teacher": {
+          "intent": 0.94854,
+          "whole_call": 0.94854,
+          "n": 855
+        },
+        "vs_teacher2": {
+          "intent": 0.95088,
+          "whole_call": 0.95088,
+          "n": 855
+        },
+        "vs_gold": {
+          "intent": 0.89591,
+          "whole_call": 0.89591,
+          "n": 855
+        },
+        "n": 855
+      }
+    },
+    "least_covered_classes": {
+      "intent": [
+        {
+          "class": "get_physical_card",
+          "n": 4,
+          "coverage": 0.5,
+          "agreement": 0.0
+        },
+        {
+          "class": "compromised_card",
+          "n": 36,
+          "coverage": 0.6111111111111112,
+          "agreement": 0.8055555555555556
+        },
+        {
+          "class": "lost_or_stolen_card",
+          "n": 50,
+          "coverage": 0.64,
+          "agreement": 0.78
+        },
+        {
+          "class": "transfer_not_received_by_recipient",
+          "n": 31,
+          "coverage": 0.6451612903225806,
+          "agreement": 0.7741935483870968
+        },
+        {
+          "class": "card_arrival",
+          "n": 43,
+          "coverage": 0.6976744186046512,
+          "agreement": 0.7906976744186046
+        }
+      ]
+    },
+    "top_student_vs_teacher_confusions": {
+      "intent": [
+        {
+          "teacher": "why_verify_identity",
+          "student": "verify_my_identity",
+          "n": 8
+        },
+        {
+          "teacher": "card_arrival",
+          "student": "card_delivery_estimate",
+          "n": 7
+        },
+        {
+          "teacher": "declined_card_payment",
+          "student": "reverted_card_payment?",
+          "n": 5
+        },
+        {
+          "teacher": "card_payment_not_recognised",
+          "student": "compromised_card",
+          "n": 5
+        },
+        {
+          "teacher": "automatic_top_up",
+          "student": "top_up_limits",
+          "n": 5
+        }
+      ]
+    }
+  },
+  "tickets": {
+    "teacher": "gemini-3.8-flash",
+    "rows": 11923,
+    "splits": {
+      "train": 9541,
+      "val": 1238,
+      "test": 1144
+    },
+    "fields": [
+      "queue",
+      "priority",
+      "type"
+    ],
+    "headline": {
+      "encoder": "all-MiniLM-L6-v2",
+      "coverage_at_95": 0.1049,
+      "coverage_ci95": [
+        0.02797,
+        0.1722
+      ],
+      "agreement_on_served": 0.90833,
+      "agreement_ci95": [
+        0.84444,
+        1.0
+      ]
+    },
+    "operating_points": [
+      {
+        "agreement_target": 0.9,
+        "coverage": 0.17133,
+        "agreement": 0.87755,
+        "threshold": 0.86144
+      },
+      {
+        "agreement_target": 0.95,
+        "coverage": 0.1049,
+        "agreement": 0.90833,
+        "threshold": 0.90006
+      },
+      {
+        "agreement_target": 0.97,
+        "coverage": 0.03322,
+        "agreement": 0.97368,
+        "threshold": 0.94547
+      }
+    ],
+    "learning_curve": {
+      "encoder": "all-MiniLM-L6-v2",
+      "teacher_labels": [
+        {
+          "labels_used": 500,
+          "coverage_at_95": 0.18619,
+          "agreement_all": 0.46066
+        },
+        {
+          "labels_used": 1000,
+          "coverage_at_95": 0.00787,
+          "agreement_all": 0.50699
+        },
+        {
+          "labels_used": 2000,
+          "coverage_at_95": 0.00874,
+          "agreement_all": 0.52535
+        },
+        {
+          "labels_used": 4000,
+          "coverage_at_95": 0.04196,
+          "agreement_all": 0.53934
+        },
+        {
+          "labels_used": 9541,
+          "coverage_at_95": 0.1049,
+          "agreement_all": 0.59091
+        }
+      ],
+      "gold_labels": [
+        {
+          "labels_used": 500,
+          "coverage_at_95": 0.00787,
+          "agreement_all": 0.12675
+        },
+        {
+          "labels_used": 1000,
+          "coverage_at_95": 0.0,
+          "agreement_all": 0.13374
+        },
+        {
+          "labels_used": 2000,
+          "coverage_at_95": 0.00087,
+          "agreement_all": 0.15122
+        },
+        {
+          "labels_used": 4000,
+          "coverage_at_95": 0.00612,
+          "agreement_all": 0.15385
+        },
+        {
+          "labels_used": 9541,
+          "coverage_at_95": 0.00524,
+          "agreement_all": 0.27622
+        }
+      ]
+    },
+    "encoders": [
+      {
+        "encoder": "all-MiniLM-L6-v2",
+        "labels": "teacher",
+        "coverage_at_95": 0.1049,
+        "agreement_all": 0.59091
+      },
+      {
+        "encoder": "all-MiniLM-L6-v2",
+        "labels": "gold",
+        "coverage_at_95": 0.00524,
+        "agreement_all": 0.27622
+      },
+      {
+        "encoder": "bge-base-en-v1.5",
+        "labels": "teacher",
+        "coverage_at_95": 0.11189,
+        "agreement_all": 0.60577
+      },
+      {
+        "encoder": "bge-base-en-v1.5",
+        "labels": "gold",
+        "coverage_at_95": 0.0,
+        "agreement_all": 0.17483
+      }
+    ],
+    "per_field": {
+      "queue": {
+        "agreement_all": 0.82955,
+        "ece": 0.02688,
+        "coverage_at_95_upper_bound": 0.56469
+      },
+      "priority": {
+        "agreement_all": 0.82255,
+        "ece": 0.01348,
+        "coverage_at_95_upper_bound": 0.53322
+      },
+      "type": {
+        "agreement_all": 0.8479,
+        "ece": 0.03265,
+        "coverage_at_95_upper_bound": 0.65559
+      }
+    },
+    "noise_ceiling": {
+      "teacher": "gemini-3.8-flash",
+      "second_teacher": "gemini-3.1-pro-preview",
+      "teacher_vs_second_teacher": {
+        "queue": 0.82683,
+        "priority": 0.82382,
+        "type": 0.85586,
+        "whole_call": 0.57658,
+        "n": 999
+      },
+      "teacher_vs_gold": {
+        "queue": 0.33433,
+        "priority": 0.38138,
+        "type": 0.64464,
+        "whole_call": 0.09209,
+        "n": 999
+      },
+      "second_teacher_vs_gold": {
+        "queue": 0.30931,
+        "priority": 0.36236,
+        "type": 0.68368,
+        "whole_call": 0.09109,
+        "n": 999
+      },
+      "student_on_served_calls": {
+        "vs_teacher": {
+          "queue": 0.9633,
+          "priority": 0.9633,
+          "type": 0.9633,
+          "whole_call": 0.89908,
+          "n": 109
+        },
+        "vs_teacher2": {
+          "queue": 0.93578,
+          "priority": 0.92661,
+          "type": 0.9633,
+          "whole_call": 0.82569,
+          "n": 109
+        },
+        "vs_gold": {
+          "queue": 0.3211,
+          "priority": 0.45872,
+          "type": 0.6789,
+          "whole_call": 0.12844,
+          "n": 109
+        },
+        "n": 109
+      }
+    },
+    "least_covered_classes": {
+      "queue": [
+        {
+          "class": "Customer Service",
+          "n": 4,
+          "coverage": 0.0,
+          "agreement": 0.25
+        },
+        {
+          "class": "Returns and Exchanges",
+          "n": 1,
+          "coverage": 0.0,
+          "agreement": 0.0
+        },
+        {
+          "class": "Human Resources",
+          "n": 3,
+          "coverage": 0.0,
+          "agreement": 1.0
+        },
+        {
+          "class": "General Inquiry",
+          "n": 46,
+          "coverage": 0.0,
+          "agreement": 0.6086956521739131
+        },
+        {
+          "class": "Billing and Payments",
+          "n": 61,
+          "coverage": 0.04918032786885246,
+          "agreement": 0.9180327868852459
+        }
+      ],
+      "priority": [
+        {
+          "class": "medium",
+          "n": 311,
+          "coverage": 0.05144694533762058,
+          "agreement": 0.6945337620578779
+        },
+        {
+          "class": "low",
+          "n": 321,
+          "coverage": 0.08099688473520249,
+          "agreement": 0.822429906542056
+        },
+        {
+          "class": "high",
+          "n": 512,
+          "coverage": 0.15234375,
+          "agreement": 0.900390625
+        }
+      ],
+      "type": [
+        {
+          "class": "Problem",
+          "n": 248,
+          "coverage": 0.04032258064516129,
+          "agreement": 0.6451612903225806
+        },
+        {
+          "class": "Request",
+          "n": 433,
+          "coverage": 0.06235565819861432,
+          "agreement": 0.9353348729792148
+        },
+        {
+          "class": "Change",
+          "n": 60,
+          "coverage": 0.1,
+          "agreement": 0.7666666666666667
+        },
+        {
+          "class": "Incident",
+          "n": 403,
+          "coverage": 0.19106699751861042,
+          "agreement": 0.890818858560794
+        }
+      ]
+    },
+    "top_student_vs_teacher_confusions": {
+      "queue": [
+        {
+          "teacher": "Technical Support",
+          "student": "Product Support",
+          "n": 29
+        },
+        {
+          "teacher": "Technical Support",
+          "student": "IT Support",
+          "n": 24
+        },
+        {
+          "teacher": "Product Support",
+          "student": "Technical Support",
+          "n": 22
+        },
+        {
+          "teacher": "IT Support",
+          "student": "Technical Support",
+          "n": 17
+        },
+        {
+          "teacher": "General Inquiry",
+          "student": "Sales and Pre-Sales",
+          "n": 14
+        }
+      ],
+      "priority": [
+        {
+          "teacher": "medium",
+          "student": "low",
+          "n": 57
+        },
+        {
+          "teacher": "low",
+          "student": "medium",
+          "n": 56
+        },
+        {
+          "teacher": "high",
+          "student": "medium",
+          "n": 51
+        },
+        {
+          "teacher": "medium",
+          "student": "high",
+          "n": 38
+        },
+        {
+          "teacher": "low",
+          "student": "high",
+          "n": 1
+        }
+      ],
+      "type": [
+        {
+          "teacher": "Problem",
+          "student": "Incident",
+          "n": 76
+        },
+        {
+          "teacher": "Incident",
+          "student": "Problem",
+          "n": 40
+        },
+        {
+          "teacher": "Request",
+          "student": "Change",
+          "n": 17
+        },
+        {
+          "teacher": "Change",
+          "student": "Request",
+          "n": 13
+        },
+        {
+          "teacher": "Problem",
+          "student": "Request",
+          "n": 12
+        }
+      ]
+    }
+  },
+  "controls": {
+    "banking77_gold_as_teacher": {
+      "encoder": "bge-base-en-v1.5",
+      "coverage_at_95": 0.95086,
+      "coverage_ci95": [
+        0.92646,
+        0.9883
+      ],
+      "agreement_on_served": 0.95448,
+      "agreement_ci95": [
+        0.93472,
+        0.96535
+      ]
+    },
+    "tickets_gold_as_teacher": {
+      "encoder": "all-MiniLM-L6-v2",
+      "coverage_at_95": 0.00874,
+      "coverage_ci95": [
+        0.00437,
+        0.0236
+      ],
+      "agreement_on_served": 0.9,
+      "agreement_ci95": [
+        0.54528,
+        1.0
+      ]
+    }
+  },
+  "small_teacher_probe": {
+    "_note": "400 tickets labelled by a 0.5B local model (ollama qwen2.5:0.5b). Tiny sample; directional only.",
+    "teacher": "qwen2.5-0.5b",
+    "whole_call_vs_gold": 0.0475,
+    "whole_call_vs_gemini_flash": 0.18421,
+    "n_compared": 38
+  },
+  "economics_projection": {
+    "_note": "Projection from measured tokens and latency, not a production measurement. See RESULTS.md.",
+    "teacher_tokens_per_call": {
+      "input": 712,
+      "output": 78
+    },
+    "teacher_cost_per_1k_calls_usd": {
+      "promo": 0.83,
+      "list_2027": 1.66
+    },
+    "teacher_latency_s": {
+      "p50": 3.6,
+      "mean": 4.0,
+      "p90": 8.0,
+      "n": 30
+    },
+    "student_latency_ms": {
+      "bge-base": 30,
+      "MiniLM": 4.4
+    },
+    "share_served_locally": 0.845,
+    "yearly_saving_usd_list_2027": [
+      {
+        "calls_per_day": 10000,
+        "saving": 5111
+      },
+      {
+        "calls_per_day": 100000,
+        "saving": 51105
+      },
+      {
+        "calls_per_day": 1000000,
+        "saving": 511054
+      }
+    ]
+  },
+  "banking77_demo_stub_teacher": {
+    "_note": "README demo: stub teacher returning gold labels, laptop CPU; verified in CI on a fresh clone.",
+    "served_locally": 0.813,
+    "holdout_agreement": 0.962,
+    "holdout_n": 317,
+    "agreement_all_served": 0.964,
+    "latency_ms": {
+      "p50": 4.7,
+      "p95": 5.0
+    }
+  }
+}
