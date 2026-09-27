@@ -43,17 +43,17 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
   `contact_messages`, listed in `/admin`, no email alerts.
 - All work lands on **`gargi-labs`**. `main` auto-deploys to production and is **never** touched by you.
 
-## 3. Current state (as of 2026-09-27; §10a's issue #11 is the always-current version of this)
+## 3. Current state (as of 2026-09-27, post-#4-merge; §10a's issue #11 is the always-current version of this)
 
 | Issue | What | State |
 |---|---|---|
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
 | #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
 | #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1 (done), #2 (done) |
-| #4 | `/reflex` from Home.dc.html | Assigned to Jules, in progress — components implemented, styling/dark-mode/review pass under way as of 23:02 UTC 2026-09-27, no PR yet (session `7017089802036803166`) |
-| #5 | `/reflex/research` | Not assigned. Needs #1 |
-| #6 | `/reflex/docs` | Not assigned. Needs #1 |
-| #7 | Contact & support (form, API, migration, admin) | Not assigned. Needs #1 |
+| #4 | `/reflex` from Home.dc.html | **Merged** via #15 (Jules' #14 re-based; same "branched from main" issue as #1/#2) |
+| #5 | `/reflex/research` | Assigned to Jules, in progress (session `726085034359084651`) |
+| #6 | `/reflex/docs` | Assigned to Jules, in progress (session `6471498076673282720`) |
+| #7 | Contact & support (form, API, migration, admin) | Assigned to Jules, in progress (session `11378861798545080030`) |
 | #8 | Apply DESIGN.md to remaining pages, delete old CSS | Not assigned. Last |
 
 Already on `gargi-labs` (done by the previous orchestrator, not by Jules): `PLAN.md`,
@@ -81,6 +81,12 @@ header/nav render outside `.shell` so they go full-width above 1440px on Indic p
 (cosmetic, restyle-ticket material); `/indic` has no dedicated metadata title yet; and the chat
 sidebar's "Gargi Labs home" logo links to `/` (the lab placeholder) rather than `/indic` (fine,
 not a bug, but worth revisiting once `/lab` exists).
+
+**#4 (`cdba2a2` via #15):** same "branched from main" failure mode as #1/#2 (Jules' PR #14 targeted
+`main` and its merge-base with `main` was `main`'s own HEAD, not `gargi-labs`'s). Rebuilt per §5:
+applied the `web/`-scoped diff from Jules' branch onto `gargi-labs`, reviewed (typecheck, build,
+scope, banned words, radius 0, calculator defaults, tabs/metadata, dev-server smoke test), merged
+as #15, closed #14 with a thank-you. No regressions found, nothing deferred.
 
 ## 4. Run order
 
