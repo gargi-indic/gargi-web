@@ -1,0 +1,58 @@
+
+> gargi-web@0.1.0 build
+> next build
+
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+   ▲ Next.js 15.5.23
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 13.7s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/18) ...
+   Generating static pages (4/18)
+   Generating static pages (8/18)
+   Generating static pages (13/18)
+ ✓ Generating static pages (18/18)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    1.76 kB         108 kB
+├ ○ /_not-found                            152 B         103 kB
+├ ƒ /admin                                 674 B         103 kB
+├ ƒ /api/admin-login                       152 B         103 kB
+├ ƒ /api/chat                              152 B         103 kB
+├ ƒ /api/contact                           152 B         103 kB
+├ ƒ /api/conversations                     152 B         103 kB
+├ ƒ /api/conversations/[id]                152 B         103 kB
+├ ƒ /api/events                            152 B         103 kB
+├ ƒ /api/feedback                          152 B         103 kB
+├ ƒ /api/waitlist                          152 B         103 kB
+├ ƒ /api/warm                              152 B         103 kB
+├ ○ /blog                                1.81 kB         108 kB
+├ ○ /blog/gargi-m1-is-out                1.81 kB         108 kB
+├ ○ /harness                             1.81 kB         108 kB
+├ ○ /indic                               2.09 kB         113 kB
+├ ○ /indic/about                         1.11 kB         107 kB
+├ ○ /indic/chat                           4.5 kB         110 kB
+├ ○ /indic/models                        1.11 kB         107 kB
+├ ○ /lab                                 2.76 kB         114 kB
+├ ○ /privacy                             1.28 kB         107 kB
+├ ○ /reflex                              1.96 kB         122 kB
+├ ○ /reflex/docs                         1.07 kB         109 kB
+├ ○ /reflex/research                     1.82 kB         113 kB
+├ ○ /robots.txt                            152 B         103 kB
+└ ○ /sitemap.xml                           152 B         103 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/255-87552e6e05b8e3aa.js       46.4 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.93 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

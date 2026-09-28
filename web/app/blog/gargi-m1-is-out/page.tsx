@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { CONTRIBUTORS, M1, POSTS } from "@/content/site";
+import { CONTRIBUTORS, M1, POSTS } from "@/content/indic";
 
 const POST = POSTS[0];
 
@@ -20,7 +20,7 @@ export default function GargiM1IsOut() {
   return (
     <div className="shell">
       <PageView page="blog/gargi-m1-is-out" />
-      <Nav current="blog" />
+      <SiteHeader current="blog" />
 
       <header className="article-head">
         <Link className="article-back" href="/blog">← Notes</Link>
@@ -43,7 +43,7 @@ export default function GargiM1IsOut() {
           {M1.name} is public today. The <a href={HF_BASE} target="_blank" rel="noreferrer">base</a>{" "}
           and <a href={HF} target="_blank" rel="noreferrer">instruct</a> checkpoints and the
           tokenizer are on Hugging Face under {M1.license}, and you can{" "}
-          <Link href="/chat">try it in chat</Link> right now — switch between the two checkpoints
+          <Link href="/indic/chat">try it in chat</Link> right now — switch between the two checkpoints
           in the header and watch them disagree.
         </p>
 
@@ -109,16 +109,13 @@ export default function GargiM1IsOut() {
       <section className="blog-cta">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="blog-cta-left">
-          <div className="manifesto" style={{ maxWidth: "24ch", fontSize: 38 }}>
-            A billion people should not have to think in English to be understood by a machine.
-          </div>
         </div>
         <div className="blog-cta-right">
           <WaitlistForm source="post-gargi-m1" label="Work on this" cta="Get in touch" />
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

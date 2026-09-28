@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { M1, POSTS } from "@/content/site";
+import { M1, POSTS } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "Notes",
@@ -18,7 +18,7 @@ export default function Blog() {
   return (
     <div className="shell">
       <PageView page="blog" />
-      <Nav current="blog" />
+      <SiteHeader current="blog" />
 
       <div className="blog-head">
         <h1>Notes</h1>
@@ -69,16 +69,13 @@ export default function Blog() {
       <section className="blog-cta">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="blog-cta-left">
-          <div className="manifesto" style={{ maxWidth: "24ch", fontSize: 38 }}>
-            A billion people should not have to think in English to be understood by a machine.
-          </div>
         </div>
         <div className="blog-cta-right">
           <WaitlistForm source="blog" label="Get new posts" cta="Subscribe" />
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

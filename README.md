@@ -1,87 +1,43 @@
-# Gargi
+# Gargi Labs
 
-Open small language models for Indian languages, and the site that serves them.
+Gargi Labs makes AI products sustainable and accessible: the tools that cut cost and latency, and the infrastructure for autonomous decision making.
 
-The first model, **Gargi-M1**, is a 110M-parameter Malayalam transformer trained
-from Malayalam Wikipedia and the Ultimate Malayalam Dataset, then instruction-tuned.
-Both the base and instruction-tuned checkpoints are served, and every conversation
-is captured to feed the next training run.
+## Products
 
-```
-gargi/
-├── web/         Next.js 15 site + chat + API routes  → Vercel
-├── inference/   FastAPI model server                 → Cloud Run (GCP)
-└── supabase/    Postgres schema, RLS and analytics views
-```
+1. **[Gargi Reflex](/reflex)** — Autonomous model caching for LLM calls. Learns from the LLM calls your product already makes and swaps in a small local model once it can prove it agrees.
+2. **Coding harness & Meta harness** (`/harness`) — The slow-thinking counterpart to Reflex: a harness for coding agents, and a meta harness that builds and tunes harnesses.
+3. **Indic Language SLMs** (`/indic`) — Open small language models for Indian languages. Gargi-M1 (Malayalam, 110M) is live.
 
-## Gargi-M1, as actually trained
+## Route Map
 
-| | |
-|---|---|
-| Parameters | 110M — 12 layers, 12 heads, 768 hidden |
-| Context | 512 tokens |
-| Vocabulary | 32,000 byte-level BPE, Malayalam only |
-| Training | ~1.39B tokens, held-out loss 1.189 |
-| Tokenizer fertility | 1.36 characters/token |
-| Checkpoints | [instruct](https://huggingface.co/gishnu/malayalam-nanogpt-instruct-v3-100M) · [base](https://huggingface.co/gishnu/malayalam-nanogpt-base-v3-100M) |
+- `/` — Home (Reflex-first, launch film, product overview)
+- `/lab` — About the lab, mission, name story, how we work, contact & support
+- `/reflex` — Gargi Reflex overview
+  - `/reflex/research` — Phase 0 research paper & benchmark data
+  - `/reflex/docs` — Documentation and CLI reference
+- `/harness` — Coding harness & Meta harness (waitlist)
+- `/indic` — Indic SLMs overview
+  - `/indic/models` — Gargi-M1 specification, fundamentals, and weights
+  - `/indic/chat` — Live Malayalam chat interface
+  - `/indic/about` — Vision, pillars, and contributors
+- `/blog` — Lab notes & research updates
+  - `/blog/gargi-m1-is-out` — Launch note for Gargi-M1
+- `/privacy` — Privacy policy
 
-Every one of these numbers lives in [`web/content/site.ts`](web/content/site.ts).
-The pages read from it; nothing is hardcoded in JSX. Change copy there.
+For complete architecture and design specifications, see [PLAN.md](docs/gargi-labs/PLAN.md) and [DESIGN.md](DESIGN.md).
 
-> The Claude Design mockup this site was built from describes a hypothetical
-> 7.2B model with a 32K context trained on 1.4T tokens. Those numbers were
-> replaced with the real ones rather than shipped.
-
-## Running it locally
-
-Full instructions in [`docs/LOCAL.md`](docs/LOCAL.md). The short version:
+## Local Development
 
 ```bash
-cd inference && pip install -r requirements.txt && python app.py    # :7860
-cd web && cp .env.example .env.local && npm install && npm run dev  # :3000
+cd web
+npm install
+npm run dev
 ```
 
-The site runs without Supabase or the model server — pages render, and the chat
-reports plainly that the model is unreachable rather than failing silently.
+To run typecheck and build:
 
-## How a message flows
-
+```bash
+cd web
+npm run typecheck
+npm run build
 ```
-browser ──POST /api/chat──▶ Next.js route ──POST /generate──▶ HF Space
-   ◀──────── SSE tokens ─────────┤                              (KV-cached)
-                                 └── after the stream closes ──▶ Supabase
-                                     messages, generations,
-                                     generation_quality
-```
-
-The Space's bearer token stays on the server. Logging happens *after* the last
-token, never between tokens, so the database never sits in front of the model.
-
-## Two things worth knowing
-
-**The KV cache is the reason the free tier works.** The training notebook's
-`generate()` re-runs a full forward pass over the whole context for every token.
-Measured at the real model shape on 2 threads: 11s uncached versus 2.3s cached
-for a 200-token reply, and the gap widens with longer replies. See
-[`inference/model.py`](inference/model.py).
-
-**Quality is measured continuously, not at release.** The notebook's Step 11
-health checks — Malayalam script ratio and distinct-3gram — run on every live
-response and land in `generation_quality`. Combined with the base/instruct switch
-in the chat header, the site is a permanently-running version of the
-`probe_base.py` experiment: which checkpoint answers real questions better.
-
-## Deploying
-
-1. **Inference** — Cloud Run: `./deploy/gcp/deploy.sh`. Scales to zero, HTTPS
-   and the bearer token handled for you. Guide: **[deploy/gcp/](deploy/gcp/)**.
-2. **Database** — run `supabase/migrations/0001_init.sql` in the SQL editor.
-3. **Vercel** — import `web/`, set the variables in `web/.env.example`.
-4. **Monitoring** — add `GARGI_INFERENCE_URL` as a GitHub secret so
-   `.github/workflows/health.yml` tells you if the service dies.
-
-Hugging Face Spaces was the original plan, but Docker Spaces need a paid tier.
-GCP won over Oracle ARM because model training will live there too, and one
-provider beats two. A working Oracle VM deployment is kept in
-[deploy/oracle/](deploy/oracle/) as a fallback — free forever and never sleeps,
-at the cost of managing TLS and a firewall yourself.

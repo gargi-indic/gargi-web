@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+Devanagari:wght@400&display=swap">
+<style>html,body{margin:0;background:#f4f1e9;color:#1d1c19;-webkit-font-smoothing:antialiased}a{color:#1d1c19;text-decoration:none}a:hover{color:#cf5d24}*{box-sizing:border-box}</style>
+</helmet>
+<div style="min-height:100vh;background:#f4f1e9;font-family:'Hanken Grotesk',system-ui,sans-serif;color:#1d1c19">
+
+<header style="position:sticky;top:0;z-index:5;background:rgba(244,241,233,0.94);backdrop-filter:blur(8px);border-bottom:1px solid #d9d3c6">
+  <div style="max-width:1240px;margin:0 auto;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+    <a href="Home.dc.html" style="display:flex;align-items:baseline;gap:10px"><span style="font:500 28px 'Newsreader',Georgia,serif;letter-spacing:-0.01em">Gargi</span><span style="font:400 16px 'Noto Serif Devanagari',serif;color:#66625a">गार्गी</span></a>
+    <nav style="display:flex;align-items:center;gap:30px;font:500 15px 'Hanken Grotesk',sans-serif">
+      <a href="Home.dc.html">Reflex</a><a href="Research.dc.html" style="color:#cf5d24">Research</a><a href="Home.dc.html#vision">Vision</a><a href="Docs.dc.html">Docs</a><a href="Home.dc.html#lab">Lab</a>
+      <a href="#" style="font:500 14px 'JetBrains Mono',monospace;padding:8px 14px;border:1.5px solid #1d1c19;border-radius:7px">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div style="max-width:1240px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px">
+  <aside style="position:sticky;top:96px;align-self:start;padding-top:96px;display:flex;flex-direction:column;gap:12px;font:400 13px 'JetBrains Mono',monospace;color:#66625a">
+    <span style="font-weight:600;letter-spacing:0.1em;color:#a39e92;margin-bottom:6px">CONTENTS</span>
+    <a href="#q" style="color:#1d1c19">1 · The question</a><a href="#headline" style="color:#66625a">2 · Headline</a><a href="#noise" style="color:#66625a">3 · Flash vs Pro</a><a href="#labels" style="color:#66625a">4 · How many labels</a><a href="#dial" style="color:#66625a">5 · The dial</a><a href="#fails" style="color:#66625a">6 · Where it fails</a><a href="#worth" style="color:#66625a">7 · What it’s worth</a><a href="#limits" style="color:#66625a">8 · Limitations</a>
+  </aside>
+
+  <article style="padding:96px 0 120px;max-width:1000px">
+    <div style="font:500 13px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">RESEARCH · PHASE 0</div>
+    <h1 style="margin:22px 0 0;font:400 64px/1.04 'Newsreader',Georgia,serif;letter-spacing:-0.025em;max-width:900px;text-wrap:balance">Can a small model stand in for an LLM? Where it works, and where it doesn’t.</h1>
+    <p style="margin:24px 0 0;font:italic 400 24px 'Newsreader',serif;color:#66625a">Phase 0, September 2026. Two datasets, two Gemini models, $29.47.</p>
+
+    <!-- 7.1 -->
+    <section id="q" data-screen-label="The question" style="margin-top:72px;padding-top:40px;border-top:1px solid #1d1c19">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§1</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">The question</h2>
+      <p style="margin:20px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34">Before building the product, we asked one thing: what share of calls can a small local model serve while agreeing with the LLM at least 95% of the time? We decided in advance that above 60% on at least one dataset meant go, and below 40% on both meant the idea was wrong.</p>
+      <p style="margin:16px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Setup.</b> Gemini 3.8 Flash labels every row (the teacher). Gemini 3.1 Pro relabels 1,000 test rows (a second opinion). The small model is a frozen sentence encoder with a trained head per field. The confidence threshold is chosen on a validation split and then measured on an untouched test split, exactly as in production. Intervals come from 1,000 bootstrap resamples.</p>
+      <div style="margin-top:28px;max-width:720px;font:400 15px 'Hanken Grotesk',sans-serif">
+        <div style="display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);padding:10px 0;border-bottom:1px solid #1d1c19;font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.08em;color:#a39e92"><span></span><span>BANKING77</span><span>SUPPORT TICKETS</span></div>
+        <div style="display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);padding:12px 0;border-bottom:1px solid #d9d3c6"><span style="color:#66625a">Task</span><span>1 field, 77 intents</span><span>3 fields: queue (10), priority (3), type (4)</span></div>
+        <div style="display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);padding:12px 0;border-bottom:1px solid #d9d3c6"><span style="color:#66625a">Rows labelled by the LLM</span><span style="font-family:'JetBrains Mono',monospace">13,072</span><span style="font-family:'JetBrains Mono',monospace">11,923</span></div>
+        <div style="display:grid;grid-template-columns:200px minmax(0,1fr) minmax(0,1fr);padding:12px 0;border-bottom:1px solid #d9d3c6"><span style="color:#66625a">Train / val / test</span><span style="font-family:'JetBrains Mono',monospace">8,979 / 1,020 / 3,073</span><span style="font-family:'JetBrains Mono',monospace">9,541 / 1,238 / 1,144</span></div>
+      </div>
+    </section>
+
+    <!-- 7.2 -->
+    <section id="headline" data-screen-label="Headline" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§2</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif;max-width:760px">It works on well-posed decisions, and says no to ambiguous ones</h2>
+      <figure style="margin:32px 0 0;padding:32px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px">
+        <div style="font:500 16px 'Hanken Grotesk',sans-serif">Share of calls a local model can serve at 95% agreement <span style="color:#66625a;font-weight:400">(test split)</span></div>
+        <div style="position:relative;margin-top:28px;display:flex;flex-direction:column;gap:22px">
+          <div style="position:absolute;top:-8px;bottom:-8px;left:calc(240px + (100% - 330px) * 0.95);border-left:1.5px dashed #1d1c19"></div>
+          <div style="display:grid;grid-template-columns:220px minmax(0,1fr) 70px;gap:20px;align-items:center"><span style="text-align:right;font:400 15px 'Hanken Grotesk',sans-serif">Banking77 · Gemini Flash teacher</span><div style="height:30px;position:relative"><div style="width:89%;height:100%;background:#cf5d24;border-radius:2px"></div><div style="position:absolute;top:50%;left:85.2%;width:7.6%;border-top:2px solid #1d1c19"></div></div><span style="font:500 16px 'JetBrains Mono',monospace">89.0%</span></div>
+          <div style="display:grid;grid-template-columns:220px minmax(0,1fr) 70px;gap:20px;align-items:center"><span style="text-align:right;font:400 15px 'Hanken Grotesk',sans-serif">Banking77 · clean-label ceiling</span><div style="height:30px"><div style="width:95.1%;height:100%;background:#8f8a80;border-radius:2px"></div></div><span style="font:500 16px 'JetBrains Mono',monospace">95.1%</span></div>
+          <div style="display:grid;grid-template-columns:220px minmax(0,1fr) 70px;gap:20px;align-items:center"><span style="text-align:right;font:400 15px 'Hanken Grotesk',sans-serif">Tickets · Gemini Flash teacher</span><div style="height:30px"><div style="width:10.5%;height:100%;background:#cf5d24;border-radius:2px"></div></div><span style="font:500 16px 'JetBrains Mono',monospace">10.5%</span></div>
+        </div>
+        <figcaption style="margin-top:22px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">Fig. 1 · Black rule on the first bar: 95% CI 85.2–92.8%. Dashed line: 95% target. Data: banking77.headline, tickets.headline, controls.banking77_gold_as_teacher.</figcaption>
+      </figure>
+      <div style="margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;max-width:900px">
+        <p style="margin:0;font:400 17px/1.6 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Banking77: 89.0%</b> of calls served at 95.5% agreement (CI 85.2–92.8%). Against a clean-label ceiling of 95.1%, the LLM’s own label noise costs about 6 points.</p>
+        <p style="margin:0;font:400 17px/1.6 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Tickets: 10.5%</b>, at 90.8% agreement, which misses the target. The gates would refuse to swap this decision, and should.</p>
+      </div>
+    </section>
+
+    <!-- 7.3 -->
+    <section id="noise" data-screen-label="Noise ceiling" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§3</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">It learns the answer, not the LLM’s quirks</h2>
+      <p style="margin:20px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34">On the calls it chooses to serve, the student agrees with Gemini Pro, a stronger model it never trained on, <b style="font-weight:600;color:#1d1c19">95.1%</b> of the time, as well as with its own teacher (94.9%). It isn’t copying Flash’s mistakes; it serves the calls where the answer is clear and hands the rest back. The two LLMs agree with each other 92.7% of the time on Banking77.</p>
+      <figure style="margin:32px 0 0;padding:32px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+          <div style="font:500 16px 'Hanken Grotesk',sans-serif">How consistent is the LLM, and does the student match it?</div>
+          <div style="display:flex;border:1px solid #d9d3c6;border-radius:7px;overflow:hidden;font:500 13px 'JetBrains Mono',monospace"><span style="padding:7px 12px;background:#1d1c19;color:#f4f1e9">All fields</span><span style="padding:7px 12px;color:#66625a">Banking77</span><span style="padding:7px 12px;color:#66625a">Tickets</span></div>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:22px;font:400 13px 'Hanken Grotesk',sans-serif;color:#3d3a34">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#3a70bb;border-radius:2px"></span>Flash vs Pro (two LLMs)</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#8f8a80;border-radius:2px"></span>Flash vs dataset labels</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#cf5d24;border-radius:2px"></span>Student vs Flash (its teacher)</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#e9a883;border-radius:2px"></span>Student vs Pro (never saw it)</span>
+        </div>
+        <div style="position:relative;margin-top:26px;display:flex;flex-direction:column;gap:22px">
+          <div style="position:absolute;top:-6px;bottom:-6px;left:calc(180px + (100% - 250px) * 0.95);border-left:1.5px dashed #1d1c19"></div>
+          <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center"><span style="text-align:right;font:500 14px 'Hanken Grotesk',sans-serif">Banking77 · intent</span><div style="display:flex;flex-direction:column;gap:3px;padding-right:70px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:92.7%;height:14px;background:#3a70bb"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">92.7%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:84.9%;height:14px;background:#8f8a80"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">84.9%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:94.9%;height:14px;background:#cf5d24"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">94.9%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:95.1%;height:14px;background:#e9a883"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">95.1%</span></div></div></div>
+          <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center"><span style="text-align:right;font:500 14px 'Hanken Grotesk',sans-serif">Tickets · queue</span><div style="display:flex;flex-direction:column;gap:3px;padding-right:70px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:82.7%;height:14px;background:#3a70bb"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">82.7%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:33.4%;height:14px;background:#8f8a80"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">33.4%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:96.3%;height:14px;background:#cf5d24"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">96.3%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:93.6%;height:14px;background:#e9a883"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">93.6%</span></div></div></div>
+          <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center"><span style="text-align:right;font:500 14px 'Hanken Grotesk',sans-serif">Tickets · priority</span><div style="display:flex;flex-direction:column;gap:3px;padding-right:70px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:82.4%;height:14px;background:#3a70bb"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">82.4%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:38.1%;height:14px;background:#8f8a80"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">38.1%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:96.3%;height:14px;background:#cf5d24"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">96.3%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:92.7%;height:14px;background:#e9a883"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">92.7%</span></div></div></div>
+          <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center"><span style="text-align:right;font:500 14px 'Hanken Grotesk',sans-serif">Tickets · type</span><div style="display:flex;flex-direction:column;gap:3px;padding-right:70px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:85.6%;height:14px;background:#3a70bb"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">85.6%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:64.5%;height:14px;background:#8f8a80"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">64.5%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:96.3%;height:14px;background:#cf5d24"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">96.3%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:96.3%;height:14px;background:#e9a883"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">96.3%</span></div></div></div>
+          <div style="display:grid;grid-template-columns:160px minmax(0,1fr);gap:20px;align-items:center"><span style="text-align:right;font:600 14px 'Hanken Grotesk',sans-serif">Tickets · whole call</span><div style="display:flex;flex-direction:column;gap:3px;padding-right:70px">
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:57.7%;height:14px;background:#3a70bb"></div><span style="font:600 12px 'JetBrains Mono',monospace;margin-right:-70px">57.7%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:9.2%;height:14px;background:#8f8a80"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">9.2%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:89.9%;height:14px;background:#cf5d24"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">89.9%</span></div>
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:82.6%;height:14px;background:#e9a883"></div><span style="font:400 12px 'JetBrains Mono',monospace;margin-right:-70px">82.6%</span></div></div></div>
+        </div>
+        <figcaption style="margin-top:22px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">Fig. 2 · Student bars measured on the calls it serves (Banking77 n=855, tickets n=109). Dashed line: 95% target. Data: *.noise_ceiling.</figcaption>
+      </figure>
+      <p style="margin:28px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34">On tickets, each field is fairly consistent between Flash and Pro (82–86%), but all three fields together agree only <b style="font-weight:600;color:#1d1c19">57.7%</b> of the time, and the dataset’s own labels match either model on only about a third of queue and priority. No student can be 95% consistent with a teacher that isn’t consistent with itself.</p>
+      <blockquote style="margin:40px 0 0;padding:0;font:italic 400 40px/1.2 'Newsreader',serif;letter-spacing:-0.01em;max-width:800px">“Before you distill an LLM, check whether it agrees with itself.”</blockquote>
+    </section>
+
+    <!-- 7.4 -->
+    <section id="labels" data-screen-label="Learning curve" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§4</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">How many labels it takes</h2>
+      <figure style="margin:28px 0 0;padding:28px 32px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px">
+        <div style="display:flex;flex-wrap:wrap;gap:22px;font:400 13px 'Hanken Grotesk',sans-serif;color:#3d3a34">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#cf5d24"></span>Coverage at 95% agreement, LLM labels</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#8f8a80"></span>Same, dataset labels (control)</span>
+        </div>
+        <svg viewBox="0 0 1000 400" style="width:100%;height:auto;display:block;margin-top:10px;font-family:'JetBrains Mono',monospace">
+          <line x1="60" x2="940" y1="350" y2="350" stroke="#d9d3c6" stroke-width="1.5"></line><line x1="60" x2="940" y1="270" y2="270" stroke="#e6e1d6"></line><line x1="60" x2="940" y1="190" y2="190" stroke="#e6e1d6"></line><line x1="60" x2="940" y1="110" y2="110" stroke="#e6e1d6"></line><line x1="60" x2="940" y1="30" y2="30" stroke="#e6e1d6"></line>
+          <text x="50" y="354" text-anchor="end" font-size="13" fill="#a39e92">0%</text><text x="50" y="194" text-anchor="end" font-size="13" fill="#a39e92">50%</text><text x="50" y="34" text-anchor="end" font-size="13" fill="#a39e92">100%</text>
+          <line x1="256" x2="256" y1="30" y2="350" stroke="#1d1c19" stroke-dasharray="4 5"></line><text x="262" y="330" font-size="13" fill="#1d1c19">2,000 labels</text>
+          <text x="60" y="376" font-size="13" fill="#a39e92">0</text><text x="256" y="376" text-anchor="middle" font-size="13" fill="#a39e92">2k</text><text x="452" y="376" text-anchor="middle" font-size="13" fill="#a39e92">4k</text><text x="648" y="376" text-anchor="middle" font-size="13" fill="#a39e92">6k</text><text x="844" y="376" text-anchor="middle" font-size="13" fill="#a39e92">8k</text><text x="940" y="394" text-anchor="end" font-size="13" fill="#a39e92">LLM labels</text>
+          <path d="M109.0,184.8 L158.0,140.0 L256.0,85.9 L452.0,52.5 L940.0,51.7" fill="none" stroke="#8f8a80" stroke-width="3"></path>
+          <path d="M109.0,155.4 L158.0,114.3 L256.0,84.3 L452.0,77.8 L940.0,72.0" fill="none" stroke="#cf5d24" stroke-width="3.5"></path>
+          <circle cx="940" cy="72" r="5" fill="#cf5d24"></circle><circle cx="940" cy="51.7" r="5" fill="#8f8a80"></circle>
+          <text x="950" y="77" font-size="14" font-weight="600" fill="#cf5d24">87%</text><text x="950" y="50" font-size="14" font-weight="600" fill="#66625a">93%</text>
+        </svg>
+        <figcaption style="margin-top:12px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">Fig. 3 · Banking77 · MiniLM encoder · data: banking77.learning_curve</figcaption>
+      </figure>
+      <div style="margin-top:24px;font:400 14px 'JetBrains Mono',monospace">
+        <div style="display:grid;grid-template-columns:minmax(0,2.2fr) repeat(5,minmax(0,1fr));padding:10px 0;border-bottom:1px solid #1d1c19;color:#a39e92;font-size:12px"><span>LLM LABELS</span><span>500</span><span>1,000</span><span>2,000</span><span>4,000</span><span>8,979</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,2.2fr) repeat(5,minmax(0,1fr));padding:12px 0;border-bottom:1px solid #d9d3c6"><span style="font-family:'Hanken Grotesk',sans-serif;color:#cf5d24">Trained on LLM labels</span><span>60.8%</span><span>73.6%</span><span>83.0%</span><span>85.1%</span><span>86.9%</span></div>
+        <div style="display:grid;grid-template-columns:minmax(0,2.2fr) repeat(5,minmax(0,1fr));padding:12px 0;border-bottom:1px solid #d9d3c6"><span style="font-family:'Hanken Grotesk',sans-serif;color:#66625a">Trained on dataset labels (control)</span><span>51.6%</span><span>65.6%</span><span>82.5%</span><span>93.0%</span><span>93.2%</span></div>
+      </div>
+      <p style="margin:24px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34">Most of the gain comes in the first 2,000 labels, about a day of traffic at 10k calls/day, or a one-off import of history. Up to 2,000 labels, LLM labels train a <i>better</i> student than the dataset’s own labels: the LLM is more consistent, even where it’s “wrong”.</p>
+    </section>
+
+    <!-- 7.5 -->
+    <section id="dial" data-screen-label="The dial" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§5</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">The dial: agreement vs coverage</h2>
+      <p style="margin:20px 0 0;font:400 19px/1.65 'Hanken Grotesk',sans-serif;max-width:720px;color:#3d3a34">Stricter agreement means fewer calls served. Each team picks its point with one setting, <span style="font-family:'JetBrains Mono',monospace;font-size:17px;color:#1d1c19">min_agreement</span>.</p>
+      <figure style="margin:28px 0 0;padding:28px 32px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr));gap:32px;align-items:center">
+        <svg viewBox="0 0 1000 400" style="width:100%;height:auto;display:block;font-family:'JetBrains Mono',monospace">
+          <line x1="60" x2="940" y1="350" y2="350" stroke="#d9d3c6" stroke-width="1.5"></line><line x1="60" x2="940" y1="190" y2="190" stroke="#e6e1d6"></line><line x1="60" x2="940" y1="30" y2="30" stroke="#e6e1d6"></line>
+          <line x1="60" x2="940" y1="46" y2="46" stroke="#1d1c19" stroke-dasharray="6 6"></line>
+          <text x="50" y="354" text-anchor="end" font-size="13" fill="#a39e92">0%</text><text x="50" y="194" text-anchor="end" font-size="13" fill="#a39e92">50%</text><text x="50" y="34" text-anchor="end" font-size="13" fill="#a39e92">100%</text>
+          <text x="60" y="376" font-size="13" fill="#a39e92">0%</text><text x="500" y="376" text-anchor="middle" font-size="13" fill="#a39e92">50%</text><text x="940" y="376" text-anchor="end" font-size="13" fill="#a39e92">100%</text><text x="500" y="396" text-anchor="middle" font-size="13" fill="#66625a">share of calls served · y: agreement</text>
+          <path d="M68.6,30.0 L367.8,30.0 L499.9,31.3 L605.2,32.5 L702.3,35.6 L790.2,40.7 L842.9,46.9 L887.0,52.3 L940.0,61.6" fill="none" stroke="#cf5d24" stroke-width="3.5" stroke-linejoin="round"></path>
+          <circle cx="794.5" cy="39.2" r="7" fill="#faf8f3" stroke="#1d1c19" stroke-width="2"></circle>
+          <circle cx="843" cy="44.4" r="9" fill="#cf5d24" stroke="#faf8f3" stroke-width="3"></circle>
+          <circle cx="940" cy="60.7" r="7" fill="#faf8f3" stroke="#1d1c19" stroke-width="2"></circle>
+          <line x1="843" x2="843" y1="54" y2="350" stroke="#cf5d24" stroke-dasharray="3 4"></line>
+          <text x="835" y="120" text-anchor="end" font-size="14" font-weight="600" fill="#cf5d24">95% → 89% served</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:0;font:400 14px 'JetBrains Mono',monospace;max-width:360px">
+          <div style="font-size:12px;color:#a39e92;letter-spacing:0.08em;padding-bottom:10px;border-bottom:1px solid #1d1c19">min_agreement</div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #d9d3c6"><span>0.90</span><span>~100% served</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 10px;margin:0 -10px;background:#cf5d24;color:#faf8f3;border-radius:6px"><span>0.95</span><span>89% served</span></div>
+          <div style="display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #d9d3c6"><span>0.97</span><span>83% served</span></div>
+        </div>
+        <figcaption style="grid-column:1 / -1;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">Fig. 4 · Banking77, student trained on LLM labels · data: banking77.operating_points</figcaption>
+      </figure>
+    </section>
+
+    <!-- 7.6 -->
+    <section id="fails" data-screen-label="Where it fails" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§6</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">Where it fails, and what it taught us</h2>
+      <figure style="margin:28px 0 0;padding:28px 32px;background:#faf8f3;border:1px solid #d9d3c6;border-radius:12px">
+        <div style="display:flex;flex-wrap:wrap;gap:22px;font:400 13px 'Hanken Grotesk',sans-serif;color:#3d3a34">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#cf5d24"></span>Trained on LLM labels (agreement vs LLM)</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:18px;height:3px;background:#8f8a80"></span>Trained on dataset labels (agreement vs dataset)</span>
+        </div>
+        <svg viewBox="0 0 1000 400" style="width:100%;height:auto;display:block;margin-top:10px;font-family:'JetBrains Mono',monospace">
+          <line x1="60" x2="940" y1="350" y2="350" stroke="#d9d3c6" stroke-width="1.5"></line><line x1="60" x2="940" y1="190" y2="190" stroke="#e6e1d6"></line><line x1="60" x2="940" y1="30" y2="30" stroke="#e6e1d6"></line>
+          <line x1="60" x2="940" y1="46" y2="46" stroke="#1d1c19" stroke-dasharray="6 6"></line><text x="934" y="40" text-anchor="end" font-size="13" fill="#1d1c19">95% agreement bar</text>
+          <text x="50" y="354" text-anchor="end" font-size="13" fill="#a39e92">0%</text><text x="50" y="194" text-anchor="end" font-size="13" fill="#a39e92">50%</text><text x="50" y="34" text-anchor="end" font-size="13" fill="#a39e92">100%</text>
+          <text x="60" y="376" font-size="13" fill="#a39e92">0%</text><text x="500" y="376" text-anchor="middle" font-size="13" fill="#a39e92">50%</text><text x="940" y="376" text-anchor="end" font-size="13" fill="#a39e92">100%</text><text x="500" y="396" text-anchor="middle" font-size="13" fill="#66625a">share of calls served · y: agreement on the whole call</text>
+          <path d="M68.5,59.1 L76.9,102.7 L85.4,107.6 L94.6,136.7 L103.1,138.6 L112.3,142.9 L120.8,151.5 L130.0,156.6 L138.5,168.0 L147.7,173.2 L173.8,168.4 L200.0,175.9 L226.9,180.4 L253.1,186.8 L279.2,192.8 L306.2,198.0 L332.3,199.9 L358.5,206.5 L385.4,212.3 L411.5,214.2 L437.7,221.0 L464.6,224.7 L490.8,230.0 L516.9,232.6 L543.8,234.0 L570.0,237.5 L596.2,240.7 L623.1,242.9 L649.2,245.6 L675.4,247.6 L702.3,250.0 L728.5,251.3 L754.6,253.3 L781.5,254.5 L807.7,256.5 L833.8,256.8 L860.8,258.1 L886.9,259.2 L913.1,260.3 L940.0,261.6" fill="none" stroke="#8f8a80" stroke-width="3" stroke-linejoin="round"></path>
+          <path d="M68.5,30.0 L76.9,44.5 L85.4,39.7 L94.6,44.2 L103.1,47.1 L112.3,53.5 L120.8,54.3 L130.0,54.6 L138.5,55.1 L147.7,58.1 L156.2,60.7 L164.6,67.6 L173.8,64.6 L182.3,64.2 L191.5,65.6 L200.0,66.9 L209.2,69.6 L226.9,69.8 L235.4,76.3 L253.1,79.7 L270.8,88.4 L296.9,89.2 L323.1,93.6 L350.0,97.1 L376.2,98.5 L402.3,101.2 L429.2,104.0 L455.4,106.6 L481.5,110.0 L508.5,115.1 L534.6,116.1 L560.8,118.0 L587.7,121.0 L613.8,122.9 L640.0,125.5 L666.9,127.7 L693.1,129.9 L719.2,134.6 L746.2,137.3 L772.3,140.9 L798.5,144.3 L825.4,146.7 L851.5,149.4 L877.7,151.6 L904.6,155.0 L940.0,160.9" fill="none" stroke="#cf5d24" stroke-width="3.5" stroke-linejoin="round"></path>
+          <circle cx="940" cy="160.9" r="5" fill="#cf5d24"></circle><circle cx="940" cy="261.6" r="5" fill="#8f8a80"></circle>
+          <text x="950" y="166" font-size="14" font-weight="600" fill="#cf5d24">59%</text><text x="950" y="266" font-size="14" font-weight="600" fill="#66625a">28%</text>
+        </svg>
+        <figcaption style="margin-top:12px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">Fig. 5 · Tickets, whole call (3 fields) · falls below the 95% bar almost immediately · data: tickets.operating_points</figcaption>
+      </figure>
+      <div style="margin-top:28px;display:flex;flex-direction:column;gap:18px;max-width:760px">
+        <p style="margin:0;font:400 18px/1.65 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Tickets.</b> A call is served only if <i>every</i> field is confident. Each field alone could serve roughly 53–70% (upper bound); together, 4–11%. The confusions are pairs a human would argue about too: Technical / Product / IT Support, medium vs low priority, Problem vs Incident.</p>
+        <p style="margin:0;font:400 18px/1.65 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Banking77.</b> The least-covered intents overlap, like <span style="font:400 15px 'JetBrains Mono',monospace;color:#1d1c19">compromised_card</span> vs <span style="font:400 15px 'JetBrains Mono',monospace;color:#1d1c19">lost_or_stolen_card</span>. Top confusions are near-synonyms (<span style="font:400 15px 'JetBrains Mono',monospace;color:#1d1c19">why_verify_identity → verify_my_identity</span>), ambiguous for the LLM too.</p>
+        <p style="margin:0;font:400 18px/1.65 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">Takeaways that shaped the roadmap:</b> serve per field (moved earlier); measure label consistency before promising a swap.</p>
+        <p style="margin:0;font:400 18px/1.65 'Hanken Grotesk',sans-serif;color:#3d3a34"><b style="font-weight:600;color:#1d1c19">A side probe.</b> A 0.5B-parameter local model as the teacher agreed with Gemini Flash on the whole ticket only 18% of the time (38 rows; directional only). A weak teacher can’t be distilled into a good student.</p>
+      </div>
+    </section>
+
+    <!-- 7.7 -->
+    <section id="worth" data-screen-label="Economics" style="margin-top:80px">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§7</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">What it’s worth <span style="font:600 12px 'JetBrains Mono',monospace;letter-spacing:0.1em;padding:4px 8px;border:1.5px dashed #1d1c19;border-radius:5px;vertical-align:middle;margin-left:10px">PROJECTION</span></h2>
+      <div style="margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px">
+        <div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:10px 0;border-bottom:1px solid #1d1c19;font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.08em;color:#a39e92"><span>CALLS / DAY</span><span style="text-align:right">YEARLY SAVING</span></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:14px 0;border-bottom:1px solid #d9d3c6;font:400 20px 'JetBrains Mono',monospace"><span>10k</span><span style="text-align:right">$5.1k</span></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:14px 0;border-bottom:1px solid #d9d3c6;font:400 20px 'JetBrains Mono',monospace"><span>100k</span><span style="text-align:right;color:#cf5d24;font-weight:500">$51k</span></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);padding:14px 0;border-bottom:1px solid #d9d3c6;font:400 20px 'JetBrains Mono',monospace"><span>1M</span><span style="text-align:right">$511k</span></div>
+          <div style="margin-top:12px;font:400 12px/1.6 'JetBrains Mono',monospace;color:#66625a">At list price, $1.66 per 1k calls · 84.5% served locally (89.0% coverage × 95%, holdout always goes to the LLM)</div>
+        </div>
+        <div>
+          <div style="font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.08em;color:#a39e92;padding:10px 0;border-bottom:1px solid #1d1c19">MEDIAN LATENCY</div>
+          <div style="display:flex;align-items:baseline;gap:14px;padding:18px 0;font:500 34px 'JetBrains Mono',monospace;flex-wrap:wrap"><span style="color:#3a70bb">3.6 s</span><span style="color:#a39e92;font-size:22px">→</span><span style="color:#cf5d24">~30 ms</span><span style="font:400 14px 'JetBrains Mono',monospace;color:#66625a">bge-base</span><span style="color:#cf5d24">~5 ms</span><span style="font:400 14px 'JetBrains Mono',monospace;color:#66625a">MiniLM</span></div>
+          <p style="margin:0;font:400 16px/1.6 'Hanken Grotesk',sans-serif;color:#3d3a34">The slowest ~15% of calls still go to the LLM, so p90 barely changes.</p>
+          <div style="margin-top:18px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.08em;color:#a39e92">WHAT THIS LEAVES OUT</div>
+          <p style="margin:8px 0 0;font:400 15px/1.6 'Hanken Grotesk',sans-serif;color:#66625a">Cold start; the shadow period; ~$20–40/month for a dedicated serving instance; retraining minutes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7.8 -->
+    <section id="limits" data-screen-label="Limitations" style="margin-top:80px;padding-top:40px;border-top:1px solid #1d1c19">
+      <div style="font:500 13px 'JetBrains Mono',monospace;color:#a39e92">§8</div>
+      <h2 style="margin:10px 0 0;font:400 38px/1.1 'Newsreader',serif">Limitations</h2>
+      <ol style="margin:24px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;max-width:760px;font:400 17px/1.6 'Hanken Grotesk',sans-serif;color:#3d3a34">
+        <li style="display:grid;grid-template-columns:36px minmax(0,1fr)"><span style="font:500 13px/1.9 'JetBrains Mono',monospace;color:#a39e92">01</span><span><b style="font-weight:600;color:#1d1c19">One run, one seed.</b> The confidence intervals cover sampling and threshold choice, not training variance across seeds.</span></li>
+        <li style="display:grid;grid-template-columns:36px minmax(0,1fr)"><span style="font:500 13px/1.9 'JetBrains Mono',monospace;color:#a39e92">02</span><span><b style="font-weight:600;color:#1d1c19">One model family.</b> The teacher and the second opinion are both Gemini, so their agreement may overstate how consistent the task is.</span></li>
+        <li style="display:grid;grid-template-columns:36px minmax(0,1fr)"><span style="font:500 13px/1.9 'JetBrains Mono',monospace;color:#a39e92">03</span><span><b style="font-weight:600;color:#1d1c19">Banking77 is a clean benchmark:</b> short single-intent queries, balanced classes. Production traffic will have a longer tail. The live holdout slice and drift demotion exist for exactly that.</span></li>
+        <li style="display:grid;grid-template-columns:36px minmax(0,1fr)"><span style="font:500 13px/1.9 'JetBrains Mono',monospace;color:#a39e92">04</span><span><b style="font-weight:600;color:#1d1c19">The tickets dataset is partly synthetic, and its gold labels are weak.</b> The tickets result says more about ambiguous multi-field tasks than about this dataset’s labels.</span></li>
+        <li style="display:grid;grid-template-columns:36px minmax(0,1fr)"><span style="font:500 13px/1.9 'JetBrains Mono',monospace;color:#a39e92">05</span><span><b style="font-weight:600;color:#1d1c19">Agreement is measured against the teacher, not the truth.</b> The student is as right as the teacher on the calls it serves.</span></li>
+      </ol>
+      <div style="margin-top:40px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:0.1em;color:#66625a">REPRODUCE</div>
+      <pre style="margin:14px 0 0;padding:22px 24px;background:#1d1c19;color:#ede9df;border-radius:10px;font:400 14px/1.8 'JetBrains Mono',monospace;white-space:pre;overflow:auto">pip install -e ".[train,phase0]"
+export P0_TEACHER=vertex:gemini-3.8-flash P0_TEACHER_2=vertex:gemini-3.1-pro-preview
+python -m experiments.phase0.run check --teachers $P0_TEACHER,$P0_TEACHER_2
+python -m experiments.phase0.run label --dataset banking77 --yes --concurrency 8
+python -m experiments.phase0.run noise --dataset banking77 --yes --concurrency 6
+python -m experiments.phase0.run sweep --dataset banking77
+<span style="color:#6b675f"># same for --dataset tickets</span></pre>
+      <div style="margin-top:20px;display:flex;gap:24px;font:500 15px 'Hanken Grotesk',sans-serif"><a href="#" style="border-bottom:1.5px solid #1d1c19;padding-bottom:2px">Raw results (phase0-data.json) ↗</a><a href="#" style="border-bottom:1.5px solid #1d1c19;padding-bottom:2px">Full write-up on GitHub ↗</a></div>
+    </section>
+  </article>
+</div>
+
+<footer style="background:#1d1c19;color:#a39e92">
+  <div style="max-width:1240px;margin:0 auto;padding:36px 48px;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;align-items:baseline">
+    <div style="display:flex;align-items:baseline;gap:10px"><span style="font:500 24px 'Newsreader',serif;color:#f4f1e9">Gargi</span><span style="font:400 15px 'Noto Serif Devanagari',serif">गार्गी</span></div>
+    <p style="margin:0;font:400 15px/1.5 'Hanken Grotesk',sans-serif;max-width:560px">Gargi is a lab building AI infrastructure that proves itself. Named for Gargi Vachaknavi, who kept asking.</p>
+  </div>
+</footer>
+</div>
+</x-dc>
+</body>
+</html>

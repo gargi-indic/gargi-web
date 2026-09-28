@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
 
 const ALLOWED = new Set([
   "page_view", "cta_click", "chat_opened", "message_sent", "checkpoint_switched",
-  "feedback_given", "response_copied", "regenerated", "waitlist_signup",
+  "feedback_given", "response_copied", "regenerated", "waitlist_signup", "contact_submitted",
 ]);
 
 export async function POST(req: NextRequest) {
