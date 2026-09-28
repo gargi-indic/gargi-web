@@ -218,9 +218,6 @@ export const WHY_OPEN = [
   "What is ours to build — and to earn from — is what sits on top: the tooling, the systems, the specialized ways that knowledge gets put to work. So the order is deliberate: first, models that handle each language superbly; then, the systems built on them. The knowledge stays free. The value lives in what you make with it.",
 ] as const;
 
-export const MANIFESTO =
-  "A billion people should not have to think in English to be understood by a machine.";
-
 /** Sampling defaults, mirroring the notebook's generate(). */
 export const GEN_DEFAULTS = {
   temperature: 0.8,

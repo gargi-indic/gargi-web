@@ -109,9 +109,6 @@ export default function GargiM1IsOut() {
       <section className="blog-cta">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="blog-cta-left">
-          <div className="manifesto" style={{ maxWidth: "24ch", fontSize: 38 }}>
-            A billion people should not have to think in English to be understood by a machine.
-          </div>
         </div>
         <div className="blog-cta-right">
           <WaitlistForm source="post-gargi-m1" label="Work on this" cta="Get in touch" />

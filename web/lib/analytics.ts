@@ -11,7 +11,8 @@ export type EventName =
   | "feedback_given"
   | "response_copied"
   | "regenerated"
-  | "waitlist_signup";
+  | "waitlist_signup"
+  | "contact_submitted";
 
 export function track(name: EventName, props: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;

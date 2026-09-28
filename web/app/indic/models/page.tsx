@@ -107,9 +107,6 @@ export default function Models() {
       <section className="accent-panel" style={{ padding: "56px var(--gutter)" }}>
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
-          <div className="manifesto" style={{ maxWidth: "26ch" }}>
-            A billion people should not have to think in English to be understood by a machine.
-          </div>
           <WaitlistForm source="models" />
         </div>
       </section>
