@@ -118,7 +118,37 @@ and does not touch `/reflex` or `/indic`, which was the PR's own stated scope li
 already merged #23 by the time this review ran**, so this was a post-merge confirmation, not a
 merge decision.
 
-**Deferred, confirmed real, NOT introduced by #22 — pick up in #8:** two pre-existing bugs found
+**#8 (`6d6381f` via #25):** implemented directly (not by Jules, after Jules failed on this ticket) —
+same pattern as #22. Reviewed independently: base and merge-base both correctly on `gargi-labs`
+(not `main`), typecheck/build pass, `modernist.css`/`site.css` deleted and `grep -rn modernist
+web/` empty, no stray hex colours, no banned words. Diffed every changed file against the
+pre-#8 `gargi-labs` tip and confirmed no chat component or API route files were touched at all
+(`web/components/chat/**`, `web/app/api/**` do not appear in the diff), so the chat UI/streaming/
+feedback logic is genuinely byte-for-byte unchanged — only its CSS classes moved onto
+`tokens.css`/`lab.css`. Rebuilt fresh (`rm -rf .next && npm run build && npm run start`) and used
+Puppeteer (`puppeteer-core` against system Chrome) to measure `document.documentElement.scrollWidth`
+at 375px on every route: no horizontal overflow anywhere, confirming the mobile-overflow bug (see
+below) is fixed — an earlier false positive during this review turned out to be a corrupted `.next`
+build from an overlapping `next dev` + `next start` process, not a real regression, resolved by a
+clean rebuild. Also confirmed via `emulateMediaFeatures(prefers-color-scheme: dark)` that body
+background and H1 text colour are correctly dark/light-aware on `/reflex`, `/indic`, `/indic/about`
+and the blog post — the dark-mode contrast bug is fixed. Visual screenshots taken at 1440px and
+375px, light and dark, on `/`, `/indic`, `/indic/about`, `/indic/models`, `/indic/chat`, `/blog`,
+`/blog/gargi-m1-is-out`, `/reflex`, `/privacy` — all correctly styled per DESIGN.md (Archivo,
+square corners, one red accent, mono numbers/code). **Not re-tested:** live chat streaming/feedback
+against the real Supabase project (would have written test data to production) — acceptable given
+the component diff confirms zero code changes to that path.
+
+**Deviation, judged acceptable, not blocking:** the ticket's em-dash cleanup only touched
+`web/content/indic.ts`; some pre-existing em-dashes remain in page JSX (blog post body,
+`/indic/about` hero lede, chat "generated as-is" notice, and title templates like
+`"Research — Gargi Reflex"`, which was explicitly approved as the site's own title-template
+separator back in the #5 review, not banned prose em-dash usage). The §6 checklist's grep comment
+reads "new copy has no em-dashes" — scoped to copy introduced by the ticket under review, not a
+retroactive sweep of already-shipped copy from #2/#4/#5/#6/#7. Left as a follow-up, not worth
+blocking the final ticket of the epic over.
+
+**Deferred, confirmed real, NOT introduced by #22 — fixed in #8:** two pre-existing bugs found
 during this review, reproduced identically on `gargi-labs` *before* #22/#23 (commit `63d0a3f`) via
 a throwaway worktree, so #22 is not at fault for either:
 1. **Dark-mode background:** `/reflex` and `/indic` still use the unfixed `--color-bg` path, so in
@@ -137,9 +167,10 @@ a throwaway worktree, so #22 is not at fault for either:
 ```
 Wave 1:  #1 — done
 Wave 2:  #2 — done
-Wave 3:  #4, #5, #6, #7 — all done. #3 assigned (reuses #4's components).
-Wave 4:  #8 — not started, do not assign until #3 is merged
-Final:   open PR gargi-labs → main for the owner. Do NOT merge it.
+Wave 3:  #4, #5, #6, #7 — all done. #3 (retried as #22) — done.
+Wave 4:  #8 — done.
+Final:   PR gargi-labs → main opened for the owner (#27). Do NOT merge it — that's the owner's call.
+         EPIC COMPLETE.
 ```
 
 Start a wave only after every PR in the previous wave is merged into `gargi-labs`.
