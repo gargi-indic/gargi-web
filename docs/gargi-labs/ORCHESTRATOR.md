@@ -49,7 +49,7 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
 |---|---|---|
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
 | #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
-| #3 | Reflex-first home, `/lab`, `/harness` | Assigned to Jules, in progress (session `6163481332370684199`) |
+| #3 | Reflex-first home, `/lab`, `/harness` | **Closed, superseded by #22** — original Jules session (`6163481332370684199`) stalled with no plan/activity for 25+ min; re-filed as #22, assigned to Jules, in progress (session `3094924859862110174`) |
 | #4 | `/reflex` from Home.dc.html | **Merged** via #15 (Jules' #14 re-based; same "branched from main" issue as #1/#2) |
 | #5 | `/reflex/research` | **Merged** via #17 (Jules' #16 re-based; same "branched from main" issue) |
 | #6 | `/reflex/docs` | **Merged** via #19 (Jules' #18 re-based; same "branched from main" issue) |
