@@ -43,7 +43,7 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
   `contact_messages`, listed in `/admin`, no email alerts.
 - All work lands on **`gargi-labs`**. `main` auto-deploys to production and is **never** touched by you.
 
-## 3. Current state (as of 2026-09-28, post-#22-merge; §10a's issue #11 is the always-current version of this)
+## 3. Current state (as of 2026-09-28, post-#8-merge — EPIC COMPLETE; §10a's issue #11 is the always-current version of this)
 
 | Issue | What | State |
 |---|---|---|
@@ -54,7 +54,15 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
 | #5 | `/reflex/research` | **Merged** via #17 (Jules' #16 re-based; same "branched from main" issue) |
 | #6 | `/reflex/docs` | **Merged** via #19 (Jules' #18 re-based; same "branched from main" issue) |
 | #7 | Contact & support (form, API, migration, admin) | **Merged** via #21 (Jules' #20 re-based; same "branched from main" issue). **Owner must run `supabase/migrations/0002_contact.sql` in the Supabase SQL editor** for the live form to work. |
-| #8 | Apply DESIGN.md to remaining pages, delete old CSS | **Assigned to Jules** (session `11469963119044501200`), in progress. |
+| #8 | Apply DESIGN.md to remaining pages, delete old CSS | **Merged** via #25 — Jules failed on this ticket, implemented directly (like #22) and reviewed independently. |
+
+**The epic is complete.** All of #1-#8 are merged into `gargi-labs`. [PR #27](https://github.com/gargi-indic/gargi-web/pull/27) from `gargi-labs` into `main` is open, **not merged** — it is the owner's to review and merge whenever they're ready to deploy.
+#22 was the successful retry of #3; both #22 and #8 were implemented directly after Jules stalled/failed.
+Jules' stray #8 PR #26 (targeting `main`) was closed unmerged with a thank-you. Post-merge verification of
+`1f122e0` (#25): typecheck + build pass; no `modernist`, stray hex, or banned words; scope clean (nothing in
+`inference/`, `deploy/`, `supabase/`, `web/app/api/`); no chat component files touched; `/`, `/reflex`,
+`/indic`, `/indic/chat`, `/blog`, `/privacy` have no horizontal scroll at 375/1440px and correct bg in light+dark
+(the #22-era dark-mode and 375px overflow bugs are fixed).
 
 Already on `gargi-labs` (done by the previous orchestrator, not by Jules): `PLAN.md`,
 `DESIGN.md`, `design/reflex/` (mockups, brief, data, charts, film source in
