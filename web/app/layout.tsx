@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Archivo, Noto_Sans_Malayalam } from "next/font/google";
-import { SITE } from "@/content/site";
-import "@/styles/modernist.css";
-import "@/styles/site.css";
+import { Archivo, JetBrains_Mono, Noto_Sans_Malayalam } from "next/font/google";
+import { SITE } from "@/content/lab";
+import "@/styles/tokens.css";
+import "@/styles/lab.css";
+import "@/styles/reflex.css";
+import "@/styles/pages.css";
 
 // The design system asks for Archivo, which has no Malayalam glyphs at all --
 // every ഗ, every മലയാളം and every chat message would otherwise fall back to
@@ -10,14 +12,21 @@ import "@/styles/site.css";
 // on every machine. Noto Sans Malayalam covers the script deliberately.
 const archivo = Archivo({
   subsets: ["latin"],
-  weight: ["400", "600", "800"],
+  weight: ["400", "500", "600", "800"],
   variable: "--font-archivo",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
 const notoMalayalam = Noto_Sans_Malayalam({
   subsets: ["malayalam"],
-  weight: ["400", "600", "800"],
+  weight: ["400", "500", "600", "800"],
   variable: "--font-noto-malayalam",
   display: "swap",
 });
@@ -37,20 +46,23 @@ export const metadata: Metadata = {
     apple: { url: "/apple-icon.png", sizes: "180x180" },
   },
   openGraph: {
-    title: `Try ${SITE.name}`,
+    title: SITE.name,
     description: SITE.description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `Try ${SITE.name}`,
+    title: SITE.name,
     description: SITE.description,
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${notoMalayalam.variable}`}>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${jetbrainsMono.variable} ${notoMalayalam.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

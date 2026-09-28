@@ -1,0 +1,271 @@
+/* Home (/), /lab and /harness. Tokens only; values live in tokens.css. */
+
+.home-positioning {
+  margin: 16px 0 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.page-first { border-top: 0; }
+
+.page-title {
+  margin: 18px 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(44px, 6.4vw, 92px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.page-lede {
+  margin: 32px 0 0;
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 65ch;
+}
+
+.split-grid .page-lede { margin-top: 18px; }
+
+.page-body {
+  margin: 18px 0 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 65ch;
+}
+
+.page-caption {
+  margin: 12px 0 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.split-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Launch film */
+.launch-film-frame {
+  margin-top: 32px;
+  border: 2px solid var(--line);
+  aspect-ratio: 16 / 9;
+  background: var(--inverse);
+}
+.launch-film {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Numbered rows (not cards) */
+.numbered-rows {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  border-top: 2px solid var(--line);
+}
+.numbered-row {
+  display: grid;
+  grid-template-columns: 64px 4fr 7fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: baseline;
+}
+.numbered-row-n {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--faint);
+}
+.numbered-row-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.numbered-row-body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+/* Get started */
+.get-started-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 48px;
+  align-items: start;
+}
+.get-started-grid .reflex-section-title { margin-top: 0; }
+.get-started-body { display: grid; gap: 20px; min-width: 0; }
+.get-started-body .reproduce-cmd { overflow-x: auto; }
+.get-started-links { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Also from Gargi Labs */
+.also-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.also-row {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid var(--line);
+}
+.also-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px;
+  color: var(--ink);
+  text-decoration: none;
+  min-height: 44px;
+}
+.also-cell + .also-cell { border-left: 2px solid var(--line); }
+.also-cell:hover .also-name { color: var(--accent); }
+.also-name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+/* Status tags */
+.status-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border: 1.5px solid currentColor;
+  border-radius: 0;
+}
+.status-live { color: var(--accent); }
+.status-dev { color: var(--muted); }
+
+/* Product grid on /lab: one bordered grid, featured cell spans more */
+.product-grid {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px solid var(--line);
+}
+.product-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px;
+  color: var(--ink);
+  text-decoration: none;
+  border-top: 2px solid var(--line);
+}
+.product-cell-reflex {
+  grid-column: 1 / -1;
+  background: var(--raised);
+  border-top: 0;
+}
+.product-cell-indic { border-left: 2px solid var(--line); }
+.product-cell:hover .product-cell-name { color: var(--accent); }
+.product-cell-name {
+  margin: 6px 0 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+.product-cell-tagline { margin: 0; font-weight: 600; font-size: 17px; }
+.product-cell-body { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 65ch; }
+
+/* /harness waitlist, restyled per DESIGN.md §5 Forms (scoped: other pages keep theirs) */
+.harness-waitlist { margin-top: 32px; max-width: 520px; }
+.harness-waitlist .waitlist-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.harness-waitlist .waitlist-row { display: flex; gap: 0; }
+.harness-waitlist .waitlist-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 14px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--line);
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 16px;
+}
+.harness-waitlist .waitlist-btn {
+  min-height: 48px;
+  padding: 12px 18px;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 2px solid var(--accent);
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 15px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.harness-waitlist .waitlist-btn:hover:not(:disabled) { background: var(--accent); }
+.harness-waitlist .waitlist-btn:active { transform: translateY(1px); }
+.harness-waitlist .waitlist-input:focus-visible,
+.harness-waitlist .waitlist-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.harness-waitlist .waitlist-error { color: var(--accent); }
+.harness-waitlist .waitlist-done { color: var(--ink); font-size: 17px; }
+
+@media (max-width: 860px) {
+  .split-grid,
+  .get-started-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .numbered-row { grid-template-columns: 40px 1fr; }
+  .numbered-row-body { grid-column: 2; }
+  .also-row, .product-grid { grid-template-columns: minmax(0, 1fr); }
+  .also-cell + .also-cell { border-left: 0; border-top: 2px solid var(--line); }
+  .product-cell-indic { border-left: 0; }
+}
+@media (max-width: 480px) {
+  .harness-waitlist .waitlist-row { flex-direction: column; gap: 8px; }
+}
+
+/* Reproduce box outside the dark CTA band: inverse code block per DESIGN.md §5 */
+.get-started-body .cta-reproduce-box {
+  background: var(--inverse);
+  padding: 16px 18px;
+  border: 0;
+}
+
+/* Paint these pages from tokens (body also does, via lab.css). */
+.page-main { background: var(--paper); color: var(--ink); min-height: calc(100vh - 68px); }

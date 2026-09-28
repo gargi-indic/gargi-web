@@ -1,13 +1,13 @@
-/** [ഗ] GARGI, the lockup used in the nav and footer. */
+/** [ഗ] GARGI LABS lockup */
 export function Wordmark({ light = false }: { light?: boolean }) {
   return (
-    <>
-      <span className="wordmark-glyph" aria-hidden>
-        <span className={light ? "wordmark-bracket-light" : "wordmark-bracket"}>[</span>
-        <span className="ml">ഗ</span>
-        <span className={light ? "wordmark-bracket-light" : "wordmark-bracket"}>]</span>
+    <span className={`wordmark${light ? " wordmark-light" : ""}`}>
+      <span className="wordmark-mark" aria-hidden>
+        <span className="wordmark-bracket">[</span>
+        <span className="wordmark-glyph ml">ഗ</span>
+        <span className="wordmark-bracket">]</span>
       </span>
-      GARGI
-    </>
+      <span className="wordmark-text">GARGI LABS</span>
+    </span>
   );
 }

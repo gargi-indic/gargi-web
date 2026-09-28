@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import { M1 } from "@/content/site";
+import { Wordmark } from "@/components/Wordmark";
+import { M1 } from "@/content/indic";
 
 type Checkpoint = "instruct" | "base";
 type Script = "malayalam" | "manglish" | "english";
@@ -257,13 +258,8 @@ export function ChatClient() {
       {drawerOpen && <div className="chat-scrim" onClick={() => setDrawerOpen(false)} />}
 
       <aside className="chat-sidebar" data-open={drawerOpen}>
-        <Link href="/" className="chat-brand">
-          <span style={{ display: "flex", gap: 2 }}>
-            <span style={{ color: "var(--color-accent-400)" }}>[</span>
-            <span className="ml">ഗ</span>
-            <span style={{ color: "var(--color-accent-400)" }}>]</span>
-          </span>
-          GARGI
+        <Link href="/" className="chat-brand" aria-label="Gargi Labs home">
+          <Wordmark />
         </Link>
 
         <div className="chat-side-block">
@@ -491,7 +487,7 @@ export function ChatClient() {
             <div className="chat-notice text-muted">
               {M1.name} is a {M1.params}-parameter research preview with a{" "}
               {M1.contextTokens}-token context. Its output is often wrong or nonsensical
-              and is generated as-is — Gargi accepts no responsibility for how it is used
+              and is generated as-is — Gargi Labs accepts no responsibility for how it is used
               or interpreted. Conversations are stored to improve the model — see{" "}
               <Link href="/privacy">privacy</Link>.
             </div>
