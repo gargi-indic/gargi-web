@@ -43,17 +43,17 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
   `contact_messages`, listed in `/admin`, no email alerts.
 - All work lands on **`gargi-labs`**. `main` auto-deploys to production and is **never** touched by you.
 
-## 3. Current state (as of 2026-09-27, post-#4-merge; §10a's issue #11 is the always-current version of this)
+## 3. Current state (as of 2026-09-28, post-#7-merge; §10a's issue #11 is the always-current version of this)
 
 | Issue | What | State |
 |---|---|---|
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
 | #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
-| #3 | Reflex-first home, `/lab`, `/harness` | Not assigned. Needs #1 (done), #2 (done) |
+| #3 | Reflex-first home, `/lab`, `/harness` | Assigned to Jules, in progress (session `6163481332370684199`) |
 | #4 | `/reflex` from Home.dc.html | **Merged** via #15 (Jules' #14 re-based; same "branched from main" issue as #1/#2) |
-| #5 | `/reflex/research` | Assigned to Jules, in progress (session `726085034359084651`) |
-| #6 | `/reflex/docs` | Assigned to Jules, in progress (session `6471498076673282720`) |
-| #7 | Contact & support (form, API, migration, admin) | Assigned to Jules, in progress (session `11378861798545080030`) |
+| #5 | `/reflex/research` | **Merged** via #17 (Jules' #16 re-based; same "branched from main" issue) |
+| #6 | `/reflex/docs` | **Merged** via #19 (Jules' #18 re-based; same "branched from main" issue) |
+| #7 | Contact & support (form, API, migration, admin) | **Merged** via #21 (Jules' #20 re-based; same "branched from main" issue). **Owner must run `supabase/migrations/0002_contact.sql` in the Supabase SQL editor** for the live form to work. |
 | #8 | Apply DESIGN.md to remaining pages, delete old CSS | Not assigned. Last |
 
 Already on `gargi-labs` (done by the previous orchestrator, not by Jules): `PLAN.md`,
@@ -88,13 +88,32 @@ applied the `web/`-scoped diff from Jules' branch onto `gargi-labs`, reviewed (t
 scope, banned words, radius 0, calculator defaults, tabs/metadata, dev-server smoke test), merged
 as #15, closed #14 with a thank-you. No regressions found, nothing deferred.
 
+**#5, #6, #7 (via #17, #19, #21):** all three Jules PRs (#16, #18, #20) branched from `main` again
+(same failure mode as #1/#2/#4 — check `git merge-base` against both `main` and `gargi-labs` on
+every future Jules PR, it has now happened 6/6 times). Because #5/#6/#7 share `web/content/reflex.ts`
+and `web/styles/reflex.css`, and were assigned in parallel, later branches also lacked the earlier
+ones' merged work — a raw `git diff origin/gargi-labs origin/<branch> -- web` would have deleted
+already-merged sections. Fix used each time: diff the Jules branch against the `gargi-labs` commit
+that was current *before that wave started* (`c5da37d`, pre-#5) to isolate just that ticket's real
+additions, confirm the stat is purely additive to shared files, then apply/copy those files onto
+current `gargi-labs` and rebuild. Small review fixes made along the way: reverted an over-eager
+metadata-title "fix" on #5 (the issue text explicitly wants `"Research — Gargi Reflex"`, which is
+the site's own `%s — Gargi Labs` title-template pattern, not a banned em-dash); on #6, removed a
+duplicate unused `CopyButton.tsx` and reused the existing one from `CopyPill.tsx`, wiring it into
+the CLI command rows which otherwise had no copy affordance despite the ticket's scope; on #7,
+replaced two hardcoded `#ffffff` colours in `ContactForm`'s inline error state with the
+`--on-accent` token. No other regressions found. #7 needs an **owner action**: run
+`supabase/migrations/0002_contact.sql` in the Supabase SQL editor — the form and API are correct
+(verified: honeypot drops silently, invalid email rejected, valid submission currently fails with
+"table not found" against the real Supabase project because the migration hasn't been applied yet).
+
 ## 4. Run order
 
 ```
-Wave 1:  #1
-Wave 2:  #2
-Wave 3:  #4, #5, #6, #7 in parallel, then #3 (it reuses #4's components)
-Wave 4:  #8
+Wave 1:  #1 — done
+Wave 2:  #2 — done
+Wave 3:  #4, #5, #6, #7 — all done. #3 assigned (reuses #4's components).
+Wave 4:  #8 — not started, do not assign until #3 is merged
 Final:   open PR gargi-labs → main for the owner. Do NOT merge it.
 ```
 
