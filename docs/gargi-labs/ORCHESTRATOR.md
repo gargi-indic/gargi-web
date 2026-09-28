@@ -43,18 +43,18 @@ Precedence: **PLAN.md > DESIGN.md (for looks) > issue body > mockups/brief.**
   `contact_messages`, listed in `/admin`, no email alerts.
 - All work lands on **`gargi-labs`**. `main` auto-deploys to production and is **never** touched by you.
 
-## 3. Current state (as of 2026-09-28, post-#7-merge; §10a's issue #11 is the always-current version of this)
+## 3. Current state (as of 2026-09-28, post-#22-merge; §10a's issue #11 is the always-current version of this)
 
 | Issue | What | State |
 |---|---|---|
 | #1 | Foundation: rename, tokens, fonts, header/footer, content split | **Merged** via #10 (Jules' #9 re-based, see §5 "Branched from main") |
 | #2 | Move model pages under `/indic` + redirects | **Merged** via #13 (Jules' #12 re-based, same "branched from main" issue as #1) |
-| #3 | Reflex-first home, `/lab`, `/harness` | **Closed, superseded by #22** — original Jules session (`6163481332370684199`) stalled with no plan/activity for 25+ min; re-filed as #22, assigned to Jules, in progress (session `3094924859862110174`) |
+| #3 | Reflex-first home, `/lab`, `/harness` | **Closed, superseded by #22** — original Jules session stalled twice with no progress; re-filed as #22 and implemented directly (not by Jules) after the second stall; merged via #23. |
 | #4 | `/reflex` from Home.dc.html | **Merged** via #15 (Jules' #14 re-based; same "branched from main" issue as #1/#2) |
 | #5 | `/reflex/research` | **Merged** via #17 (Jules' #16 re-based; same "branched from main" issue) |
 | #6 | `/reflex/docs` | **Merged** via #19 (Jules' #18 re-based; same "branched from main" issue) |
 | #7 | Contact & support (form, API, migration, admin) | **Merged** via #21 (Jules' #20 re-based; same "branched from main" issue). **Owner must run `supabase/migrations/0002_contact.sql` in the Supabase SQL editor** for the live form to work. |
-| #8 | Apply DESIGN.md to remaining pages, delete old CSS | Not assigned. Last |
+| #8 | Apply DESIGN.md to remaining pages, delete old CSS | **Assigned to Jules** (session `11469963119044501200`), in progress. |
 
 Already on `gargi-labs` (done by the previous orchestrator, not by Jules): `PLAN.md`,
 `DESIGN.md`, `design/reflex/` (mockups, brief, data, charts, film source in
@@ -106,6 +106,31 @@ replaced two hardcoded `#ffffff` colours in `ContactForm`'s inline error state w
 `supabase/migrations/0002_contact.sql` in the Supabase SQL editor — the form and API are correct
 (verified: honeypot drops silently, invalid email rejected, valid submission currently fails with
 "table not found" against the real Supabase project because the migration hasn't been applied yet).
+
+**#22 (`e6fc3aa` via #23):** implemented directly (not by Jules) after Jules stalled twice on
+#3/#22. Reviewed independently: typecheck/build pass, base and merge-base both correctly on
+`gargi-labs` (not the "branched from main" bug that hit #1/#2/#4/#5/#6/#7), scope limited to the
+3 new pages plus shared reflex components, no banned words/em-dashes/stray hex in new copy. The PR
+found and fixed a pre-existing site-wide dark-mode bug (`body { background: var(--color-bg) }` in
+`modernist.css` has no dark-mode value) by giving the 3 new pages their own `.page-main { background:
+var(--paper) }` — verified this fix works (`/`, `/lab`, `/harness` all render correctly in dark mode)
+and does not touch `/reflex` or `/indic`, which was the PR's own stated scope limit. **Owner had
+already merged #23 by the time this review ran**, so this was a post-merge confirmation, not a
+merge decision.
+
+**Deferred, confirmed real, NOT introduced by #22 — pick up in #8:** two pre-existing bugs found
+during this review, reproduced identically on `gargi-labs` *before* #22/#23 (commit `63d0a3f`) via
+a throwaway worktree, so #22 is not at fault for either:
+1. **Dark-mode background:** `/reflex` and `/indic` still use the unfixed `--color-bg` path, so in
+   dark mode their body stays light while text follows the dark-aware `--ink` tokens — on `/reflex`
+   specifically this makes the hero H1 ("Make every LLM call") render as near-invisible light-grey-
+   on-light-grey. This is more than cosmetic on `/reflex` and should be prioritized in #8, not just
+   swept in with the CSS deletion.
+2. **Mobile horizontal overflow:** at 375px, the `.reflex-hero-inner` grid (shared by `/`, `/reflex`)
+   does not collapse to one column despite an `@media (max-width: 860px)` rule that should apply —
+   reproduced pixel-identically pre- and post-#22, so it predates this ticket (likely landed with #4
+   via #15). Needs investigation in #8 (check for a stray inline width/min-width on `CallStream` or
+   its parent that's winning over the grid's `1fr` at that breakpoint).
 
 ## 4. Run order
 
