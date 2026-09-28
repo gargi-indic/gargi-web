@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteFooter } from "@/components/SiteFooter";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { FUNDAMENTALS, M1, M1_STATS, RELEASES } from "@/content/site";
+import { FUNDAMENTALS, M1, M1_STATS, RELEASES } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "Models",
@@ -14,8 +13,7 @@ export const metadata: Metadata = {
 export default function Models() {
   return (
     <div className="shell">
-      <PageView page="models" />
-      <Nav current="models" />
+      <PageView page="indic-models" />
 
       <section className="model-hero">
         <div className="model-hero-body">
@@ -27,7 +25,7 @@ export default function Models() {
             tokenizer and training recipe are published in full.
           </p>
           <div className="hero-actions">
-            <Link className="btn btn-primary btn-lg" href="/chat">Try it in chat</Link>
+            <Link className="btn btn-primary btn-lg" href="/indic/chat">Try it in chat</Link>
             <a className="btn btn-secondary btn-lg btn-onbg" href="#downloads">Download weights</a>
           </div>
         </div>
@@ -109,14 +107,11 @@ export default function Models() {
       <section className="accent-panel" style={{ padding: "56px var(--gutter)" }}>
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
-          <div className="manifesto" style={{ maxWidth: "26ch" }}>
-            A billion people should not have to think in English to be understood by a machine.
-          </div>
           <WaitlistForm source="models" />
         </div>
       </section>
 
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

@@ -1,26 +1,9 @@
 /**
  * Every factual claim the site makes about Gargi models lives here.
- *
- * The Claude Design mockup was drawn around a hypothetical 7.2B model with a
- * 32K context trained on 1.4T tokens. Gargi-M1 is a 110M model with a 512
- * context trained on ~1.05B tokens. The numbers below are the real ones, taken
- * from the malayalam-nanogpt-v3 training run; the prose is a starting point to
- * be rewritten. Change copy here, not in the pages.
  */
-
-export const SITE = {
-  name: "Gargi",
-  tagline: "Indic language research",
-  description:
-    "Gargi builds open foundation models for Indian languages — trained from the language itself, not translated into it.",
-  url: "https://gargi.ai",
-} as const;
 
 /**
  * The flagship model, as actually trained.
- * These are read off the published checkpoints, not the notebook's log output:
- * pretraining ran to step 21,172 (x 65,536 tokens/step = 1.39B) reaching a
- * held-out loss of 1.1887, and SFT ran to step 2,773.
  */
 export const M1 = {
   id: "gargi-m1",
@@ -56,8 +39,7 @@ export const M1_STATS: { label: string; value: string; accent?: boolean }[] = [
   { label: "Status", value: M1.status, accent: true },
 ];
 
-/** The "Fundamentals" 01–05 sections on /models. One line each; the full
- *  recipe lives in the model card, not on the marketing page. */
+/** The "Fundamentals" 01–05 sections on /models. */
 export const FUNDAMENTALS = [
   {
     n: "01",
@@ -213,7 +195,7 @@ export const CONTRIBUTORS = [
   { role: "Speakers", body: "Reading model output and telling us where it is wrong." },
 ] as const;
 
-/** /blog. One post for now — the launch note. Set `href` when a post exists. */
+/** /blog. One post for now — the launch note. */
 export const POSTS = [
   {
     featured: true,
@@ -235,9 +217,6 @@ export const WHY_OPEN = [
   "A model is human knowledge, compressed — trained on what millions of people wrote, spoke and handed down. It was never ours to fence off. Language and the knowledge it carries are held in common, so the models built from them must be too.",
   "What is ours to build — and to earn from — is what sits on top: the tooling, the systems, the specialized ways that knowledge gets put to work. So the order is deliberate: first, models that handle each language superbly; then, the systems built on them. The knowledge stays free. The value lives in what you make with it.",
 ] as const;
-
-export const MANIFESTO =
-  "A billion people should not have to think in English to be understood by a machine.";
 
 /** Sampling defaults, mirroring the notebook's generate(). */
 export const GEN_DEFAULTS = {

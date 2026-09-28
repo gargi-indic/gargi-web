@@ -20,7 +20,7 @@ export function AdminLogin() {
   return (
     <div className="shell">
       <div className="prose">
-        <h1>Gargi admin</h1>
+        <h1>Gargi Labs admin</h1>
         <form onSubmit={submit} style={{ display: "flex", gap: 8, maxWidth: 380 }}>
           <label className="sr-only" htmlFor="pw">Password</label>
           <input

@@ -1,17 +1,17 @@
 import Link from "next/link";
-import { Nav } from "@/components/Nav";
-import { Footer } from "@/components/Footer";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 
 export default function NotFound() {
   return (
     <div className="shell">
-      <Nav />
+      <SiteHeader />
       <div className="prose">
         <h1>Not found</h1>
         <p className="text-muted">That page does not exist.</p>
         <p><Link href="/">Back to the home page</Link></p>
       </div>
-      <Footer />
+      <SiteFooter />
     </div>
   );
 }

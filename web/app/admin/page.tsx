@@ -24,7 +24,7 @@ export default async function Admin() {
   }
 
   const db = supabaseAdmin();
-  const [usage, latency, quality, feedback, recent] = await Promise.all([
+  const [usage, latency, quality, feedback, recent, contactMessages] = await Promise.all([
     db.from("v_daily_usage").select("*").limit(14),
     db.from("v_model_latency").select("*"),
     db.from("v_quality_trend").select("*").limit(14),
@@ -33,10 +33,24 @@ export default async function Admin() {
       .select("created_at, checkpoint, prompt_text, response_text, total_ms, tokens_per_sec, stop_reason")
       .order("created_at", { ascending: false })
       .limit(25),
+    db.from("contact_messages")
+      .select("created_at, name, email, intent, message, source")
+      .order("created_at", { ascending: false })
+      .limit(50),
   ]);
+
+  const contactRows = contactMessages.data?.map((msg) => ({
+    date: msg.created_at ? new Date(msg.created_at).toISOString().slice(0, 10) : "—",
+    name: msg.name || "—",
+    email: msg.email || "—",
+    intent: msg.intent || "—",
+    message: msg.message ? (msg.message.length > 160 ? `${msg.message.slice(0, 160)}…` : msg.message) : "—",
+    source: msg.source || "—",
+  })) ?? null;
 
   return (
     <Shell>
+      <Table title="Contact & support" rows={contactRows} />
       <Table title="Latency by checkpoint" rows={latency.data} />
       <Table title="Feedback" rows={feedback.data} />
       <Table title="Daily usage" rows={usage.data} />
@@ -53,7 +67,7 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <div className="shell">
       <div className="prose" style={{ maxWidth: "none" }}>
-        <h1>Gargi admin</h1>
+        <h1>Gargi Labs admin</h1>
         {children}
       </div>
     </div>
