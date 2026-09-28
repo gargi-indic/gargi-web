@@ -6,6 +6,7 @@ import "@/styles/lab.css";
 import "@/styles/modernist.css";
 import "@/styles/site.css";
 import "@/styles/reflex.css";
+import "@/styles/pages.css";
 
 // The design system asks for Archivo, which has no Malayalam glyphs at all --
 // every ഗ, every മലയാളം and every chat message would otherwise fall back to

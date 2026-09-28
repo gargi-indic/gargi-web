@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { REFLEX_CONTENT } from "@/content/reflex";
 import { SavingsCalculator } from "./SavingsCalculator";
+import { StatTiles } from "./StatTiles";
 
 export function Evidence() {
   const { evidence } = REFLEX_CONTENT;
@@ -18,34 +19,7 @@ export function Evidence() {
           </Link>
         </div>
 
-        <div className="evidence-stat-tiles">
-          {evidence.stats.map((stat, idx) => {
-            const splitVal = stat.value.split(" → ");
-            return (
-              <div key={idx} className="stat-tile">
-                <div className="stat-tile-val">
-                  {splitVal.length === 2 ? (
-                    <>
-                      <span className="stat-teacher-val">{splitVal[0]}</span>
-                      <span className="stat-arrow"> → </span>
-                      <span className="stat-student-val">{splitVal[1]}</span>
-                    </>
-                  ) : (
-                    <span
-                      className={
-                        stat.highlight === "student" ? "stat-student-val" : ""
-                      }
-                    >
-                      {stat.value}
-                    </span>
-                  )}
-                </div>
-                <div className="stat-tile-label">{stat.label}</div>
-                <div className="stat-tile-caveat">{stat.caveat}</div>
-              </div>
-            );
-          })}
-        </div>
+        <StatTiles />
 
         <div className="evidence-bottom-grid">
           <div className="chart-col">
