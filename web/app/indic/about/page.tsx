@@ -4,7 +4,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ScriptCycler } from "@/components/ScriptCycler";
 import { WaitlistForm } from "@/components/WaitlistForm";
 import { PageView } from "@/components/PageView";
-import { CONTRIBUTORS, MANIFESTO, PILLARS, VISION, WHY_OPEN } from "@/content/indic";
+import { CONTRIBUTORS, PILLARS, VISION, WHY_OPEN } from "@/content/indic";
 
 export const metadata: Metadata = {
   title: "About",
@@ -82,7 +82,6 @@ export default function About() {
       <section className="accent-panel" style={{ padding: "64px var(--gutter)" }}>
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
-          <div className="manifesto" style={{ maxWidth: "24ch" }}>{MANIFESTO}</div>
           <WaitlistForm source="about" label="Work with us" cta="Send" />
         </div>
       </section>

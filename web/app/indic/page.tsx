@@ -1,10 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ScriptCycler } from "@/components/ScriptCycler";
-import { WaitlistForm } from "@/components/WaitlistForm";
+import { ContactSupport } from "@/components/ContactSupport";
 import { PageView } from "@/components/PageView";
-import { LANGUAGES, M1, MANIFESTO } from "@/content/indic";
+import { LANGUAGES, M1 } from "@/content/indic";
 
 export default function IndicHome() {
   return (
@@ -63,23 +62,7 @@ export default function IndicHome() {
         </div>
       </section>
 
-      <section id="access" className="access">
-        <div className="access-img grayscale">
-          <Image
-            src="/access-portrait.png"
-            alt=""
-            width={1200}
-            height={1600}
-            priority={false}
-            style={{ width: "100%", height: "100%", objectFit: "contain" }}
-          />
-        </div>
-        <div className="accent-panel">
-          <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
-          <div className="manifesto">{MANIFESTO}</div>
-          <WaitlistForm source="indic" />
-        </div>
-      </section>
+      <ContactSupport source="indic" />
 
       <SiteFooter />
     </div>

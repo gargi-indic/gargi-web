@@ -9,6 +9,9 @@ export const SITE = {
 export const LAB_LINE =
   "Gargi Labs builds AI that proves itself before you trust it. Named for Gargi Vachaknavi, who kept asking.";
 
+export const CONTACT_LINE =
+  "Tools that make AI products sustainable: lower cost, lower latency, and decisions that run on their own.";
+
 export const LAB_GITHUB = "https://github.com/gargi-indic";
 export const REFLEX_GITHUB = "https://github.com/gargi-indic";
 
