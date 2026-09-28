@@ -1,11 +1,16 @@
-# Gargi
+# Gargi Labs
 
-Open small language models for Indian languages, and the site that serves them.
+A small lab building three things, and the site that presents them.
 
-The first model, **Gargi-M1**, is a 110M-parameter Malayalam transformer trained
-from Malayalam Wikipedia and the Ultimate Malayalam Dataset, then instruction-tuned.
-Both the base and instruction-tuned checkpoints are served, and every conversation
-is captured to feed the next training run.
+| Product | Status | Route |
+|---|---|---|
+| **Gargi Reflex**: autonomous model caching for LLM calls | Launching | `/reflex` |
+| **Coding harness & Meta harness** | In development | `/harness` |
+| **Indic Language SLMs** (Gargi-M1 and successors) | Live research preview | `/indic` |
+
+The spec for the site is [`docs/gargi-labs/PLAN.md`](docs/gargi-labs/PLAN.md); how it
+looks is [`DESIGN.md`](DESIGN.md) (tokens in `web/styles/tokens.css`, components in
+`web/styles/lab.css`).
 
 ```
 gargi/
@@ -14,23 +19,38 @@ gargi/
 └── supabase/    Postgres schema, RLS and analytics views
 ```
 
+## Routes
+
+```
+/                        Home, Reflex-first, with the launch film
+/lab                     About the lab, all products, contact & support
+/reflex                  Gargi Reflex
+/reflex/research         Phase 0 research
+/reflex/docs             Docs landing
+/harness                 Coding harness & Meta harness (waitlist)
+/indic                   Indic SLMs overview
+/indic/models            Gargi-M1 and releases
+/indic/about             Vision, pillars, contributors
+/indic/chat              Chat with Gargi-M1
+/blog, /blog/<post>      Lab notes
+/privacy                 Privacy
+/admin, /api/*           Internal
+```
+
+`/models`, `/chat` and `/about` redirect permanently to their `/indic` versions.
+All copy and every number live in `web/content/` (`lab.ts`, `reflex.ts`, `indic.ts`);
+nothing is hardcoded in JSX.
+
 ## Gargi-M1, as actually trained
 
 | | |
 |---|---|
-| Parameters | 110M — 12 layers, 12 heads, 768 hidden |
+| Parameters | 110M: 12 layers, 12 heads, 768 hidden |
 | Context | 512 tokens |
 | Vocabulary | 32,000 byte-level BPE, Malayalam only |
 | Training | ~1.39B tokens, held-out loss 1.189 |
 | Tokenizer fertility | 1.36 characters/token |
 | Checkpoints | [instruct](https://huggingface.co/gishnu/malayalam-nanogpt-instruct-v3-100M) · [base](https://huggingface.co/gishnu/malayalam-nanogpt-base-v3-100M) |
-
-Every one of these numbers lives in [`web/content/site.ts`](web/content/site.ts).
-The pages read from it; nothing is hardcoded in JSX. Change copy there.
-
-> The Claude Design mockup this site was built from describes a hypothetical
-> 7.2B model with a 32K context trained on 1.4T tokens. Those numbers were
-> replaced with the real ones rather than shipped.
 
 ## Running it locally
 

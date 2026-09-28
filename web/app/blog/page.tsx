@@ -33,7 +33,7 @@ export default function Blog() {
           <div className="post-featured-body">
             <div className="post-meta">
               <span className="tag tag-accent">{featured.tag}</span>
-              <span className="text-muted" style={{ fontSize: 13 }}>
+              <span className="post-meta-info text-muted">
                 {featured.date} · {featured.read}
               </span>
             </div>

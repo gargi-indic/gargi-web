@@ -26,7 +26,7 @@ export default function GargiM1IsOut() {
         <Link className="article-back" href="/blog">← Notes</Link>
         <div className="post-meta">
           <span className="tag tag-accent">{POST.tag}</span>
-          <span className="text-muted" style={{ fontSize: 13 }}>
+          <span className="post-meta-info text-muted">
             {POST.date} · {POST.read}
           </span>
         </div>

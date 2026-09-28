@@ -34,7 +34,7 @@ export function AdminLogin() {
           />
           <button className="btn btn-primary" type="submit">Enter</button>
         </form>
-        {error && <p style={{ color: "var(--color-accent-700)" }}>Wrong password.</p>}
+        {error && <p style={{ color: "var(--accent)" }}>Wrong password.</p>}
       </div>
     </div>
   );
