@@ -47,9 +47,9 @@ export default function Models() {
         </div>
       </section>
 
-      <section style={{ borderBottom: "2px solid var(--color-divider)" }}>
-        <div className="section-head" style={{ paddingTop: 44, paddingBottom: 24 }}>
-          <h2 style={{ fontSize: 32 }}>Fundamentals</h2>
+      <section className="rule-bottom">
+        <div className="section-head">
+          <h2>Fundamentals</h2>
           <span className="section-note text-muted">
             {/* The short version — the full recipe is in the model card. */}
           </span>
@@ -67,9 +67,9 @@ export default function Models() {
         </div>
       </section>
 
-      <section id="downloads" style={{ borderBottom: "2px solid var(--color-divider)" }}>
-        <div className="section-head" style={{ paddingTop: 44, paddingBottom: 24 }}>
-          <h2 style={{ fontSize: 32 }}>Releases</h2>
+      <section id="downloads" className="rule-bottom">
+        <div className="section-head">
+          <h2>Releases</h2>
           <span className="section-note text-muted">
             {/* Weights, tokenizers and evaluation code, published as each one is finished. */}
           </span>
@@ -104,7 +104,7 @@ export default function Models() {
         </div>
       </section>
 
-      <section className="accent-panel" style={{ padding: "56px var(--gutter)" }}>
+      <section className="accent-panel">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
           <WaitlistForm source="models" />

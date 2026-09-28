@@ -249,10 +249,10 @@
 
 @media (max-width: 860px) {
   .split-grid,
-  .get-started-grid { grid-template-columns: 1fr; gap: 24px; }
+  .get-started-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .numbered-row { grid-template-columns: 40px 1fr; }
   .numbered-row-body { grid-column: 2; }
-  .also-row, .product-grid { grid-template-columns: 1fr; }
+  .also-row, .product-grid { grid-template-columns: minmax(0, 1fr); }
   .also-cell + .also-cell { border-left: 0; border-top: 2px solid var(--line); }
   .product-cell-indic { border-left: 0; }
 }
@@ -267,5 +267,5 @@
   border: 0;
 }
 
-/* body still paints the legacy --color-bg, which has no dark value; paint these pages from tokens. */
+/* Paint these pages from tokens (body also does, via lab.css). */
 .page-main { background: var(--paper); color: var(--ink); min-height: calc(100vh - 68px); }

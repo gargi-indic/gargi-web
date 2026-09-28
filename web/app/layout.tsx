@@ -3,8 +3,6 @@ import { Archivo, JetBrains_Mono, Noto_Sans_Malayalam } from "next/font/google";
 import { SITE } from "@/content/lab";
 import "@/styles/tokens.css";
 import "@/styles/lab.css";
-import "@/styles/modernist.css";
-import "@/styles/site.css";
 import "@/styles/reflex.css";
 import "@/styles/pages.css";
 

@@ -198,7 +198,7 @@ export function ContactForm({ source = "indic" }: { source?: string }) {
                 onClick={() => setIntent(item.id)}
                 style={{
                   borderRadius: 0,
-                  border: isSelected ? "2px solid var(--on-accent)" : "1px solid rgba(255, 255, 255, 0.4)",
+                  border: isSelected ? "2px solid var(--on-accent)" : "1px solid color-mix(in srgb, var(--on-accent) 40%, transparent)",
                   background: isSelected ? "var(--on-accent)" : "transparent",
                   color: isSelected ? "var(--ink)" : "var(--on-accent)",
                   padding: "8px 12px",
@@ -257,7 +257,7 @@ export function ContactForm({ source = "indic" }: { source?: string }) {
           role="alert"
           style={{
             color: "var(--on-accent)",
-            backgroundColor: "rgba(0, 0, 0, 0.25)",
+            backgroundColor: "color-mix(in srgb, var(--inverse) 25%, transparent)",
             padding: "8px 12px",
             fontSize: "14px",
             fontWeight: 600,

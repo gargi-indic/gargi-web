@@ -31,7 +31,7 @@ export default function IndicHome() {
         </div>
       </section>
 
-      <section id="languages" style={{ borderBottom: "2px solid var(--color-divider)" }}>
+      <section id="languages" className="rule-bottom">
         <div className="section-head">
           <h2>Building knowledge infrastructure for Indic languages</h2>
           <span className="section-note text-muted">

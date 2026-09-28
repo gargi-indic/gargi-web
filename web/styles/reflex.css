@@ -152,7 +152,7 @@
 @media (max-width: 860px) {
   .reflex-hero-inner {
     padding: 0 16px;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 }
@@ -378,7 +378,7 @@
 
 @media (max-width: 860px) {
   .problem-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 }
@@ -436,7 +436,7 @@
 
 @media (max-width: 860px) {
   .loop-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
 }
@@ -646,7 +646,7 @@
 
 @media (max-width: 640px) {
   .router-outputs {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -676,7 +676,7 @@
 
 @media (max-width: 860px) {
   .gates-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
 }
@@ -851,7 +851,7 @@
 
 @media (max-width: 540px) {
   .evidence-stat-tiles {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -925,7 +925,7 @@
 
 @media (max-width: 860px) {
   .evidence-bottom-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
 }
@@ -1235,7 +1235,7 @@
 
 @media (max-width: 860px) {
   .sixways-code-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1289,7 +1289,7 @@
 
 @media (max-width: 860px) {
   .sixways-bottom-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 }
@@ -1386,7 +1386,7 @@
 
 @media (max-width: 860px) {
   .coldstart-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
 }
@@ -1523,7 +1523,7 @@
 
 @media (max-width: 640px) {
   .vision-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -1570,7 +1570,7 @@
 
 @media (max-width: 860px) {
   .whennot-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 }
@@ -1634,7 +1634,7 @@
 
 @media (max-width: 860px) {
   .cta-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
   }
 }
@@ -1716,7 +1716,7 @@
 
 @media (max-width: 960px) {
   .research-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
     padding: 32px 16px 80px;
   }
@@ -1853,7 +1853,7 @@
 
 @media (max-width: 640px) {
   .research-table-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 6px;
   }
 }
@@ -1988,7 +1988,7 @@
 
 @media (max-width: 640px) {
   .headline-summaries {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 16px;
   }
 }
@@ -2081,7 +2081,7 @@
 
 @media (max-width: 640px) {
   .noise-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
   }
 }
@@ -2282,7 +2282,7 @@
 
 @media (max-width: 860px) {
   .dial-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2394,7 +2394,7 @@
 
 @media (max-width: 768px) {
   .economics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 32px;
   }
 }
@@ -2579,7 +2579,7 @@
 
 @media (max-width: 860px) {
   .docs-intro-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 40px;
     align-items: start;
   }
@@ -2648,7 +2648,7 @@
 
 @media (max-width: 640px) {
   .quickstart-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2765,7 +2765,7 @@
 
 @media (max-width: 540px) {
   .docs-paths-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -2817,7 +2817,7 @@
 
 @media (max-width: 860px) {
   .docs-gl-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 48px;
   }
 }
@@ -2989,7 +2989,7 @@
 
 @media (max-width: 860px) {
   .docs-cli-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
   }
 }

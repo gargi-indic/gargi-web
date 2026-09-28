@@ -44,7 +44,7 @@ export const FUNDAMENTALS = [
   {
     n: "01",
     title: "Tokenizer",
-    body: `${M1.vocab} tokens of byte-level BPE trained on Malayalam alone, at ${M1.fertility} — so more real Malayalam fits inside a ${M1.context}-token window.`,
+    body: `${M1.vocab} tokens of byte-level BPE trained on Malayalam alone, at ${M1.fertility}, so more real Malayalam fits inside a ${M1.context}-token window.`,
   },
   {
     n: "02",
@@ -54,7 +54,7 @@ export const FUNDAMENTALS = [
   {
     n: "03",
     title: "Architecture",
-    body: `A decoder-only transformer in the GPT-2 shape — ${M1.layers} layers, ${M1.heads} heads, ${M1.dModel} dimensions. Deliberately conventional.`,
+    body: `A decoder-only transformer in the GPT-2 shape: ${M1.layers} layers, ${M1.heads} heads, ${M1.dModel} dimensions. Deliberately conventional.`,
   },
   {
     n: "04",
@@ -64,7 +64,7 @@ export const FUNDAMENTALS = [
   {
     n: "05",
     title: "Evaluation",
-    body: `Bits-per-character, not perplexity — it is the only measure that survives a change of tokenizer. Published in full, failures included.`,
+    body: `Bits-per-character, not perplexity. It is the only measure that survives a change of tokenizer. Published in full, failures included.`,
   },
 ] as const;
 
@@ -91,8 +91,8 @@ export const RELEASES = [
   {
     name: "Gargi-T1",
     language: "Tamil",
-    params: "—",
-    context: "—",
+    params: "TBD",
+    context: "TBD",
     date: "2027",
     href: null,
     status: "Planned" as const,
@@ -100,8 +100,8 @@ export const RELEASES = [
   {
     name: "Gargi-K1",
     language: "Kannada",
-    params: "—",
-    context: "—",
+    params: "TBD",
+    context: "TBD",
     date: "2027",
     href: null,
     status: "Collecting" as const,
@@ -133,7 +133,7 @@ export const LANGUAGES = [
     native: "ಕನ್ನಡ",
     english: "Kannada",
     speakers: "44M speakers",
-    model: "—",
+    model: "TBD",
     status: "Collecting",
     live: false,
   },
@@ -142,7 +142,7 @@ export const LANGUAGES = [
     native: "తెలుగు",
     english: "Telugu",
     speakers: "83M speakers",
-    model: "—",
+    model: "TBD",
     status: "Planned",
     live: false,
   },
@@ -151,17 +151,17 @@ export const LANGUAGES = [
 /** The 12 scripts the [ഗ] wordmark cycles through. */
 export const SCRIPTS = [
   { g: "ഗ", title: "Malayalam" },
-  { g: "ग", title: "Devanagari — Hindi, Marathi, Sanskrit, Nepali, Konkani, Maithili, Dogri, Bodo, Sindhi" },
+  { g: "ग", title: "Devanagari: Hindi, Marathi, Sanskrit, Nepali, Konkani, Maithili, Dogri, Bodo, Sindhi" },
   { g: "গ", title: "Bengali–Assamese" },
   { g: "గ", title: "Telugu" },
   { g: "ಗ", title: "Kannada" },
   { g: "க", title: "Tamil" },
   { g: "ગ", title: "Gujarati" },
   { g: "ଗ", title: "Odia" },
-  { g: "ਗ", title: "Gurmukhi — Punjabi" },
-  { g: "گ", title: "Perso-Arabic — Urdu, Kashmiri, Sindhi" },
-  { g: "ᱜ", title: "Ol Chiki — Santali" },
-  { g: "ꯒ", title: "Meetei Mayek — Manipuri" },
+  { g: "ਗ", title: "Gurmukhi: Punjabi" },
+  { g: "گ", title: "Perso-Arabic: Urdu, Kashmiri, Sindhi" },
+  { g: "ᱜ", title: "Ol Chiki: Santali" },
+  { g: "ꯒ", title: "Meetei Mayek: Manipuri" },
 ] as const;
 
 /** /about — the four numbered pillars. */
@@ -169,7 +169,7 @@ export const PILLARS = [
   {
     n: "01",
     title: "Small models, genuinely capable",
-    body: "Small models that handle Indian languages well enough to depend on — trained from the language itself, not translated into it.",
+    body: "Small models that handle Indian languages well enough to depend on, trained from the language itself, not translated into it.",
   },
   {
     n: "02",
@@ -179,7 +179,7 @@ export const PILLARS = [
   {
     n: "03",
     title: "The whole knowledge layer",
-    body: "Not just models, but the infrastructure beneath them — so information becomes reachable in any language people read, write or speak.",
+    body: "Not just models, but the infrastructure beneath them, so information becomes reachable in any language people read, write or speak.",
   },
   {
     n: "04",
@@ -205,17 +205,17 @@ export const POSTS = [
     slug: "gargi-m1-is-out",
     title: "Gargi-M1 is out, and here is everything that went wrong first",
     excerpt:
-      `A ${M1.params} Malayalam model, trained from the language rather than translated into it. Both checkpoints open, a chat you can use right now, and an honest note on what it still cannot do — plus who I am looking for to build the rest.`,
+      `A ${M1.params} Malayalam model, trained from the language rather than translated into it. Both checkpoints open, a chat you can use right now, and an honest note on what it still cannot do, plus who I am looking for to build the rest.`,
     href: "/blog/gargi-m1-is-out",
   },
 ] as const;
 
 export const VISION =
-  "Every person reaching computers — and everything computers know — in their own language, through models that belong to everyone.";
+  "Every person reaching computers, and everything computers know, in their own language, through models that belong to everyone.";
 
 export const WHY_OPEN = [
-  "A model is human knowledge, compressed — trained on what millions of people wrote, spoke and handed down. It was never ours to fence off. Language and the knowledge it carries are held in common, so the models built from them must be too.",
-  "What is ours to build — and to earn from — is what sits on top: the tooling, the systems, the specialized ways that knowledge gets put to work. So the order is deliberate: first, models that handle each language superbly; then, the systems built on them. The knowledge stays free. The value lives in what you make with it.",
+  "A model is human knowledge, compressed: trained on what millions of people wrote, spoke and handed down. It was never ours to fence off. Language and the knowledge it carries are held in common, so the models built from them must be too.",
+  "What is ours to build, and to earn from, is what sits on top: the tooling, the systems, the specialized ways that knowledge gets put to work. So the order is deliberate: first, models that handle each language superbly; then, the systems built on them. The knowledge stays free. The value lives in what you make with it.",
 ] as const;
 
 /** Sampling defaults, mirroring the notebook's generate(). */

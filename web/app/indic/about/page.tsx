@@ -32,10 +32,10 @@ export default function About() {
         </div>
       </section>
 
-      <section style={{ borderBottom: "2px solid var(--color-divider)" }}>
+      <section className="rule-bottom">
         <div className="vision-split">
           <div>
-            <div className="kicker" style={{ marginBottom: 16 }}>Our vision</div>
+            <div className="kicker">Our vision</div>
             <p className="manifesto">{VISION}</p>
           </div>
           <div className="vision-why">
@@ -57,8 +57,8 @@ export default function About() {
 
       <section className="contribute-split">
         <div className="contribute-intro">
-          <h2 style={{ margin: "0 0 16px", fontSize: 32 }}>Built the way open source is built</h2>
-          <p style={{ margin: "0 0 28px", fontSize: 17, lineHeight: 1.6, maxWidth: "46ch" }}>
+          <h2>Built the way open source is built</h2>
+          <p>
             Gargi Labs develops in the open, in public repositories, with the same review and
             contribution model that produced most of the software the world runs on. If you
             work on language, machine learning, data or the languages themselves, there is
@@ -73,13 +73,13 @@ export default function About() {
           {CONTRIBUTORS.map((c) => (
             <div className="contribute-row" key={c.role}>
               <span className="contribute-role">{c.role}</span>
-              <span className="text-muted" style={{ fontSize: 15 }}>{c.body}</span>
+              <span className="contribute-body text-muted">{c.body}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="accent-panel" style={{ padding: "64px var(--gutter)" }}>
+      <section className="accent-panel">
         <div className="accent-panel-ghost ml" aria-hidden>ഗ</div>
         <div className="accent-split">
           <WaitlistForm source="about" label="Work with us" cta="Send" />
