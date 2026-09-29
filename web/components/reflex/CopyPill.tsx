@@ -7,7 +7,7 @@ interface CopyPillProps {
   className?: string;
 }
 
-export function CopyPill({ command = "pip install gargi", className = "" }: CopyPillProps) {
+export function CopyPill({ command = "pip install gargi-reflex", className = "" }: CopyPillProps) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

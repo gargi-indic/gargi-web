@@ -13,7 +13,7 @@ export const CONTACT_LINE =
   "Tools that make AI products sustainable: lower cost, lower latency, and decisions that run on their own.";
 
 export const LAB_GITHUB = "https://github.com/gargi-indic";
-export const REFLEX_GITHUB = "https://github.com/gargi-indic";
+export const REFLEX_GITHUB = "https://github.com/gargi-indic/gargi-decision-harness";
 
 export const PRODUCTS = [
   {
@@ -71,7 +71,7 @@ export const HOME = {
     titleAccent: "swappable.",
     sub: "You write the prompt. Reflex learns from your LLM's answers and serves the repeat calls locally, in milliseconds.",
     positioning: "You do the prompt design. Reflex does the data science.",
-    pipCommand: "pip install gargi",
+    pipCommand: "pip install gargi-reflex",
     watchFilm: "Watch the film ↓",
   },
   film: {
@@ -109,7 +109,7 @@ export const HOME = {
   },
   getStarted: {
     title: "Get started",
-    pipCommand: "pip install gargi",
+    pipCommand: "pip install gargi-reflex",
     reproduceTitle: "Reproduce our numbers in 90 seconds:",
     reproduceCommand: "python -m examples.banking77.run_demo",
     links: [

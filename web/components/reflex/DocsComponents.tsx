@@ -48,7 +48,7 @@ export function DocsQuickStart() {
 
 export function DocsIntegrationPaths() {
   const { integrationPaths } = DOCS;
-  const gargiMdUrl = `${REFLEX_GITHUB}/gargi-decision-harness/blob/main/${integrationPaths.docPath}`;
+  const gargiMdUrl = `${REFLEX_GITHUB}/blob/main/${integrationPaths.docPath}`;
 
   return (
     <section className="reflex-section docs-paths-section" data-screen-label="Integration paths">
@@ -95,7 +95,7 @@ export function DocsGuidesLifecycle() {
           <div className="reflex-eyebrow">{guidesAndLifecycle.guidesEyebrow}</div>
           <div className="docs-guides-list">
             {guidesAndLifecycle.guides.map((guide) => {
-              const url = `${REFLEX_GITHUB}/gargi-decision-harness/blob/main/${guide.docPath}`;
+              const url = `${REFLEX_GITHUB}/blob/main/${guide.docPath}`;
               return (
                 <a
                   key={guide.title}
