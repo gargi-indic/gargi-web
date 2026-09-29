@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo, JetBrains_Mono, Noto_Sans_Malayalam } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SITE } from "@/content/lab";
 import "@/styles/tokens.css";
 import "@/styles/lab.css";
@@ -63,7 +64,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${archivo.variable} ${jetbrainsMono.variable} ${notoMalayalam.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
