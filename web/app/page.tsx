@@ -7,7 +7,6 @@ import { CallStream } from "@/components/reflex/CallStream";
 import { CopyPill } from "@/components/reflex/CopyPill";
 import { StatTiles } from "@/components/reflex/StatTiles";
 import { Contract } from "@/components/reflex/Contract";
-import { LaunchFilm } from "@/components/reflex/LaunchFilm";
 import { HOME, SITE } from "@/content/lab";
 
 export const metadata: Metadata = {
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  const { hero, film, does, evidence, getStarted, also } = HOME;
+  const { hero, does, evidence, getStarted, also } = HOME;
 
   return (
     <div className="shell">
@@ -34,22 +33,9 @@ export default function Home() {
               <p className="home-positioning">{hero.positioning}</p>
               <div className="reflex-hero-actions">
                 <CopyPill command={hero.pipCommand} />
-                <a href="#film" className="btn-secondary">
-                  {hero.watchFilm}
-                </a>
               </div>
             </div>
             <CallStream />
-          </div>
-        </section>
-
-        <section id="film" className="reflex-section">
-          <div className="reflex-container">
-            <h2 className="reflex-section-title">{film.title}</h2>
-            <div className="launch-film-frame">
-              <LaunchFilm src={film.src} poster={film.poster} label={film.label} />
-            </div>
-            <p className="page-caption">{film.caption}</p>
           </div>
         </section>
 

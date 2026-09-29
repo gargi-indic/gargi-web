@@ -72,14 +72,6 @@ export const HOME = {
     sub: "You write the prompt. Reflex learns from your LLM's answers and serves the repeat calls locally, in milliseconds.",
     positioning: "You do the prompt design. Reflex does the data science.",
     pipCommand: "pip install gargi-reflex",
-    watchFilm: "Watch the film ↓",
-  },
-  film: {
-    title: "One minute, from 3.6 s to 5 ms.",
-    caption: "Banking77 end-to-end demo · stub teacher · laptop CPU",
-    src: "/reflex/film.mp4",
-    poster: "/reflex/film-poster.jpg",
-    label: "Gargi Reflex launch film",
   },
   does: {
     title: "What Reflex does",
